@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Radiance</string>
+    <string name="welcome">The Best Electronic Items at the Right Place</string>
+    <string name="search_text">Search</string>
+    <string name="home_title">Home</string>
+    <string name="profile_text">Profile</string>
+    <string name="orders_text">Orders</string>
+    <string name="notification_text">Notification</string>
+    <string name="cart_text">Cart</string>
+    <string name="sign_out_text">Sign Out</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="drawer_close">Close Navigation Drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="wishlist_text">Wishlist</string>
+    <string name="products_text">Products</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="email_field_text">Enter your email address or mobile number</string>
+    <string name="password_field_text">Enter your password</string>
+    <string name="create_password_field_text">Create your password</string>
+</resources>

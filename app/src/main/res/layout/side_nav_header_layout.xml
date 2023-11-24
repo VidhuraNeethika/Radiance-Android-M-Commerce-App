@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        app:srcCompat="@drawable/full_logo" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/nameTextView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_vertical"-->
+<!--        android:text="Vidhura Neethika"-->
+<!--        android:layout_marginStart="125dp"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/emailTextView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_vertical"-->
+<!--        android:text="vidhuraneethika000@gmail.com"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginStart="125dp"/>-->
+
+</FrameLayout>

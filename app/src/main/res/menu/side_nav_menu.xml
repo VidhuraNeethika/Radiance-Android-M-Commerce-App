@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/sideNavGroupMain">
+        <item
+            android:id="@+id/sideNavHome"
+            android:icon="@drawable/dashboard_icon"
+            android:title="@string/home_title" />
+
+        <item
+            android:id="@+id/sideNavCart"
+            android:icon="@drawable/bag_icon"
+            android:title="@string/cart_text" />
+
+        <item
+            android:id="@+id/sideNavWishlist"
+            android:icon="@drawable/heart_icon"
+            android:title="@string/wishlist_text" />
+
+        <item
+            android:id="@+id/sideNavProducts"
+            android:icon="@drawable/products_icon"
+            android:title="@string/products_text" />
+
+        <item
+            android:id="@+id/sideNavOrders"
+            android:icon="@drawable/box_icon"
+            android:title="@string/orders_text" />
+
+        <item
+            android:id="@+id/sideNavProfile"
+            android:icon="@drawable/user_icon"
+            android:title="@string/profile_text" />
+
+        <item
+            android:id="@+id/sideNavNotification"
+            android:icon="@drawable/notification_icon"
+            android:title="@string/notification_text" />
+
+    </group>
+
+    <group android:id="@+id/sideNavGroupAuth">
+        <item
+            android:id="@+id/sideNavLog"
+            android:icon="@drawable/sign_in_icon"
+            android:title="@string/sign_in_text" />
+
+        <item
+            android:id="@+id/sideNavLogOut"
+            android:icon="@drawable/power_icon"
+            android:title="@string/sign_out_text" />
+    </group>
+
+</menu>
