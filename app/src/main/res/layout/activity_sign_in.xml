@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_orange"
-    android:backgroundTint="@color/primary_orange"
+    android:backgroundTint="@color/primary_color"
     tools:context=".SignInActivity">
 
     <View
@@ -27,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/white_icon" />
+        app:srcCompat="@drawable/icon" />
 
     <TextView
         android:id="@+id/textView"
@@ -37,7 +36,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="176dp"
         android:text="Welcome to Radiance"
-        android:textColor="@color/white"
+        android:textColor="@color/primary_color"
         android:textSize="26dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,9 +51,11 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="36dp"
         android:background="@drawable/custom_input_rounded"
+        android:backgroundTint="@color/white"
         android:drawableStart="@drawable/email_icon"
         android:drawablePadding="10dp"
         android:hint="@string/email_field_text"
+        android:inputType="textUri"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:textSize="14sp"
@@ -70,6 +71,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="36dp"
         android:background="@drawable/custom_input_rounded"
+        android:backgroundTint="@color/white"
         android:drawableStart="@drawable/key_icon"
         android:drawablePadding="10dp"
         android:hint="@string/password_field_text"
@@ -88,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/welcome"
-        android:textColor="@color/dark_white"
+        android:textColor="@color/primary_color"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -108,7 +110,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/custom_input_rounded_dark_orange"
+            android:background="@drawable/custom_input_rounded"
+            android:backgroundTint="@color/primary_color"
             android:padding="6sp"
             android:paddingStart="20sp"
             android:paddingEnd="20sp"
@@ -127,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_up_text"
-            android:textColor="@color/dark_white"
+            android:textColor="@color/primary_color"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -149,8 +152,9 @@
     <Button
         android:id="@+id/signUpBtn"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:layout_marginTop="38dp"
+        android:backgroundTint="@color/orange"
         android:text="@string/sign_in_text"
         app:layout_constraintEnd_toEndOf="@+id/passwordField"
         app:layout_constraintStart_toStartOf="@+id/passwordField"
@@ -162,9 +166,8 @@
         android:layout_height="1dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="48dp"
-        android:layout_marginEnd="36dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpBtn" />
 
@@ -173,13 +176,24 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="38dp"
-        android:background="@color/white"
-        android:backgroundTint="@color/white"
+        android:background="@color/light_bg_color"
+        android:backgroundTint="@color/light_bg_color"
         android:text="Or"
         android:textAlignment="center"
         android:textColor="@color/matte_light_dark"
         app:layout_constraintEnd_toEndOf="@+id/signUpBtn"
         app:layout_constraintStart_toStartOf="@+id/signUpBtn"
+        app:layout_constraintTop_toBottomOf="@+id/signUpBtn" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="36dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/signUpBtn" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -188,6 +202,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="38dp"
         android:background="@drawable/custom_input_rounded"
+        android:backgroundTint="@color/dark_white"
         app:layout_constraintEnd_toEndOf="@+id/signUpBtn"
         app:layout_constraintStart_toStartOf="@+id/signUpBtn"
         app:layout_constraintTop_toBottomOf="@+id/textView6">
@@ -219,7 +234,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Sign In with Google Account" />
+                android:text="Sign In with Google Account"
+                android:textColor="@color/primary_color" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -256,7 +272,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Sign Up"
-            android:textColor="@color/primary_orange"
+            android:textColor="@color/primary_color"
             android:textStyle="bold" />
     </LinearLayout>
 

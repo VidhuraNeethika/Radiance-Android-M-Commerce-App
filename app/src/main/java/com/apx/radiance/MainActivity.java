@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.imageMenuButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.open();
@@ -58,10 +58,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        DrawerLayout dl =findViewById(R.id.drawerLayout);
+
         if (item.getItemId() == R.id.sideNavHome||item.getItemId() == R.id.bottomNavHome) {
             loadFragment(new HomeFragment());
+            dl.setBackgroundResource(R.color.white);
         }else if(item.getItemId() == R.id.sideNavCart||item.getItemId() == R.id.bottomNavCart){
-            loadFragment(new HomeFragment());
+            loadFragment(new CartFragment());
+            dl.setBackgroundResource(R.color.dark_white);
         }
         return true;
     }
