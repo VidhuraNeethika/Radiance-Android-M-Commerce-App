@@ -17,13 +17,14 @@ import com.apx.radiance.model.ProductItem;
 
 import java.util.ArrayList;
 
-public class CartFragment extends Fragment {
+
+public class WishlistFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    public CartFragment() {
+    public WishlistFragment() {
     }
 
     @Override
@@ -34,7 +35,7 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_cart, container, false);
+        return inflater.inflate(R.layout.fragment_wishlist, container, false);
     }
 
     @Override
@@ -42,6 +43,7 @@ public class CartFragment extends Fragment {
         super.onViewCreated(fragment, savedInstanceState);
 
         ArrayList<ProductItem> productsList = new ArrayList<>();
+
         for (int i = 0; i < 10; i++) {
             productsList.add(new ProductItem(
                     R.drawable.logitech_mouse,

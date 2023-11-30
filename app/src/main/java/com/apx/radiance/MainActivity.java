@@ -58,18 +58,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        DrawerLayout dl =findViewById(R.id.drawerLayout);
+        DrawerLayout dl = findViewById(R.id.drawerLayout);
 
-        if (item.getItemId() == R.id.sideNavHome||item.getItemId() == R.id.bottomNavHome) {
+        if (item.getItemId() == R.id.sideNavHome || item.getItemId() == R.id.bottomNavHome) {
             loadFragment(new HomeFragment());
             dl.setBackgroundResource(R.color.white);
-        }else if(item.getItemId() == R.id.sideNavCart||item.getItemId() == R.id.bottomNavCart){
+        } else if (item.getItemId() == R.id.sideNavCart || item.getItemId() == R.id.bottomNavCart) {
             loadFragment(new CartFragment());
             dl.setBackgroundResource(R.color.dark_white);
+        } else if (item.getItemId() == R.id.sideNavWishlist) {
+            loadFragment(new WishlistFragment());
         }
-        return true;
-    }
 
+        drawerLayout.close();
+        return true;
+
+    }
 
 
     public void loadFragment(Fragment fragment) {
