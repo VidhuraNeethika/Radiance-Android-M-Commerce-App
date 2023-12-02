@@ -36,9 +36,9 @@
         android:layout_marginStart="177dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="176dp"
-        android:text="Welcome to Radiance"
+        android:text="@string/welcome_to_radiance"
         android:textColor="@color/primary_color"
-        android:textSize="26dp"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -141,7 +141,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:gravity="center"
-        android:text="Unveil Your Style, Discover Your Favorites. Shop now and redefine your shopping experience with us."
+        android:text="@string/radiance_description"
         android:textColor="@color/matte_light_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +174,7 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="38dp"
-        android:text="Or"
+        android:text="@string/or_text"
         android:textAlignment="center"
         android:textColor="@color/matte_light_dark"
         app:layout_constraintEnd_toEndOf="@+id/signUpBtn"
@@ -206,11 +206,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="38dp"
             android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -230,7 +231,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Sign Up with Google Account" />
+                android:text="@string/sign_up_with_google_account_text" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -249,7 +250,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Already have an Acount? " />
+            android:text="@string/already_have_an_acount_text" />
 
         <TextView
             android:id="@+id/textView12"
@@ -271,7 +272,7 @@
         android:drawablePadding="8dp"
         android:drawableTint="@color/matte_light_dark"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Please enter valid email or mobile number"
+        android:text="@string/email_warning_text"
         android:textColor="@color/matte_light_dark"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@+id/emailField"
@@ -287,7 +288,7 @@
         android:drawablePadding="8dp"
         android:drawableTint="@color/matte_light_dark"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Password must be at least 8 characters."
+        android:text="@string/password_warning_text"
         android:textColor="@color/matte_light_dark"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@+id/passwordField"

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -14,12 +16,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.apx.radiance.adapter.CartProductAdapter;
+import com.apx.radiance.adapter.GridProductAdapter;
+import com.apx.radiance.adapter.MtLProductAdapter;
 import com.apx.radiance.adapter.SliderImageAdapter;
+import com.apx.radiance.adapter.TagAdapter;
+import com.apx.radiance.model.ProductItem;
+import com.apx.radiance.model.Tags;
 
 import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
+
+    private RecyclerView recyclerRecyclerView;
+    private RecyclerView.Adapter recyclerAdapter;
+    private GridLayoutManager gridLayoutManager;
+    private ArrayList<Tags> tagsArrayList;
+    private RecyclerView.LayoutManager horizontalLayoutManager;
+    private String[] tagsName;
 
     public HomeFragment() {
     }
@@ -39,30 +54,23 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View fragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(fragment, savedInstanceState);
 
-        fragment.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SignInActivity.class));
-            }
-        });
-
         //Slider Start //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         RecyclerView recyclerView = fragment.findViewById(R.id.sliderRecycler);
         ArrayList<String> arrayList = new ArrayList<>();
 
-        arrayList.add("https://images.pexels.com/photos/4050388/pexels-photo-4050388.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-        arrayList.add("https://images.pexels.com/photos/3755516/pexels-photo-3755516.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-        arrayList.add("https://images.pexels.com/photos/4968386/pexels-photo-4968386.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-        arrayList.add("https://images.pexels.com/photos/3823488/pexels-photo-3823488.jpeg");
+        arrayList.add("https://static1.xdaimages.com/wordpress/wp-content/uploads/2022/10/XDA-9.jpg");
+        arrayList.add("https://www.iclarified.com/images/news/91148/436756/436756-640.jpg");
+        arrayList.add("https://image.benq.com/is/image/benqco/dp1310-banner-231122-2048-1?$ResponsivePreset$");
+        arrayList.add("https://plugmedia-wp-uploads.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2022/08/Screenshot-2022-08-12-at-14-30-10-Anker-737-Power-Bank-PowerCore-24K.jpg");
 
         SliderImageAdapter adapter = new SliderImageAdapter(getContext(), arrayList);
 
         adapter.setOnItemClickListener(new SliderImageAdapter.OnItemClickListener() {
             @Override
             public void onClick(ImageView imageView, String path) {
-                startActivity(new Intent(getContext(),ImageViewActivity.class).putExtra("image",path),
-                        ActivityOptions.makeSceneTransitionAnimation(getActivity(),imageView,"image").toBundle());
+                startActivity(new Intent(getContext(), ImageViewActivity.class).putExtra("image", path),
+                        ActivityOptions.makeSceneTransitionAnimation(getActivity(), imageView, "image").toBundle());
             }
         });
 
@@ -70,5 +78,106 @@ public class HomeFragment extends Fragment {
 
         //Slider End //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //New Arrival Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ArrayList<ProductItem> productsList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            productsList.add(new ProductItem(
+                    R.drawable.logitech_mouse,
+                    "Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
+                    "Logitech",
+                    "Gaming Mouse",
+                    100.00));
+        }
+
+        recyclerRecyclerView = fragment.findViewById(R.id.newArriavalsRecycler);
+        recyclerRecyclerView.setHasFixedSize(true);
+        //gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerAdapter = new GridProductAdapter(productsList);
+        recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
+        recyclerRecyclerView.setAdapter(recyclerAdapter);
+
+        //New Arrival End /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //New Arrival Start /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ArrayList<ProductItem> productsListTrending = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            productsListTrending.add(new ProductItem(
+                    R.drawable.logitech_mouse,
+                    "Logitech - MX999 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
+                    "Logitech",
+                    "Gaming Mouse",
+                    100.00));
+        }
+
+        recyclerRecyclerView = fragment.findViewById(R.id.trendingProductRecycler);
+        recyclerRecyclerView.setHasFixedSize(true);
+        //gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerAdapter = new GridProductAdapter(productsListTrending);
+        recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
+        recyclerRecyclerView.setAdapter(recyclerAdapter);
+
+        //New Arrival End /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //Tags Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        categoryInitialized();
+        recyclerRecyclerView = fragment.findViewById(R.id.tagsRecyclerView);
+        horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
+        recyclerRecyclerView.setHasFixedSize(true);
+        TagAdapter tagAdapter = new TagAdapter(getContext(), tagsArrayList);
+        recyclerRecyclerView.setAdapter(tagAdapter);
+
+        //Tags End /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //More to Love Start ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ArrayList<ProductItem> productsListMTL = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            productsListMTL.add(new ProductItem(
+                    R.drawable.logitech_mouse,
+                    "Logitech - MX111 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
+                    "Logitech",
+                    "Gaming Mouse",
+                    100.00));
+        }
+
+        recyclerRecyclerView = fragment.findViewById(R.id.moreToLoveRecycler);
+        recyclerRecyclerView.setHasFixedSize(true);
+        horizontalLayoutManager = new LinearLayoutManager(getContext());
+        recyclerAdapter = new MtLProductAdapter(productsListMTL);
+        recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
+        recyclerRecyclerView.setAdapter(recyclerAdapter);
+
+        //More to Love End /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     }
+
+    private void categoryInitialized() {
+
+        tagsArrayList = new ArrayList<>();
+
+        tagsName = new String[]{
+                "All",
+                "New Arriavals",
+                "Popular",
+                "Trending",
+                "See more",
+        };
+
+        for (int i = 0; i < tagsName.length; i++) {
+
+            Tags tags = new Tags(tagsName[i]);
+            tagsArrayList.add(tags);
+        }
+
+
+    }
+
 }

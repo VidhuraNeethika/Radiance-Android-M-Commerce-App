@@ -20,4 +20,26 @@
     <string name="password_field_text">Enter your password</string>
     <string name="create_password_field_text">Create your password</string>
     <string name="location_text">Location</string>
+    <string name="help_center_text">Help Center</string>
+    <string name="provacy_policy_text">Provacy Policy</string>
+    <string name="welcome_to_radiance">Welcome to Radiance</string>
+    <string name="radiance_description">Unveil Your Style, Discover Your Favorites. Shop now and redefine your shopping experience with us.</string>
+    <string name="or_text">Or</string>
+    <string name="sign_in_with_google_account_text">Sign In with Google Account</string>
+    <string name="fogot_password_text">Fogot Password?</string>
+    <string name="don_t_have_an_account_text">Don\'t have an account?</string>
+    <string name="sign_up_with_google_account_text">Sign Up with Google Account</string>
+    <string name="already_have_an_acount_text">Already have an Acount?</string>
+    <string name="email_warning_text">Please enter valid email or mobile number</string>
+    <string name="password_warning_text">Password must be at least 8 characters.</string>
+    <string name="cart_title">7 Items in cart</string>
+    <string name="sub_total_text">Sub Total</string>
+    <string name="shipping_text">Shipping</string>
+    <string name="total_text">Total</string>
+    <string name="finalize_order_text">Finalize Order</string>
+    <string name="category_title_text">Category</string>
+    <string name="see_all_text">See All</string>
+    <string name="new_arriavals_text">New Arriavals</string>
+    <string name="trending_now_text">Trending Now</string>
+    <string name="more_to_love_text">More to Love</string>
 </resources>

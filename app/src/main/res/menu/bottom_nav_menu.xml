@@ -7,22 +7,22 @@
         />
 
     <item
+        android:id="@+id/bottomNavNotification"
+        android:icon="@drawable/search_icon"
+        android:title="@string/search_text" />
+
+    <item
         android:id="@+id/bottomNavCart"
         android:icon="@drawable/bag_icon"
         android:title="@string/cart_text" />
 
     <item
-        android:id="@+id/bottomNavNotification"
+        android:id="@+id/bottomNavOrders"
         android:icon="@drawable/notification_icon"
         android:title="@string/notification_text" />
 
     <item
-        android:id="@+id/bottomNavOrders"
-        android:icon="@drawable/box_icon"
-        android:title="@string/orders_text" />
-
-    <item
         android:id="@+id/bottomNavProfile"
-        android:icon="@drawable/user_icon"
+        android:icon="@drawable/sign_in_icon"
         android:title="@string/profile_text" />
 </menu>

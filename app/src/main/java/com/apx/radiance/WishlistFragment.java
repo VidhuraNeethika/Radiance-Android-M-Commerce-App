@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.apx.radiance.adapter.CartProductAdapter;
+import com.apx.radiance.adapter.WishlistProductAdapter;
 import com.apx.radiance.model.ProductItem;
 
 import java.util.ArrayList;
@@ -56,7 +57,9 @@ public class WishlistFragment extends Fragment {
         recyclerView = fragment.findViewById(R.id.productListRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new CartProductAdapter(productsList);
+
+        adapter = new WishlistProductAdapter(productsList);
+
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 

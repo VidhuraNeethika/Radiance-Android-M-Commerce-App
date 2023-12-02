@@ -35,9 +35,9 @@
         android:layout_marginStart="177dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="176dp"
-        android:text="Welcome to Radiance"
+        android:text="@string/welcome_to_radiance"
         android:textColor="@color/primary_color"
-        android:textSize="26dp"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -55,7 +55,7 @@
         android:drawableStart="@drawable/email_icon"
         android:drawablePadding="10dp"
         android:hint="@string/email_field_text"
-        android:inputType="textUri"
+        android:inputType="text"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:textSize="14sp"
@@ -143,7 +143,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:gravity="center"
-        android:text="Unveil Your Style, Discover Your Favorites. Shop now and redefine your shopping experience with us."
+        android:text="@string/radiance_description"
         android:textColor="@color/matte_light_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -178,7 +178,7 @@
         android:layout_marginTop="38dp"
         android:background="@color/light_bg_color"
         android:backgroundTint="@color/light_bg_color"
-        android:text="Or"
+        android:text="@string/or_text"
         android:textAlignment="center"
         android:textColor="@color/matte_light_dark"
         app:layout_constraintEnd_toEndOf="@+id/signUpBtn"
@@ -210,11 +210,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="38dp"
             android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -234,7 +235,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Sign In with Google Account"
+                android:text="@string/sign_in_with_google_account_text"
                 android:textColor="@color/primary_color" />
         </LinearLayout>
 
@@ -245,7 +246,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Fogot Password?"
+        android:text="@string/fogot_password_text"
         android:textColor="@color/matte_light_dark"
         app:layout_constraintEnd_toEndOf="@+id/passwordField"
         app:layout_constraintTop_toBottomOf="@+id/passwordField" />
@@ -264,14 +265,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Don't have an account? " />
+            android:text="@string/don_t_have_an_account_text" />
 
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sign Up"
+            android:text="@string/sign_up_text"
             android:textColor="@color/primary_color"
             android:textStyle="bold" />
     </LinearLayout>

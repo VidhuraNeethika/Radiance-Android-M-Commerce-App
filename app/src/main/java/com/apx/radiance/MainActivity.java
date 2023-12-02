@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             dl.setBackgroundResource(R.color.dark_white);
         } else if (item.getItemId() == R.id.sideNavWishlist) {
             loadFragment(new WishlistFragment());
+        }else if (item.getItemId() == R.id.sideNavProfile || item.getItemId() == R.id.bottomNavProfile) {
+            loadFragment(new ProfileFragment());
         }
 
         drawerLayout.close();

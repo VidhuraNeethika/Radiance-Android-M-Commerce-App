@@ -115,56 +115,35 @@
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/priceText"
             app:layout_constraintEnd_toEndOf="@+id/productNameText">
 
             <ImageButton
-                android:id="@+id/imageButton6"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_input"
-                app:srcCompat="@drawable/minus_icon" />
-
-            <TextView
-                android:id="@+id/textView24"
-                android:layout_width="35dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="10"
-                android:textAlignment="center" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:id="@+id/imageButton14"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="@drawable/custom_input"
                 android:backgroundTint="@color/primary_color"
-                app:srcCompat="@drawable/add_icon" />
+                app:srcCompat="@drawable/bag_icon_white" />
 
             <Space
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-        </LinearLayout>
+            <ImageButton
+                android:id="@+id/imageButton7"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_input"
+                android:backgroundTint="@color/orange"
+                app:srcCompat="@drawable/delete_icon" />
 
-        <ImageButton
-            android:id="@+id/imageButton7"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/custom_input"
-            android:backgroundTint="@color/orange"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="@+id/productNameText"
-            app:srcCompat="@drawable/delete_icon" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

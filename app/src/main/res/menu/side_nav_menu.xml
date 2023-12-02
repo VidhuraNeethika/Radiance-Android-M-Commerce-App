@@ -8,6 +8,11 @@
             android:title="@string/home_title" />
 
         <item
+            android:id="@+id/sideNavProducts"
+            android:icon="@drawable/search_icon"
+            android:title="@string/search_text" />
+
+        <item
             android:id="@+id/sideNavCart"
             android:icon="@drawable/bag_icon"
             android:title="@string/cart_text" />
@@ -18,31 +23,38 @@
             android:title="@string/wishlist_text" />
 
         <item
-            android:id="@+id/sideNavProducts"
-            android:icon="@drawable/products_icon"
-            android:title="@string/products_text" />
-
-        <item
             android:id="@+id/sideNavOrders"
-            android:icon="@drawable/box_icon"
+            android:icon="@drawable/products_icon"
             android:title="@string/orders_text" />
-
-        <item
-            android:id="@+id/sideNavProfile"
-            android:icon="@drawable/user_icon"
-            android:title="@string/profile_text" />
 
         <item
             android:id="@+id/sideNavNotification"
             android:icon="@drawable/notification_icon"
             android:title="@string/notification_text" />
 
+        <item
+            android:id="@+id/sideNavProfile"
+            android:icon="@drawable/sign_in_icon"
+            android:title="@string/profile_text" />
+
+    </group>
+
+    <group android:id="@+id/sideNavGroupHelp">
+        <item
+            android:id="@+id/helpCenter"
+            android:icon="@drawable/help_icon"
+            android:title="@string/help_center_text" />
+
+        <item
+            android:id="@+id/privacyPolicy"
+            android:icon="@drawable/privacy_icon"
+            android:title="@string/provacy_policy_text" />
     </group>
 
     <group android:id="@+id/sideNavGroupAuth">
         <item
             android:id="@+id/sideNavLog"
-            android:icon="@drawable/sign_in_icon"
+            android:icon="@drawable/user_icon"
             android:title="@string/sign_in_text" />
 
         <item
