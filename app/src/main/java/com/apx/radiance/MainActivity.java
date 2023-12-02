@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (item.getItemId() == R.id.sideNavHome || item.getItemId() == R.id.bottomNavHome) {
             loadFragment(new HomeFragment());
-            dl.setBackgroundResource(R.color.white);
         } else if (item.getItemId() == R.id.sideNavCart || item.getItemId() == R.id.bottomNavCart) {
             loadFragment(new CartFragment());
             dl.setBackgroundResource(R.color.dark_white);
@@ -70,13 +69,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             loadFragment(new WishlistFragment());
         }else if (item.getItemId() == R.id.sideNavProfile || item.getItemId() == R.id.bottomNavProfile) {
             loadFragment(new ProfileFragment());
+        }else if (item.getItemId() == R.id.sideNavSearch || item.getItemId() == R.id.bottomNavSerach) {
+            loadFragment(new SearchFragment());
+        }else if (item.getItemId() == R.id.sideNavNotification || item.getItemId() == R.id.bottomNavNotification) {
+            loadFragment(new NotificationFragment());
+        }else if (item.getItemId() == R.id.privacyPolicy ) {
+            loadFragment(new PrivacyPolicyFragment());
         }
 
+        dl.setBackgroundResource(R.color.white);
         drawerLayout.close();
         return true;
 
     }
-
 
     public void loadFragment(Fragment fragment) {
         FragmentManager supportFragmentManager = getSupportFragmentManager();

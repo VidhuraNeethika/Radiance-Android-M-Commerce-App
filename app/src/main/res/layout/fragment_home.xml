@@ -11,7 +11,7 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/location_text"
         android:textColor="@color/matte_light_dark"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/custom_input"
         android:padding="6dp"
         android:src="@drawable/notification_icon"
@@ -51,13 +51,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView18" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,33 +69,36 @@
             android:layout_height="40dp"
             android:background="@drawable/custom_input"
             android:backgroundTint="@color/primary_color"
-            android:src="@drawable/filter_icon" />
-
-        <Space
-            android:layout_width="5dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:src="@drawable/filter_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/textInputSearch"
-            android:layout_width="300dp"
+            android:id="@+id/emailAddressField"
+            android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/custom_input"
             android:drawableStart="@drawable/search_icon"
             android:hint="@string/search_text"
             android:paddingStart="10dp"
             android:paddingRight="20dp"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageButton3"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -253,7 +256,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView22" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/newArriavalsRecycler"
+                android:id="@+id/serachResultRecycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -269,7 +272,7 @@
                 android:src="@drawable/banner_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newArriavalsRecycler" />
+                app:layout_constraintTop_toBottomOf="@+id/serachResultRecycler" />
 
             <TextView
                 android:id="@+id/textView25"

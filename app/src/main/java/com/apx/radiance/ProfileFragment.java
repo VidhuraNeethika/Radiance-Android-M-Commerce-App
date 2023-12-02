@@ -30,7 +30,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View fragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(fragment, savedInstanceState);
-        fragment.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+        fragment.findViewById(R.id.signInButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), SignInActivity.class));

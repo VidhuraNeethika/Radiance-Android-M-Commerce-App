@@ -7,7 +7,7 @@
         />
 
     <item
-        android:id="@+id/bottomNavNotification"
+        android:id="@+id/bottomNavSerach"
         android:icon="@drawable/search_icon"
         android:title="@string/search_text" />
 
@@ -17,7 +17,7 @@
         android:title="@string/cart_text" />
 
     <item
-        android:id="@+id/bottomNavOrders"
+        android:id="@+id/bottomNavNotification"
         android:icon="@drawable/notification_icon"
         android:title="@string/notification_text" />
 

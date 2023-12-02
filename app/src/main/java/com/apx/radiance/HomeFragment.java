@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.apx.radiance.adapter.CartProductAdapter;
 import com.apx.radiance.adapter.GridProductAdapter;
 import com.apx.radiance.adapter.MtLProductAdapter;
 import com.apx.radiance.adapter.SliderImageAdapter;
@@ -90,7 +89,7 @@ public class HomeFragment extends Fragment {
                     100.00));
         }
 
-        recyclerRecyclerView = fragment.findViewById(R.id.newArriavalsRecycler);
+        recyclerRecyclerView = fragment.findViewById(R.id.serachResultRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
         //gridLayoutManager = new GridLayoutManager(getContext(), 2);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -165,7 +164,7 @@ public class HomeFragment extends Fragment {
 
         tagsName = new String[]{
                 "All",
-                "New Arriavals",
+                "New Arrivals",
                 "Popular",
                 "Trending",
                 "See more",

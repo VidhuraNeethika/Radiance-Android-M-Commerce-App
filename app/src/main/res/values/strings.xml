@@ -5,7 +5,7 @@
     <string name="home_title">Home</string>
     <string name="profile_text">Profile</string>
     <string name="orders_text">Orders</string>
-    <string name="notification_text">Notification</string>
+    <string name="notification_text">Notifications</string>
     <string name="cart_text">Cart</string>
     <string name="sign_out_text">Sign Out</string>
     <string name="sign_in_text">Sign In</string>
@@ -42,4 +42,11 @@
     <string name="new_arriavals_text">New Arriavals</string>
     <string name="trending_now_text">Trending Now</string>
     <string name="more_to_love_text">More to Love</string>
+    <string name="password_text">Password</string>
+    <string name="email_address_field_text">Email Address</string>
+    <string name="first_name_text">First Name</string>
+    <string name="last_name_text">Last Name</string>
+    <string name="city_field">City</string>
+    <string name="mobile_number_text">Mobile Number</string>
+    <string name="update_text">Update</string>
 </resources>
