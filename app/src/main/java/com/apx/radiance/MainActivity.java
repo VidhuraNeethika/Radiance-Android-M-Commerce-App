@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -75,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             loadFragment(new NotificationFragment());
         }else if (item.getItemId() == R.id.privacyPolicy ) {
             loadFragment(new PrivacyPolicyFragment());
+        }else if (item.getItemId() == R.id.sideNavOrders ) {
+            loadFragment(new OrderFragment());
+        }else if (item.getItemId() == R.id.sideNavLog ) {
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
         }
 
         dl.setBackgroundResource(R.color.white);

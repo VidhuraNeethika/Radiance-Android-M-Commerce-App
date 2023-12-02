@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".WishlistFragment">
+    tools:context=".OrderFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/wishlistBodyEmptyLayout"
@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wishHeader"
-        android:visibility="invisible">
+        android:visibility="visible">
 
 
         <ImageView
@@ -23,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_marginTop="100dp"
-            android:src="@drawable/empty_wishlist_image"
+            android:src="@drawable/empty_orders_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
             android:layout_marginStart="107dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="107dp"
-            android:text="@string/yor_wish_list_is_empty_text"
+            android:text="@string/no_orders_yet_text"
             android:textColor="@color/matte_light_dark"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +47,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="@string/looks_like_you_haven_t_added_anything_to_your_wishlist_yet_text"
+            android:text="@string/when_orders_are_visible_you_ll_see_them_here_explore_the_app_text"
             android:textAlignment="center"
             android:textColor="@color/matte_light_dark"
             app:layout_constraintEnd_toEndOf="@+id/textView30"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:backgroundTint="@color/primary_color"
-            android:text="@string/start_shopping_text"
+            android:text="@string/explore_the_app_text"
             app:layout_constraintEnd_toEndOf="@+id/textView49"
             app:layout_constraintStart_toStartOf="@+id/textView49"
             app:layout_constraintTop_toBottomOf="@+id/textView49" />
@@ -95,7 +95,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
-            android:text="@string/wishlist_text"
+            android:text="@string/orders_text"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/primary_color"
@@ -107,31 +107,6 @@
             app:layout_constraintStart_toEndOf="@+id/imageButton"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.272" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/wishlistBodyLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/wishlistBodyEmptyLayout">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/productListRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:scrollbars="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

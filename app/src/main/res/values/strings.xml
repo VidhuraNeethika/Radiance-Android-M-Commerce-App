@@ -49,4 +49,16 @@
     <string name="city_field">City</string>
     <string name="mobile_number_text">Mobile Number</string>
     <string name="update_text">Update</string>
+    <string name="your_cart_is_empty_text">Your cart is empty</string>
+    <string name="looks_like_you_haven_t_added_any_products_to_your_cart_yet_text">Looks like you haven\'t added any products to your cart yet.</string>
+    <string name="start_shopping_text">Start Shopping</string>
+    <string name="yor_wish_list_is_empty_text">Yor wishlist is empty</string>
+    <string name="looks_like_you_haven_t_added_anything_to_your_wishlist_yet_text">Looks like you haven\'t added anything to your wishlist yet.</string>
+    <string name="clear_all_text">Clear All</string>
+    <string name="search_again_text">Search Again</string>
+    <string name="you_have_no_notifications_right_now_come_back_later_to_check_for_new_notifications_text">You have no notifications right now.Come back later to check for new notifications.</string>
+    <string name="no_notifications_yet_text">No notifications yet</string>
+    <string name="no_orders_yet_text">No orders yet</string>
+    <string name="when_orders_are_visible_you_ll_see_them_here_explore_the_app_text">When orders are visible, you\'ll see them here. Explore the app.</string>
+    <string name="explore_the_app_text">Explore the app</string>
 </resources>
