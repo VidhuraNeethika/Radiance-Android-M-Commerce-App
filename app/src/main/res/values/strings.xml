@@ -61,4 +61,5 @@
     <string name="no_orders_yet_text">No orders yet</string>
     <string name="when_orders_are_visible_you_ll_see_them_here_explore_the_app_text">When orders are visible, you\'ll see them here. Explore the app.</string>
     <string name="explore_the_app_text">Explore the app</string>
+    <string name="product_details_text">Product Details</string>
 </resources>

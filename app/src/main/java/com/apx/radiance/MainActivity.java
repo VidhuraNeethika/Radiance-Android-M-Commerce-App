@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             loadFragment(new OrderFragment());
         }else if (item.getItemId() == R.id.sideNavLog ) {
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        }else if (item.getItemId() == R.id.helpCenter ) {
+            loadFragment(new SingleProductViewFragment());
         }
 
         dl.setBackgroundResource(R.color.white);
