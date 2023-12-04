@@ -20,7 +20,7 @@ import com.apx.radiance.adapter.GridProductAdapter;
 import com.apx.radiance.adapter.MtLProductAdapter;
 import com.apx.radiance.adapter.SliderImageAdapter;
 import com.apx.radiance.adapter.TagAdapter;
-import com.apx.radiance.model.ProductItem;
+import com.apx.radiance.model.Product;
 import com.apx.radiance.model.Tags;
 
 import java.util.ArrayList;
@@ -79,10 +79,13 @@ public class HomeFragment extends Fragment {
 
         //New Arrival Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ArrayList<ProductItem> productsList = new ArrayList<>();
+        ArrayList<String> imageList = new ArrayList<>();
+        imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
+
+        ArrayList<Product> productsList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            productsList.add(new ProductItem(
-                    R.drawable.logitech_mouse,
+            productsList.add(new Product(
+                    imageList,
                     "Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
                     "Logitech",
                     "Gaming Mouse",
@@ -101,10 +104,10 @@ public class HomeFragment extends Fragment {
 
         //New Arrival Start /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ArrayList<ProductItem> productsListTrending = new ArrayList<>();
+        ArrayList<Product> productsListTrending = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            productsListTrending.add(new ProductItem(
-                    R.drawable.logitech_mouse,
+            productsListTrending.add(new Product(
+                    imageList,
                     "Logitech - MX999 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
                     "Logitech",
                     "Gaming Mouse",
@@ -136,10 +139,10 @@ public class HomeFragment extends Fragment {
 
         //More to Love Start ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ArrayList<ProductItem> productsListMTL = new ArrayList<>();
+        ArrayList<Product> productsListMTL = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            productsListMTL.add(new ProductItem(
-                    R.drawable.logitech_mouse,
+            productsListMTL.add(new Product(
+                    imageList,
                     "Logitech - MX111 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
                     "Logitech",
                     "Gaming Mouse",

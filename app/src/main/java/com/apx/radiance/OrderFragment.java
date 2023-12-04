@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.apx.radiance.adapter.OrdersAdapter;
 import com.apx.radiance.model.Orders;
-import com.apx.radiance.model.ProductItem;
+import com.apx.radiance.model.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -36,12 +38,17 @@ public class OrderFragment extends Fragment {
     public void onViewCreated(@NonNull View fragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(fragment, savedInstanceState);
 
+        ImageView imageView =  fragment.findViewById(R.id.imageView10);
+
+        ArrayList<String> imageList = new ArrayList<>();
+        imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
+
         //Products
         ArrayList<Orders> orderArrayList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             orderArrayList.add(new Orders(
-                    new ProductItem(
-                            R.drawable.logitech_mouse,
+                    new Product(
+                            imageList,
                             "Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
                             "Logitech",
                             "Gaming Mouse",

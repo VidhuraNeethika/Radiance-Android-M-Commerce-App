@@ -1,30 +1,32 @@
 package com.apx.radiance.model;
 
-public class ProductItem {
+import java.util.ArrayList;
 
-    private int imageSource;
+public class Product {
+
+    private ArrayList<String> imageList;
     private String name;
     private String brand;
     private String category;
     private Double price;
 
-    public ProductItem() {
+    public Product() {
     }
 
-    public ProductItem(int imageSource, String name, String brand, String category, Double price) {
-        this.imageSource = imageSource;
+    public Product(ArrayList<String> imageList, String name, String brand, String category, Double price) {
+        this.imageList = imageList;
         this.name = name;
         this.brand = brand;
         this.category = category;
         this.price = price;
     }
 
-    public int getImageSource() {
-        return imageSource;
+    public ArrayList<String> getImageList() {
+        return imageList;
     }
 
-    public void setImageSource(int imageSource) {
-        this.imageSource = imageSource;
+    public void setImageList(ArrayList<String> imageList) {
+        this.imageList = imageList;
     }
 
     public String getName() {

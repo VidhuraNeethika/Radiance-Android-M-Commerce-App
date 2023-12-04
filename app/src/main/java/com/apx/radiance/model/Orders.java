@@ -4,7 +4,7 @@ public class Orders {
 
     private int id;
 
-    private ProductItem product;
+    private Product product;
 
     private String date;
 
@@ -13,7 +13,7 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(ProductItem product, String date, int qty) {
+    public Orders(Product product, String date, int qty) {
         this.product = product;
         this.date = date;
         this.qty = qty;
@@ -27,11 +27,11 @@ public class Orders {
         this.id = id;
     }
 
-    public ProductItem getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(ProductItem product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

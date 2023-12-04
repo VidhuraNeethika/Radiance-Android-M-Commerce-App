@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.apx.radiance.R;
 import com.apx.radiance.model.Orders;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -49,7 +50,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         holder.qty.setText(String.valueOf("Quantity : "+ order.getQty()));
         holder.price.setText(String.valueOf("LKR "+ order.getProduct().getPrice()+"0"));
         holder.date.setText(order.getDate());
-        holder.imageView.setImageResource(order.getProduct().getImageSource());
+        Picasso.get().load(order.getProduct().getImageList().get(0)).into(holder.imageView);
     }
 
     @Override

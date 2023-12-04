@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.apx.radiance.R;
 import com.apx.radiance.model.NotificationItems;
-import com.apx.radiance.model.ProductItem;
 
 import java.util.ArrayList;
 

@@ -3,23 +3,22 @@ package com.apx.radiance.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apx.radiance.R;
 import com.apx.radiance.holders.ProductViewHolder;
-import com.apx.radiance.model.ProductItem;
+import com.apx.radiance.model.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class WishlistProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
-    private ArrayList<ProductItem> productItemsList;
+    private ArrayList<Product> productItemsList;
 
-    public WishlistProductAdapter(ArrayList<ProductItem> productsList) {
+    public WishlistProductAdapter(ArrayList<Product> productsList) {
         this.productItemsList = productsList;
     }
 
@@ -36,8 +35,8 @@ public class WishlistProductAdapter extends RecyclerView.Adapter<ProductViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        ProductItem currentItem = productItemsList.get(position);
-        holder.imageView.setImageResource(currentItem.getImageSource());
+        Product currentItem = productItemsList.get(position);
+        Picasso.get().load(currentItem.getImageList().get(0)).into(holder.imageView);
         holder.name.setText(currentItem.getName());
         holder.brand.setText(currentItem.getBrand());
         holder.category.setText(currentItem.getCategory());

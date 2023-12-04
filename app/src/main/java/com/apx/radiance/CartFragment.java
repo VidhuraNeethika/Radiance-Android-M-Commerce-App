@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.apx.radiance.adapter.CartProductAdapter;
-import com.apx.radiance.model.ProductItem;
+import com.apx.radiance.model.Product;
 
 import java.util.ArrayList;
 
@@ -41,10 +41,14 @@ public class CartFragment extends Fragment {
     public void onViewCreated(@NonNull View fragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(fragment, savedInstanceState);
 
-        ArrayList<ProductItem> productsList = new ArrayList<>();
+        ArrayList<Product> productsList = new ArrayList<>();
+
+        ArrayList<String> imageList = new ArrayList<>();
+        imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
+
         for (int i = 0; i < 10; i++) {
-            productsList.add(new ProductItem(
-                    R.drawable.logitech_mouse,
+            productsList.add(new Product(
+                    imageList,
                     "Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
                     "Logitech",
                     "Gaming Mouse",

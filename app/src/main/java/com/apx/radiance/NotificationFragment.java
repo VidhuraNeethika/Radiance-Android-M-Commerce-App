@@ -13,10 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.apx.radiance.adapter.GridProductAdapter;
 import com.apx.radiance.adapter.NotificationAdapter;
 import com.apx.radiance.model.NotificationItems;
-import com.apx.radiance.model.ProductItem;
 import com.apx.radiance.model.Tags;
 
 import java.util.ArrayList;
