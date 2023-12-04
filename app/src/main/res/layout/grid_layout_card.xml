@@ -44,7 +44,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout5"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,18 +69,19 @@
                 android:id="@+id/categoryText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:text="Gaming Mouse"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@+id/productNameText"
                 app:layout_constraintStart_toStartOf="@+id/productNameText"
-                app:layout_constraintTop_toBottomOf="@+id/productNameText" />
+                app:layout_constraintTop_toBottomOf="@+id/brandText" />
 
 
             <TextView
                 android:id="@+id/priceText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:text="LKR.7800.00"
                 android:textAlignment="center"
                 android:textColor="@color/primary_color"
@@ -89,6 +90,17 @@
                 app:layout_constraintEnd_toEndOf="@+id/categoryText"
                 app:layout_constraintStart_toStartOf="@+id/categoryText"
                 app:layout_constraintTop_toBottomOf="@+id/categoryText" />
+
+            <TextView
+                android:id="@+id/brandText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Logitech"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/productNameText"
+                app:layout_constraintStart_toStartOf="@+id/productNameText"
+                app:layout_constraintTop_toBottomOf="@+id/productNameText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

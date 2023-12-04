@@ -10,11 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apx.radiance.R;
+import com.apx.radiance.holders.ProductViewHolder;
 import com.apx.radiance.model.ProductItem;
 
 import java.util.ArrayList;
 
-public class WishlistProductAdapter extends RecyclerView.Adapter<WishlistProductAdapter.ViewHolder> {
+public class WishlistProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
     private ArrayList<ProductItem> productItemsList;
 
@@ -22,34 +23,19 @@ public class WishlistProductAdapter extends RecyclerView.Adapter<WishlistProduct
         this.productItemsList = productsList;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imageView;
-        public TextView name, brand, category, price;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            imageView = itemView.findViewById(R.id.productImage);
-            name = itemView.findViewById(R.id.productNameText);
-            brand = itemView.findViewById(R.id.brandText);
-            category = itemView.findViewById(R.id.categoryText);
-            price = itemView.findViewById(R.id.priceText);
-        }
-    }
-
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizontal_card_detailed_wishlist, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ProductViewHolder viewHolder = new ProductViewHolder(view);
 
         return viewHolder;
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         ProductItem currentItem = productItemsList.get(position);
         holder.imageView.setImageResource(currentItem.getImageSource());
         holder.name.setText(currentItem.getName());
