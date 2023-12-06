@@ -44,7 +44,7 @@
 
 
     <EditText
-        android:id="@+id/emailField"
+        android:id="@+id/emailFieldSignIn"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="36dp"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/passwordField"
+        android:id="@+id/passwordFieldSignIn"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="36dp"
@@ -82,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailField" />
+        app:layout_constraintTop_toBottomOf="@+id/emailFieldSignIn" />
 
     <TextView
         android:id="@+id/textView2"
@@ -150,14 +150,14 @@
         app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <Button
-        android:id="@+id/signUpBtn"
+        android:id="@+id/signInBtn"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginTop="38dp"
         android:backgroundTint="@color/orange"
         android:text="@string/sign_in_text"
-        app:layout_constraintEnd_toEndOf="@+id/passwordField"
-        app:layout_constraintStart_toStartOf="@+id/passwordField"
+        app:layout_constraintEnd_toEndOf="@+id/passwordFieldSignIn"
+        app:layout_constraintStart_toStartOf="@+id/passwordFieldSignIn"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <View
@@ -169,7 +169,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
 
     <TextView
         android:id="@+id/textView6"
@@ -181,9 +181,9 @@
         android:text="@string/or_text"
         android:textAlignment="center"
         android:textColor="@color/matte_light_dark"
-        app:layout_constraintEnd_toEndOf="@+id/signUpBtn"
-        app:layout_constraintStart_toStartOf="@+id/signUpBtn"
-        app:layout_constraintTop_toBottomOf="@+id/signUpBtn" />
+        app:layout_constraintEnd_toEndOf="@+id/signInBtn"
+        app:layout_constraintStart_toStartOf="@+id/signInBtn"
+        app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
 
     <View
         android:id="@+id/divider2"
@@ -194,7 +194,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/signUpBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -203,8 +203,8 @@
         android:layout_marginTop="38dp"
         android:background="@drawable/custom_input_rounded"
         android:backgroundTint="@color/dark_white"
-        app:layout_constraintEnd_toEndOf="@+id/signUpBtn"
-        app:layout_constraintStart_toStartOf="@+id/signUpBtn"
+        app:layout_constraintEnd_toEndOf="@+id/signInBtn"
+        app:layout_constraintStart_toStartOf="@+id/signInBtn"
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <LinearLayout
@@ -248,8 +248,8 @@
         android:layout_marginTop="10dp"
         android:text="@string/fogot_password_text"
         android:textColor="@color/matte_light_dark"
-        app:layout_constraintEnd_toEndOf="@+id/passwordField"
-        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
+        app:layout_constraintEnd_toEndOf="@+id/passwordFieldSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/passwordFieldSignIn" />
 
     <LinearLayout
         android:layout_width="wrap_content"

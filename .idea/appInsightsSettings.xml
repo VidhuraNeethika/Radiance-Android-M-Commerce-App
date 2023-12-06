@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.apx.radiance" />
+                  <option name="mobileSdkAppId" value="1:1032837080230:android:9ce4168f208fd48ba88067" />
+                  <option name="projectId" value="radiance-android-app" />
+                  <option name="projectNumber" value="1032837080230" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

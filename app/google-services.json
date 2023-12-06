@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1032837080230",
+    "project_id": "radiance-android-app",
+    "storage_bucket": "radiance-android-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032837080230:android:9ce4168f208fd48ba88067",
+        "android_client_info": {
+          "package_name": "com.apx.radiance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmZytt3TuWN_tUs89rdI8svlrSRkVDNsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
