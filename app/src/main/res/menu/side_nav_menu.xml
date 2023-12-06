@@ -39,7 +39,25 @@
 
     </group>
 
+    <group android:id="@+id/sideNavGroupAdmin">
+        <item
+            android:id="@+id/sideNavProductRegis"
+            android:icon="@drawable/squre_add_product"
+            android:title="@string/product_registration_text" />
+
+        <item
+            android:id="@+id/sideNavMyProduct"
+            android:icon="@drawable/my_products"
+            android:title="@string/my_product_text" />
+    </group>
+
     <group android:id="@+id/sideNavGroupHelp">
+
+        <item
+            android:id="@+id/sideNavAbout"
+            android:icon="@drawable/about_info_icon"
+            android:title="@string/about_us_text" />
+
         <item
             android:id="@+id/helpCenter"
             android:icon="@drawable/help_icon"

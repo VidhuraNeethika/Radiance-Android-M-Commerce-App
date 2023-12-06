@@ -129,7 +129,7 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView8" />
 
             <EditText
-                android:id="@+id/emailAddressField"
+                android:id="@+id/productTitleField"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
@@ -160,9 +160,9 @@
                 android:paddingStart="10dp"
                 android:paddingRight="20dp"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/emailAddressField"
-                app:layout_constraintStart_toStartOf="@+id/emailAddressField"
-                app:layout_constraintTop_toBottomOf="@+id/emailAddressField" />
+                app:layout_constraintEnd_toEndOf="@+id/productTitleField"
+                app:layout_constraintStart_toStartOf="@+id/productTitleField"
+                app:layout_constraintTop_toBottomOf="@+id/productTitleField" />
 
             <LinearLayout
                 android:id="@+id/linearLayout6"

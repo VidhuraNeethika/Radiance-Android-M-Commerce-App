@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import com.apx.radiance.adapter.OrdersAdapter;
 import com.apx.radiance.model.Orders;
 import com.apx.radiance.model.Product;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -63,7 +62,7 @@ public class OrderFragment extends Fragment {
         RecyclerView.Adapter<OrdersAdapter.ViewHolder> adapter = new OrdersAdapter(orderArrayList);
 
         if (orderArrayList.isEmpty()) {
-            fragment.findViewById(R.id.ordersBodyEmptyLayout).setVisibility(View.VISIBLE);
+            fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.VISIBLE);
             fragment.findViewById(R.id.ordersLayout).setVisibility(View.INVISIBLE);
         } else {
             recyclerView.setAdapter(adapter);

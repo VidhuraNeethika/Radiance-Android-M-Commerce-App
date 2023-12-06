@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,11 +16,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class GridProductAdapter extends RecyclerView.Adapter<GridProductAdapter.ProductViewHolder> {
+public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.ProductViewHolder> {
 
     private ArrayList<Product> productItemsList;
 
-    public GridProductAdapter(ArrayList<Product> productsList) {
+    public MyProductAdapter(ArrayList<Product> productsList) {
         this.productItemsList = productsList;
     }
 
@@ -40,17 +41,16 @@ public class GridProductAdapter extends RecyclerView.Adapter<GridProductAdapter.
 
     @NonNull
     @Override
-    public GridProductAdapter.ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyProductAdapter.ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_layout_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_product_card, parent, false);
         ProductViewHolder viewHolder = new ProductViewHolder(view);
-
         return viewHolder;
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GridProductAdapter.ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyProductAdapter.ProductViewHolder holder, int position) {
         Product currentItem = productItemsList.get(position);
         Picasso.get().load(currentItem.getImageList().get(0)).into(holder.imageView);
         holder.name.setText(currentItem.getName());

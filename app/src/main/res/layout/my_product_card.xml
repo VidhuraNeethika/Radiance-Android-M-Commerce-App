@@ -100,7 +100,7 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/orange"
-                android:text="Buy Now" />
+                android:text="Details" />
 
         </LinearLayout>
 

@@ -82,6 +82,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
         }else if (item.getItemId() == R.id.helpCenter ) {
             loadFragment(new SingleProductViewFragment());
+        }else if (item.getItemId() == R.id.sideNavProductRegis ) {
+            loadFragment(new AddProductFragment());
+        }else if (item.getItemId() == R.id.sideNavMyProduct ) {
+            loadFragment(new MyProductFragment());
         }
 
         dl.setBackgroundResource(R.color.white);

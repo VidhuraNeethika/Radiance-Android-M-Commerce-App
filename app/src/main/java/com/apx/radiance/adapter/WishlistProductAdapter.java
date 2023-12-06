@@ -3,18 +3,19 @@ package com.apx.radiance.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apx.radiance.R;
-import com.apx.radiance.holders.ProductViewHolder;
 import com.apx.radiance.model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class WishlistProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
+public class WishlistProductAdapter extends RecyclerView.Adapter<WishlistProductAdapter.ProductViewHolder> {
 
     private ArrayList<Product> productItemsList;
 
@@ -22,9 +23,24 @@ public class WishlistProductAdapter extends RecyclerView.Adapter<ProductViewHold
         this.productItemsList = productsList;
     }
 
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
+
+        public ImageView imageView;
+        public TextView name, brand, category, price;
+
+        public ProductViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.productImage);
+            name = itemView.findViewById(R.id.productNameText);
+            brand = itemView.findViewById(R.id.brandText);
+            category = itemView.findViewById(R.id.categoryText);
+            price = itemView.findViewById(R.id.priceText);
+        }
+    }
+
     @NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public WishlistProductAdapter.ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizontal_card_detailed_wishlist, parent, false);
         ProductViewHolder viewHolder = new ProductViewHolder(view);
@@ -34,7 +50,7 @@ public class WishlistProductAdapter extends RecyclerView.Adapter<ProductViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WishlistProductAdapter.ProductViewHolder holder, int position) {
         Product currentItem = productItemsList.get(position);
         Picasso.get().load(currentItem.getImageList().get(0)).into(holder.imageView);
         holder.name.setText(currentItem.getName());
