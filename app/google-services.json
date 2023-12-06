@@ -12,7 +12,20 @@
           "package_name": "com.apx.radiance"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1032837080230-l7nqrn9u445ohr4a0ddvh60uh4jt8vn8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apx.radiance",
+            "certificate_hash": "e8d6035fa9604fc051af598d9563d328e51a4de3"
+          }
+        },
+        {
+          "client_id": "1032837080230-1sq0n60bosbdj2e7s8iep17o6itdds5o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDmZytt3TuWN_tUs89rdI8svlrSRkVDNsE"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032837080230-1sq0n60bosbdj2e7s8iep17o6itdds5o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

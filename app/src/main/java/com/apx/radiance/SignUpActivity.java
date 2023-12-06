@@ -37,14 +37,9 @@ public class SignUpActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         fireStoreDatabase = FirebaseFirestore.getInstance();
 
-        userRegistration();
-
-    }
-
-    private void userRegistration(){
-
         EditText emailEditText = findViewById(R.id.emailFieldSignIn);
         EditText passwordEditText = findViewById(R.id.passwordFieldSignIn);
+
         findViewById(R.id.signInBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,60 +58,67 @@ public class SignUpActivity extends AppCompatActivity {
                     passwordEditText.requestFocus();
                 }else{
 
-                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-
-                                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-
-                                User user = new User();
-                                user.setEmail(currentUser.getEmail());
-                                user.setUserType("user");
-
-                                fireStoreDatabase.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-
-                                        currentUser.sendEmailVerification();
-//                                        Toast.makeText(SignUpActivity.this, "Please verify your email", Toast.LENGTH_LONG).show();
-
-                                        CoordinatorLayout coordinatorLayout = findViewById(R.id.signInCoordinatiorLayout);
-
-                                        Snackbar.make(coordinatorLayout, "Please Verify Your Email", Snackbar.LENGTH_LONG)
-                                                .setAction("Open Email",
-                                                        new View.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(View v) {
-                                                                Intent intent = new Intent(Intent.ACTION_MAIN);
-                                                                intent.addCategory(Intent.CATEGORY_APP_EMAIL);
-                                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                                startActivity(intent);
-                                                            }
-                                                        }
-                                                ).show();
-
-//                                        startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(SignUpActivity.this, "Error. Please try again.", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
-                            } else {
-
-                                Toast.makeText(SignUpActivity.this, "Registration fail", Toast.LENGTH_SHORT).show();
-
-                            }
-                        }
-                    });
+                    userRegistration(email,password);
 
                 }
 
             }
         });
+
+    }
+
+    private void userRegistration(String email,String password){
+
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+
+                    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+                    User user = new User();
+                    user.setEmail(currentUser.getEmail());
+                    user.setUserType("user");
+
+                    fireStoreDatabase.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+
+                            currentUser.sendEmailVerification();
+//                                        Toast.makeText(SignUpActivity.this, "Please verify your email", Toast.LENGTH_LONG).show();
+
+                            CoordinatorLayout coordinatorLayout = findViewById(R.id.signInCoordinatiorLayout);
+
+                            Snackbar.make(coordinatorLayout, "Please Verify Your Email", Snackbar.LENGTH_LONG)
+                                    .setAction("Open Email",
+                                            new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                                                    intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(intent);
+                                                }
+                                            }
+                                    ).show();
+
+//                                        startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(SignUpActivity.this, "Error. Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                } else {
+
+                    Toast.makeText(SignUpActivity.this, "Registration fail", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
     }
 }

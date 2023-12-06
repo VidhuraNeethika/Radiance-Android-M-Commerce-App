@@ -52,4 +52,7 @@ dependencies {
 
     //FIREBASE FIRESTORE
     implementation("com.google.firebase:firebase-firestore")
+
+    //FIREBASE AUTH WITH GOOGLE
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 }
