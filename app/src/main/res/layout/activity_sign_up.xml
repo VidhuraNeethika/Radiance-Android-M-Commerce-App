@@ -157,7 +157,7 @@
             app:layout_constraintTop_toTopOf="@+id/view2" />
 
         <Button
-            android:id="@+id/signInBtn"
+            android:id="@+id/signUpBtn"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
@@ -167,49 +167,47 @@
             app:layout_constraintStart_toStartOf="@+id/passwordFieldSignIn"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="48dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toStartOf="@+id/textView6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
-
         <TextView
             android:id="@+id/textView6"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
+            android:layout_marginTop="24dp"
             android:text="@string/or_text"
             android:textAlignment="center"
             android:textColor="@color/matte_light_dark"
-            app:layout_constraintEnd_toEndOf="@+id/signInBtn"
-            app:layout_constraintStart_toStartOf="@+id/signInBtn"
-            app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
+            app:layout_constraintEnd_toEndOf="@+id/signUpBtn"
+            app:layout_constraintStart_toStartOf="@+id/signUpBtn"
+            app:layout_constraintTop_toBottomOf="@+id/signUpBtn" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="@+id/textView6"
+            app:layout_constraintEnd_toStartOf="@+id/textView6"
+            app:layout_constraintStart_toStartOf="@+id/signUpBtn"
+            app:layout_constraintTop_toTopOf="@+id/textView6" />
 
         <View
             android:id="@+id/divider3"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="36dp"
             android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/textView6"
+            app:layout_constraintEnd_toEndOf="@+id/signUpBtn"
             app:layout_constraintStart_toEndOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
+            app:layout_constraintTop_toTopOf="@+id/textView6" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/signInWithGoogleBtn"
+            android:id="@+id/signUpWithGoogleBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/custom_input_rounded"
             android:backgroundTint="@color/dark_white"
-            app:layout_constraintEnd_toEndOf="@+id/signInBtn"
-            app:layout_constraintStart_toStartOf="@+id/signInBtn"
+            app:layout_constraintEnd_toEndOf="@+id/divider3"
+            app:layout_constraintStart_toStartOf="@+id/divider"
             app:layout_constraintTop_toBottomOf="@+id/textView6">
 
             <LinearLayout
@@ -245,32 +243,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/signInWithGoogleBtn"
-            app:layout_constraintStart_toStartOf="@+id/signInWithGoogleBtn"
-            app:layout_constraintTop_toBottomOf="@+id/signInWithGoogleBtn">
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/already_have_an_acount_text" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/sign_in_text"
-                android:textColor="@color/primary_color"
-                android:textStyle="bold" />
-        </LinearLayout>
-
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
@@ -302,6 +274,38 @@
             android:textStyle="italic"
             app:layout_constraintStart_toStartOf="@+id/passwordFieldSignIn"
             app:layout_constraintTop_toBottomOf="@+id/passwordFieldSignIn" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/signUpWithGoogleBtn"
+            app:layout_constraintStart_toStartOf="@+id/signUpWithGoogleBtn"
+            app:layout_constraintTop_toBottomOf="@+id/signUpWithGoogleBtn">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/already_have_an_acount_text" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sign_in_text"
+                android:textColor="@color/primary_color"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

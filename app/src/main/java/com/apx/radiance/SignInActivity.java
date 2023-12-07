@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.apx.radiance.model.User;
 import com.google.android.gms.auth.api.identity.GetSignInIntentRequest;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
@@ -32,12 +33,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class SignInActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private SignInClient signInClient;
-    String email,password;
+    String email, password;
 
     public static final String TAG = SignInActivity.class.getName();
 
@@ -77,7 +82,7 @@ public class SignInActivity extends AppCompatActivity {
                     passwordEditText.requestFocus();
                 } else {
 
-                    userLogin(email,password);
+                    userLogin(email, password);
 
                 }
 
@@ -142,7 +147,7 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
-    private void forgotPassword(String email){
+    private void forgotPassword(String email) {
         firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -163,7 +168,7 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-    private void signInWithGoogle(){
+    private void signInWithGoogle() {
 
         GetSignInIntentRequest signInIntentRequest = GetSignInIntentRequest.builder().setServerClientId(getString(R.string.web_client_id)).build();
 
@@ -177,19 +182,19 @@ public class SignInActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-
+                Toast.makeText(SignInActivity.this, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
     private final ActivityResultLauncher<IntentSenderRequest> signInLauncher = registerForActivityResult(new ActivityResultContracts.StartIntentSenderForResult(),
-                    new ActivityResultCallback<ActivityResult>() {
-                        @Override
-                        public void onActivityResult(ActivityResult result) {
-                            handleSignInResult(result.getData());
-                        }
-                    });
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    handleSignInResult(result.getData());
+                }
+            });
 
     private void handleSignInResult(Intent intent) {
         try {
@@ -211,7 +216,7 @@ public class SignInActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser user = firebaseAuth.getCurrentUser();
-                    if(user!=null) {
+                    if (user != null) {
                         startActivity(new Intent(SignInActivity.this, MainActivity.class));
                     }
                 }
@@ -219,7 +224,7 @@ public class SignInActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-
+                Toast.makeText(SignInActivity.this, "Error. Please try again.", Toast.LENGTH_SHORT).show();
             }
         });
     }
