@@ -92,7 +92,7 @@
                         android:layout_height="wrap_content">
 
                         <ImageButton
-                            android:id="@+id/imageButton19"
+                            android:id="@+id/pImg01"
                             android:layout_width="250dp"
                             android:layout_height="250dp"
                             android:background="@drawable/custom_input"
@@ -103,40 +103,43 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageButton
-                            android:id="@+id/imageButton20"
+                            android:id="@+id/pImg02"
                             android:layout_width="250dp"
                             android:layout_height="250dp"
                             android:layout_marginStart="6dp"
                             android:background="@drawable/custom_input"
                             android:backgroundTint="@color/white"
                             android:src="@drawable/add_product_icon"
+                            android:visibility="visible"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageButton19"
+                            app:layout_constraintStart_toEndOf="@+id/pImg01"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageButton
-                            android:id="@+id/imageButton21"
+                            android:id="@+id/pImg03"
                             android:layout_width="250dp"
                             android:layout_height="250dp"
                             android:layout_marginStart="6dp"
                             android:background="@drawable/custom_input"
                             android:backgroundTint="@color/white"
                             android:src="@drawable/add_product_icon"
+                            android:visibility="visible"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageButton20"
+                            app:layout_constraintStart_toEndOf="@+id/pImg02"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.0" />
 
                         <ImageButton
-                            android:id="@+id/imageButton22"
+                            android:id="@+id/pImg04"
                             android:layout_width="250dp"
                             android:layout_height="250dp"
                             android:layout_marginStart="6dp"
                             android:background="@drawable/custom_input"
                             android:backgroundTint="@color/white"
                             android:src="@drawable/add_product_icon"
+                            android:visibility="visible"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageButton21"
+                            app:layout_constraintStart_toEndOf="@+id/pImg03"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </HorizontalScrollView>
@@ -182,10 +185,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/productTitleField">
 
                 <Spinner
-                    android:id="@+id/spinner4"
+                    android:id="@+id/categoryItems"
                     android:layout_width="180dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/custom_input" />
+                    android:background="@drawable/custom_input"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp" />
 
                 <Space
                     android:layout_width="5dp"
@@ -196,7 +201,9 @@
                     android:id="@+id/spinner3"
                     android:layout_width="180dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/custom_input" />
+                    android:background="@drawable/custom_input"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp" />
             </LinearLayout>
 
             <Spinner
@@ -205,6 +212,8 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/custom_input"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout7"
                 app:layout_constraintStart_toStartOf="@+id/linearLayout7"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />

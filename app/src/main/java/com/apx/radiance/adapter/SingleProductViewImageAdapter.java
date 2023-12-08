@@ -48,5 +48,4 @@ public class SingleProductViewImageAdapter extends RecyclerView.Adapter<SinglePr
         return productImageList.size();
     }
 
-
 }
