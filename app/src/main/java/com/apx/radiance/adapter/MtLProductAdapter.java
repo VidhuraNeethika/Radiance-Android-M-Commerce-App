@@ -56,7 +56,7 @@ public class MtLProductAdapter extends RecyclerView.Adapter<MtLProductAdapter.Pr
         holder.name.setText(currentItem.getName());
         holder.brand.setText(currentItem.getBrand());
         holder.category.setText(currentItem.getCategory());
-        holder.price.setText(currentItem.getPrice().toString());
+        holder.price.setText("Rs."+currentItem.getPrice().toString()+"0");
     }
 
     @Override
