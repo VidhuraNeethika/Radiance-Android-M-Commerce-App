@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.apx.radiance.adapter.GridProductAdapter;
 import com.apx.radiance.adapter.MtLProductAdapter;
@@ -22,18 +23,24 @@ import com.apx.radiance.adapter.SliderImageAdapter;
 import com.apx.radiance.adapter.TagAdapter;
 import com.apx.radiance.model.Product;
 import com.apx.radiance.model.Tags;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.EventListener;
 
 
 public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerRecyclerView;
-    private RecyclerView.Adapter recyclerAdapter;
+    private RecyclerView.Adapter newArrivalAdapter, trendingAdapter, moreToLoveAdapter;
     private GridLayoutManager gridLayoutManager;
     private ArrayList<Tags> tagsArrayList;
     private RecyclerView.LayoutManager horizontalLayoutManager;
     private String[] tagsName;
+    private FirebaseDatabase firebaseDatabase;
 
     public HomeFragment() {
     }
@@ -54,6 +61,8 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(fragment, savedInstanceState);
 
         //Slider Start //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
         RecyclerView recyclerView = fragment.findViewById(R.id.sliderRecycler);
         ArrayList<String> arrayList = new ArrayList<>();
@@ -79,50 +88,63 @@ public class HomeFragment extends Fragment {
 
         //New Arrival Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ArrayList<String> imageList = new ArrayList<>();
-        imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
+        ArrayList<Product> newArrivalsProducts = new ArrayList<>();
 
-        ArrayList<Product> productsList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            productsList.add(new Product(
-                    imageList,
-                    "Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
-                    "Logitech",
-                    "Gaming Mouse",
-                    100.00));
-        }
+        firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Product product = dataSnapshot.getValue(Product.class);
+                    newArrivalsProducts.add(product);
+                }
+                newArrivalAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Db data load fail", Toast.LENGTH_LONG).show();
+            }
+        });
 
         recyclerRecyclerView = fragment.findViewById(R.id.serachResultRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
-        //gridLayoutManager = new GridLayoutManager(getContext(), 2);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerAdapter = new GridProductAdapter(productsList);
+        newArrivalAdapter = new GridProductAdapter(newArrivalsProducts);
         recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
-        recyclerRecyclerView.setAdapter(recyclerAdapter);
+        recyclerRecyclerView.setAdapter(newArrivalAdapter);
 
         //New Arrival End /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        //New Arrival Start /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Trending Start /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ArrayList<Product> productsListTrending = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            productsListTrending.add(new Product(
-                    imageList,
-                    "Logitech - MX999 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
-                    "Logitech",
-                    "Gaming Mouse",
-                    100.00));
-        }
+        ArrayList<Product> trendingProductList = new ArrayList<>();
+
+        firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Product product = dataSnapshot.getValue(Product.class);
+                    trendingProductList.add(product);
+                }
+                trendingAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Db data load fail", Toast.LENGTH_LONG).show();
+            }
+        });
 
         recyclerRecyclerView = fragment.findViewById(R.id.trendingProductRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
-        //gridLayoutManager = new GridLayoutManager(getContext(), 2);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerAdapter = new GridProductAdapter(productsListTrending);
+        trendingAdapter = new GridProductAdapter(trendingProductList);
         recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
-        recyclerRecyclerView.setAdapter(recyclerAdapter);
+        recyclerRecyclerView.setAdapter(trendingAdapter);
 
-        //New Arrival End /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Trending End /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
         //Tags Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -139,25 +161,33 @@ public class HomeFragment extends Fragment {
 
         //More to Love Start ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ArrayList<Product> productsListMTL = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            productsListMTL.add(new Product(
-                    imageList,
-                    "Logitech - MX111 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
-                    "Logitech",
-                    "Gaming Mouse",
-                    100.00));
-        }
+        ArrayList<Product> moretoLoveProducts = new ArrayList<>();
+
+        firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Product product = dataSnapshot.getValue(Product.class);
+                    moretoLoveProducts.add(product);
+                }
+                moreToLoveAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Db data load fail", Toast.LENGTH_LONG).show();
+            }
+        });
 
         recyclerRecyclerView = fragment.findViewById(R.id.moreToLoveRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
         horizontalLayoutManager = new LinearLayoutManager(getContext());
-        recyclerAdapter = new MtLProductAdapter(productsListMTL);
+        moreToLoveAdapter = new MtLProductAdapter(moretoLoveProducts);
         recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
-        recyclerRecyclerView.setAdapter(recyclerAdapter);
+        recyclerRecyclerView.setAdapter(moreToLoveAdapter);
 
         //More to Love End /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     }
 

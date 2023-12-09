@@ -65,13 +65,15 @@ public class SearchFragment extends Fragment {
         imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
 
         ArrayList<Product> productsList = new ArrayList<>();
+        Product product = new Product();
+        product.setImageList(imageList);
+        product.setName("Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button");
+        product.setBrand("Logitech");
+        product.setCategory("Gaming Mouse");
+        product.setPrice(100.00);
+
         for (int i = 0; i < 10; i++) {
-            productsList.add(new Product(
-                    imageList,
-                    "Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
-                    "Logitech",
-                    "Gaming Mouse",
-                    100.00));
+            productsList.add(product);
         }
 
         recyclerRecyclerView = fragment.findViewById(R.id.searchResultRecycler);

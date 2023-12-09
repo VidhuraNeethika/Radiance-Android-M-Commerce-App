@@ -174,6 +174,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
 
+            <Spinner
+                android:id="@+id/categoryItems"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/custom_input"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout7"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout7"
+                app:layout_constraintTop_toBottomOf="@+id/productTitleField" />
+
             <LinearLayout
                 android:id="@+id/linearLayout7"
                 android:layout_width="0dp"
@@ -182,10 +195,10 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/productTitleField"
                 app:layout_constraintStart_toStartOf="@+id/productTitleField"
-                app:layout_constraintTop_toBottomOf="@+id/productTitleField">
+                app:layout_constraintTop_toBottomOf="@+id/categoryItems">
 
                 <Spinner
-                    android:id="@+id/categoryItems"
+                    android:id="@+id/brandItems"
                     android:layout_width="180dp"
                     android:layout_height="40dp"
                     android:background="@drawable/custom_input"
@@ -198,25 +211,13 @@
                     android:layout_weight="1" />
 
                 <Spinner
-                    android:id="@+id/spinner3"
+                    android:id="@+id/modelItems"
                     android:layout_width="180dp"
                     android:layout_height="40dp"
                     android:background="@drawable/custom_input"
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp" />
             </LinearLayout>
-
-            <Spinner
-                android:id="@+id/spinner5"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/custom_input"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout7"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout7"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
             <EditText
                 android:id="@+id/priceField"
@@ -227,28 +228,30 @@
                 android:drawableStart="@drawable/rounded_arrow_icon"
                 android:drawablePadding="10dp"
                 android:hint="@string/enter_product_price_text"
+                android:inputType="number"
                 android:paddingStart="10dp"
                 android:paddingRight="20dp"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/qtyField"
                 app:layout_constraintEnd_toStartOf="@+id/qtyField"
-                app:layout_constraintStart_toStartOf="@+id/spinner5"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout7"
                 app:layout_constraintTop_toTopOf="@+id/qtyField" />
 
             <EditText
                 android:id="@+id/qtyField"
                 android:layout_width="150dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/custom_input"
                 android:drawableStart="@drawable/rounded_arrow_icon"
                 android:drawablePadding="10dp"
                 android:hint="@string/enter_qty_text"
+                android:inputType="number"
                 android:paddingStart="10dp"
                 android:paddingRight="20dp"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/spinner5"
-                app:layout_constraintTop_toBottomOf="@+id/spinner5" />
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout7"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
             <EditText
                 android:id="@+id/descriptionField"
@@ -267,12 +270,34 @@
                 app:layout_constraintTop_toBottomOf="@+id/qtyField" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/addProductBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="12dp"
                 android:backgroundTint="@color/primary_color"
                 android:text="@string/add_product_text"
+                app:layout_constraintEnd_toEndOf="@+id/descriptionField"
+                app:layout_constraintStart_toStartOf="@+id/descriptionField"
+                app:layout_constraintTop_toBottomOf="@+id/loadingProgress" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="(Maximum 4 Images)"
+                android:textColor="@color/matte_light_dark"
+                app:layout_constraintBottom_toBottomOf="@+id/textView73"
+                app:layout_constraintStart_toEndOf="@+id/textView73"
+                app:layout_constraintTop_toTopOf="@+id/textView73" />
+
+            <ProgressBar
+                android:id="@+id/loadingProgress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/descriptionField"
                 app:layout_constraintStart_toStartOf="@+id/descriptionField"
                 app:layout_constraintTop_toBottomOf="@+id/descriptionField" />

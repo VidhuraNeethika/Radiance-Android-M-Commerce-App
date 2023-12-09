@@ -5,20 +5,22 @@ import java.util.ArrayList;
 public class Product {
 
     private ArrayList<String> imageList;
-    private String name;
-    private String brand;
-    private String category;
+    private String name, description, category, brand, model;
     private Double price;
+    private int quantity;
 
     public Product() {
     }
 
-    public Product(ArrayList<String> imageList, String name, String brand, String category, Double price) {
+    public Product(ArrayList<String> imageList, String name, String description, String category, String brand, String model, Double price, int quantity) {
         this.imageList = imageList;
         this.name = name;
-        this.brand = brand;
+        this.description = description;
         this.category = category;
+        this.brand = brand;
+        this.model = model;
         this.price = price;
+        this.quantity = quantity;
     }
 
     public ArrayList<String> getImageList() {
@@ -37,12 +39,12 @@ public class Product {
         this.name = name;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCategory() {
@@ -53,11 +55,35 @@ public class Product {
         this.category = category;
     }
 
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
     public Double getPrice() {
         return price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

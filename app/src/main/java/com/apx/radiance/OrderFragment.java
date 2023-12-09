@@ -42,16 +42,17 @@ public class OrderFragment extends Fragment {
         ArrayList<String> imageList = new ArrayList<>();
         imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
 
+        Product product = new Product();
+        product.setImageList(imageList);
+        product.setName("Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button");
+        product.setBrand("Logitech");
+        product.setCategory("Gaming Mouse");
+        product.setPrice(100.00);
+
         //Products
         ArrayList<Orders> orderArrayList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            orderArrayList.add(new Orders(
-                    new Product(
-                            imageList,
-                            "Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button",
-                            "Logitech",
-                            "Gaming Mouse",
-                            100.00),
+            orderArrayList.add(new Orders(product,
                     "22:00 23-12-2023",
                     2
             ));

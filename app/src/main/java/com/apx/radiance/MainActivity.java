@@ -13,11 +13,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NavigationBarView.OnItemSelectedListener {
 
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private MaterialToolbar toolbar;
     private BottomNavigationView bottomNavigationView;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigationView);
         toolbar = findViewById(R.id.materialToolBar);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
 
         setSupportActionBar(toolbar);
 
@@ -64,28 +72,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (item.getItemId() == R.id.sideNavHome || item.getItemId() == R.id.bottomNavHome) {
             loadFragment(new HomeFragment());
         } else if (item.getItemId() == R.id.sideNavCart || item.getItemId() == R.id.bottomNavCart) {
-            loadFragment(new CartFragment());
-            dl.setBackgroundResource(R.color.dark_white);
+            if (currentUser != null) {
+                loadFragment(new CartFragment());
+                dl.setBackgroundResource(R.color.dark_white);
+            }else{
+                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            }
         } else if (item.getItemId() == R.id.sideNavWishlist) {
-            loadFragment(new WishlistFragment());
-        }else if (item.getItemId() == R.id.sideNavProfile || item.getItemId() == R.id.bottomNavProfile) {
-            loadFragment(new ProfileFragment());
-        }else if (item.getItemId() == R.id.sideNavSearch || item.getItemId() == R.id.bottomNavSerach) {
+            if (currentUser != null) {
+                loadFragment(new WishlistFragment());
+            }else{
+                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            }
+        } else if (item.getItemId() == R.id.sideNavProfile || item.getItemId() == R.id.bottomNavProfile) {
+            if (currentUser != null) {
+                loadFragment(new ProfileFragment());
+            }else{
+                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            }
+        } else if (item.getItemId() == R.id.sideNavSearch || item.getItemId() == R.id.bottomNavSerach) {
             loadFragment(new SearchFragment());
-        }else if (item.getItemId() == R.id.sideNavNotification || item.getItemId() == R.id.bottomNavNotification) {
+        } else if (item.getItemId() == R.id.sideNavNotification || item.getItemId() == R.id.bottomNavNotification) {
             loadFragment(new NotificationFragment());
-        }else if (item.getItemId() == R.id.privacyPolicy ) {
+        } else if (item.getItemId() == R.id.privacyPolicy) {
             loadFragment(new PrivacyPolicyFragment());
-        }else if (item.getItemId() == R.id.sideNavOrders ) {
-            loadFragment(new OrderFragment());
-        }else if (item.getItemId() == R.id.sideNavLog ) {
+        } else if (item.getItemId() == R.id.sideNavOrders) {
+            if (currentUser != null) {
+                loadFragment(new OrderFragment());
+            }else{
+                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            }
+        } else if (item.getItemId() == R.id.sideNavLog) {
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
-        }else if (item.getItemId() == R.id.helpCenter ) {
+        } else if (item.getItemId() == R.id.helpCenter) {
             loadFragment(new SingleProductViewFragment());
-        }else if (item.getItemId() == R.id.sideNavProductRegis ) {
+        } else if (item.getItemId() == R.id.sideNavProductRegis) {
             loadFragment(new AddProductFragment());
-        }else if (item.getItemId() == R.id.sideNavMyProduct ) {
+        } else if (item.getItemId() == R.id.sideNavMyProduct) {
             loadFragment(new MyProductFragment());
+        }else if (item.getItemId() == R.id.sideNavLogOut) {
+            firebaseAuth.signOut();
+            Toast.makeText(MainActivity.this, "Successfully Log Out", Toast.LENGTH_SHORT).show();
         }
 
         dl.setBackgroundResource(R.color.white);
