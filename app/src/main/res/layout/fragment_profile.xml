@@ -76,15 +76,15 @@
             android:paddingBottom="10dp">
 
             <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/profileImageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="163dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="163dp"
                 android:background="@drawable/custom_input_rounded"
                 android:backgroundTint="@color/dark_white"
-                android:padding="20dp"
+                android:padding="6dp"
                 android:src="@drawable/profile_user"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,21 +103,33 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+
+            <Button
+                android:id="@+id/signOutButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/primary_color"
+                android:text="@string/sign_out_text"
+                app:layout_constraintEnd_toEndOf="@+id/textView29"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toBottomOf="@+id/userName" />
 
             <Button
                 android:id="@+id/signInButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:backgroundTint="@color/primary_color"
                 android:text="@string/sign_in_text"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="@+id/textView29"
                 app:layout_constraintStart_toStartOf="@+id/textView29"
-                app:layout_constraintTop_toBottomOf="@+id/textView29" />
+                app:layout_constraintTop_toBottomOf="@+id/userName" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/addProfileImageBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-25dp"
@@ -125,11 +137,11 @@
                 android:backgroundTint="@color/primary_color"
                 android:padding="5dp"
                 android:src="@drawable/add_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-                app:layout_constraintStart_toEndOf="@+id/imageView8" />
+                app:layout_constraintBottom_toBottomOf="@+id/profileImageView"
+                app:layout_constraintStart_toEndOf="@+id/profileImageView" />
 
             <EditText
-                android:id="@+id/productTitleField"
+                android:id="@+id/emailaddressFieldProfileProfile"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
@@ -147,23 +159,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
-            <EditText
-                android:id="@+id/passwordFieldSignIn"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/custom_input"
-                android:drawableStart="@drawable/key_icon"
-                android:drawablePadding="10dp"
-                android:hint="@string/password_text"
-                android:inputType="numberPassword"
-                android:paddingStart="10dp"
-                android:paddingRight="20dp"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/productTitleField"
-                app:layout_constraintStart_toStartOf="@+id/productTitleField"
-                app:layout_constraintTop_toBottomOf="@+id/productTitleField" />
-
             <LinearLayout
                 android:id="@+id/linearLayout6"
                 android:layout_width="0dp"
@@ -174,7 +169,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/signInButton">
+                app:layout_constraintTop_toBottomOf="@+id/signOutButton">
 
                 <EditText
                     android:id="@+id/firstNameField"
@@ -208,7 +203,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/addressField"
+                android:id="@+id/addressFieldProfile"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -219,13 +214,12 @@
                 android:paddingStart="10dp"
                 android:paddingRight="20dp"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/passwordFieldSignIn"
-                app:layout_constraintHorizontal_bias="0.333"
-                app:layout_constraintStart_toStartOf="@+id/passwordFieldSignIn"
-                app:layout_constraintTop_toBottomOf="@+id/mobileField" />
+                app:layout_constraintEnd_toEndOf="@+id/mobileFieldProfile"
+                app:layout_constraintStart_toStartOf="@+id/mobileFieldProfile"
+                app:layout_constraintTop_toBottomOf="@+id/mobileFieldProfile" />
 
             <EditText
-                android:id="@+id/cityField"
+                android:id="@+id/cityFieldProfile"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -236,12 +230,12 @@
                 android:paddingStart="10dp"
                 android:paddingRight="20dp"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/addressField"
-                app:layout_constraintStart_toStartOf="@+id/addressField"
-                app:layout_constraintTop_toBottomOf="@+id/addressField" />
+                app:layout_constraintEnd_toEndOf="@+id/addressFieldProfile"
+                app:layout_constraintStart_toStartOf="@+id/addressFieldProfile"
+                app:layout_constraintTop_toBottomOf="@+id/addressFieldProfile" />
 
             <EditText
-                android:id="@+id/mobileField"
+                android:id="@+id/mobileFieldProfile"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -249,12 +243,13 @@
                 android:drawableStart="@drawable/phone_icon"
                 android:drawablePadding="10dp"
                 android:hint="@string/mobile_number_text"
+                android:inputType="number"
                 android:paddingStart="10dp"
                 android:paddingRight="20dp"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/passwordFieldSignIn"
-                app:layout_constraintStart_toStartOf="@+id/passwordFieldSignIn"
-                app:layout_constraintTop_toBottomOf="@+id/passwordFieldSignIn" />
+                app:layout_constraintEnd_toEndOf="@+id/emailaddressFieldProfileProfile"
+                app:layout_constraintStart_toStartOf="@+id/emailaddressFieldProfileProfile"
+                app:layout_constraintTop_toBottomOf="@+id/emailaddressFieldProfileProfile" />
 
             <Button
                 android:id="@+id/updateButton"
@@ -263,9 +258,20 @@
                 android:layout_marginTop="24dp"
                 android:backgroundTint="@color/primary_color"
                 android:text="@string/update_text"
-                app:layout_constraintEnd_toEndOf="@+id/cityField"
-                app:layout_constraintStart_toStartOf="@+id/cityField"
-                app:layout_constraintTop_toBottomOf="@+id/cityField" />
+                app:layout_constraintEnd_toEndOf="@+id/cityFieldProfile"
+                app:layout_constraintStart_toStartOf="@+id/cityFieldProfile"
+                app:layout_constraintTop_toBottomOf="@+id/cityFieldProfile" />
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/textView29"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

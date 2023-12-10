@@ -15,6 +15,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,24 +31,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apx.radiance.model.Product;
+import com.apx.radiance.model.User;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.firestore.v1.WriteResult;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -55,6 +66,8 @@ public class AddProductFragment extends Fragment {
     private Uri imgUri1, imgUri2, imgUri3, imgUri4;
     private FirebaseFirestore database;
     private StorageReference storageReference, storageReference1, storageReference2, storageReference3, storageReference4;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser currentUser;
 
     ArrayList<String> images = new ArrayList<>();
     ArrayList<String> downloadImagesList = new ArrayList<>();
@@ -87,6 +100,8 @@ public class AddProductFragment extends Fragment {
         super.onViewCreated(fragment, savedInstanceState);
 
         database = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
 
         imageButton01 = fragment.findViewById(R.id.pImg01);
         imageButton02 = fragment.findViewById(R.id.pImg02);
@@ -107,13 +122,14 @@ public class AddProductFragment extends Fragment {
         FirebaseApp.initializeApp(requireContext());
         storageReference = FirebaseStorage.getInstance().getReference();
 
+        checkUser();
+
         imageButton01.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
                         intent.setType("image/*");
-                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                         intent.setAction(Intent.ACTION_GET_CONTENT);
                         activityResultLauncher1.launch(Intent.createChooser(intent, "Select Image"));
                     }
@@ -126,7 +142,6 @@ public class AddProductFragment extends Fragment {
                     public void onClick(View v) {
                         Intent intent = new Intent();
                         intent.setType("image/*");
-                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                         intent.setAction(Intent.ACTION_GET_CONTENT);
                         activityResultLauncher2.launch(Intent.createChooser(intent, "Select Image"));
                     }
@@ -139,7 +154,6 @@ public class AddProductFragment extends Fragment {
                     public void onClick(View v) {
                         Intent intent = new Intent();
                         intent.setType("image/*");
-                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                         intent.setAction(Intent.ACTION_GET_CONTENT);
                         activityResultLauncher3.launch(Intent.createChooser(intent, "Select Image"));
                     }
@@ -152,7 +166,6 @@ public class AddProductFragment extends Fragment {
                     public void onClick(View v) {
                         Intent intent = new Intent();
                         intent.setType("image/*");
-                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                         intent.setAction(Intent.ACTION_GET_CONTENT);
                         activityResultLauncher4.launch(Intent.createChooser(intent, "Select Image"));
                     }
@@ -268,6 +281,34 @@ public class AddProductFragment extends Fragment {
             }
         });
 
+        fragment.findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new HomeFragment());
+            }
+        });
+
+        fragment.findViewById(R.id.switchToSellerAccountBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DocumentReference docRef = database.collection("Users").document(currentUser.getUid());
+                docRef.update("userType", "seller").addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        fragment.findViewById(R.id.addProductScrollView).setVisibility(View.VISIBLE);
+                        fragment.findViewById(R.id.addProductCustomerView).setVisibility(View.GONE);
+                        Toast.makeText(getContext(), "Successfully Switch", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("onFailure : ");
+                    }
+                });
+
+            }
+        });
 
     }
 
@@ -327,30 +368,30 @@ public class AddProductFragment extends Fragment {
         String description = productDescriptionText.getText().toString();
 
 
-//        if (title.isEmpty()) {
-//            productTitleText.setError("Product title is required");
-//            productTitleText.requestFocus();
-//        } else if (price.isEmpty()) {
-//            productPriceText.setError("Product price is required");
-//            productPriceText.requestFocus();
-//        } else if (qty.isEmpty()) {
-//            qtyText.setError("Product quantity is required");
-//            qtyText.requestFocus();
-//        } else if (description.isEmpty()) {
-//            productDescriptionText.setError("Product description is required");
-//            productDescriptionText.requestFocus();
-//        } else if (categoryText.equals("Select Category")) {
-//            ((TextView) categoryView.getSelectedView()).setError("Category is required");
-//            categoryView.requestFocus();
-//        } else if (brandText.equals("Select Brand")) {
-//            ((TextView) brandView.getSelectedView()).setError("Brand is required");
-//            brandView.requestFocus();
-//        } else if (modelText.equals("Select Model")) {
-//            ((TextView) modelView.getSelectedView()).setError("Model is required");
-//            modelView.requestFocus();
-//        } else if (imgUri1 == null) {
-//            Toast.makeText(getContext(), "Please select at least one image", Toast.LENGTH_SHORT).show();
-//        } else {
+        if (title.isEmpty()) {
+            productTitleText.setError("Product title is required");
+            productTitleText.requestFocus();
+        } else if (price.isEmpty()) {
+            productPriceText.setError("Product price is required");
+            productPriceText.requestFocus();
+        } else if (qty.isEmpty()) {
+            qtyText.setError("Product quantity is required");
+            qtyText.requestFocus();
+        } else if (description.isEmpty()) {
+            productDescriptionText.setError("Product description is required");
+            productDescriptionText.requestFocus();
+        } else if (categoryText.equals("Select Category")) {
+            ((TextView) categoryView.getSelectedView()).setError("Category is required");
+            categoryView.requestFocus();
+        } else if (brandText.equals("Select Brand")) {
+            ((TextView) brandView.getSelectedView()).setError("Brand is required");
+            brandView.requestFocus();
+        } else if (modelText.equals("Select Model")) {
+            ((TextView) modelView.getSelectedView()).setError("Model is required");
+            modelView.requestFocus();
+        } else if (imgUri1 == null) {
+            Toast.makeText(getContext(), "Please select at least one image", Toast.LENGTH_SHORT).show();
+        } else {
 
         images.add(String.valueOf(imgUri1));
 
@@ -404,7 +445,7 @@ public class AddProductFragment extends Fragment {
         }).start();
 
 
-//        }
+        }
     }
 
     private void addDetailsToDatabase(int index, String title, String price, String qty, String description) {
@@ -418,9 +459,15 @@ public class AddProductFragment extends Fragment {
             product.setPrice(Double.parseDouble(price));
             product.setQuantity(Integer.parseInt(qty));
             product.setDescription(description);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss", Locale.getDefault());
+            String formattedDate = sdf.format(new Date());
+
+            product.setRegDate(formattedDate);
             product.setCategory(categoryText);
             product.setBrand(brandText);
             product.setModel(modelText);
+            product.setSellerEmail(currentUser.getEmail());
 
             FirebaseDatabase.getInstance().getReference("Products").child(title)
                     .setValue(product)
@@ -456,6 +503,43 @@ public class AddProductFragment extends Fragment {
         imageButton03.setImageResource(R.drawable.add_product_icon);
         imageButton04.setImageResource(R.drawable.add_product_icon);
         progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    private void checkUser() {
+
+        if (currentUser != null) {
+
+            database.collection("Users").document(firebaseAuth.getUid()).get().addOnSuccessListener(
+                    new OnSuccessListener<com.google.firebase.firestore.DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(com.google.firebase.firestore.DocumentSnapshot documentSnapshot) {
+
+                            if (documentSnapshot.exists()) {
+
+                                User user = documentSnapshot.toObject(User.class);
+
+                                if(user.getUserType().equals("user")) {
+                                    getView().findViewById(R.id.addProductScrollView).setVisibility(View.GONE);
+                                    getView().findViewById(R.id.addProductCustomerView).setVisibility(View.VISIBLE);
+                                } else {
+                                    getView().findViewById(R.id.addProductScrollView).setVisibility(View.VISIBLE);
+                                    getView().findViewById(R.id.addProductCustomerView).setVisibility(View.GONE);
+                                }
+
+                            }
+
+                        }
+                    }
+            );
+
+        }
+    }
+
+    public void loadFragment(Fragment fragment) {
+        FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
     }
 
 }

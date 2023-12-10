@@ -103,16 +103,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
         } else if (item.getItemId() == R.id.sideNavLog) {
-            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            if (currentUser != null) {
+                Toast.makeText(MainActivity.this, "You are already logged in", Toast.LENGTH_SHORT).show();
+            }else{
+                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            }
         } else if (item.getItemId() == R.id.helpCenter) {
             loadFragment(new SingleProductViewFragment());
         } else if (item.getItemId() == R.id.sideNavProductRegis) {
-            loadFragment(new AddProductFragment());
+            if (currentUser != null) {
+                loadFragment(new AddProductFragment());
+            }else{
+                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            }
         } else if (item.getItemId() == R.id.sideNavMyProduct) {
-            loadFragment(new MyProductFragment());
+            if (currentUser != null) {
+                loadFragment(new MyProductFragment());
+            }else{
+                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            }
         }else if (item.getItemId() == R.id.sideNavLogOut) {
-            firebaseAuth.signOut();
-            Toast.makeText(MainActivity.this, "Successfully Log Out", Toast.LENGTH_SHORT).show();
+            if (currentUser != null) {
+                firebaseAuth.signOut();
+                Toast.makeText(MainActivity.this, "Successfully Log Out", Toast.LENGTH_SHORT).show();
+            }else{
+                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            }
+
         }
 
         dl.setBackgroundResource(R.color.white);

@@ -29,6 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.EventListener;
 
 
@@ -60,9 +62,9 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View fragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(fragment, savedInstanceState);
 
-        //Slider Start //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+        //Slider Start //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         RecyclerView recyclerView = fragment.findViewById(R.id.sliderRecycler);
         ArrayList<String> arrayList = new ArrayList<>();

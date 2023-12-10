@@ -64,6 +64,13 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.homeBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignInActivity.this, MainActivity.class));
+            }
+        });
+
         findViewById(R.id.signInBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

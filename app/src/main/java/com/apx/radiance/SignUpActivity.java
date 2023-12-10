@@ -54,6 +54,13 @@ public class SignUpActivity extends AppCompatActivity {
         EditText emailEditText = findViewById(R.id.emailFieldSignIn);
         EditText passwordEditText = findViewById(R.id.passwordFieldSignIn);
 
+        findViewById(R.id.homeBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+            }
+        });
+
         findViewById(R.id.signUpBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +90,13 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signUpWithGoogle();
+            }
+        });
+
+        findViewById(R.id.signInBtnTop).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
             }
         });
 

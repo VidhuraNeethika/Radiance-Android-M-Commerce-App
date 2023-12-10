@@ -11,10 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.apx.radiance.adapter.MyProductAdapter;
 import com.apx.radiance.adapter.WishlistProductAdapter;
 import com.apx.radiance.model.Product;
+import com.apx.radiance.model.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -23,6 +34,10 @@ public class MyProductFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser currentUser;
+    private FirebaseFirestore database;
+    private StorageReference storageReference;
 
     public MyProductFragment() {
     }
@@ -41,6 +56,14 @@ public class MyProductFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View fragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(fragment, savedInstanceState);
+
+        database = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+        checkUser();
 
         ArrayList<Product> productsList = new ArrayList<>();
 
@@ -67,5 +90,58 @@ public class MyProductFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        fragment.findViewById(R.id.switchToSellerAccountBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DocumentReference docRef = database.collection("Users").document(currentUser.getUid());
+                docRef.update("userType", "seller").addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        fragment.findViewById(R.id.addProductScrollView).setVisibility(View.VISIBLE);
+                        fragment.findViewById(R.id.addProductCustomerView).setVisibility(View.GONE);
+                        Toast.makeText(getContext(), "Successfully Switch", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("onFailure : ");
+                    }
+                });
+
+            }
+        });
+
     }
+
+    private void checkUser() {
+
+        if (currentUser != null) {
+
+            database.collection("Users").document(firebaseAuth.getUid()).get().addOnSuccessListener(
+                    new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(com.google.firebase.firestore.DocumentSnapshot documentSnapshot) {
+
+                            if (documentSnapshot.exists()) {
+
+                                User user = documentSnapshot.toObject(User.class);
+
+                                if(user.getUserType().equals("user")) {
+                                    getView().findViewById(R.id.myProductsBodyLayout).setVisibility(View.GONE);
+                                    getView().findViewById(R.id.myProductCustomerView).setVisibility(View.VISIBLE);
+                                } else {
+                                    getView().findViewById(R.id.myProductsBodyLayout).setVisibility(View.VISIBLE);
+                                    getView().findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
+                                }
+
+                            }
+
+                        }
+                    }
+            );
+
+        }
+    }
+
 }

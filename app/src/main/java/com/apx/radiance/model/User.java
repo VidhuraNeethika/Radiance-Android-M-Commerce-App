@@ -8,8 +8,8 @@ public class User {
     private String mobile;
     private String address;
     private String userType;
-
     private String city;
+    private String imageUrl;
 
     public User() {
     }
@@ -68,5 +68,13 @@ public class User {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

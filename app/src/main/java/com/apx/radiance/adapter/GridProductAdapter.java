@@ -14,6 +14,7 @@ import com.apx.radiance.model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GridProductAdapter extends RecyclerView.Adapter<GridProductAdapter.ProductViewHolder> {
 
