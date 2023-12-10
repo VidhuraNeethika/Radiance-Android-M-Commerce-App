@@ -526,6 +526,9 @@ public class AddProductFragment extends Fragment {
                                     getView().findViewById(R.id.addProductCustomerView).setVisibility(View.GONE);
                                 }
 
+                            }else{
+                                Toast.makeText(getContext(), "Please update your account details", Toast.LENGTH_SHORT).show();
+                                loadFragment(new ProfileFragment());
                             }
 
                         }

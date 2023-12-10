@@ -1,10 +1,13 @@
 package com.apx.radiance;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -135,6 +138,9 @@ public class MyProductFragment extends Fragment {
                                     getView().findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
                                 }
 
+                            }else{
+                                Toast.makeText(getContext(), "Please update your account details", Toast.LENGTH_SHORT).show();
+                                loadFragment(new ProfileFragment());
                             }
 
                         }
@@ -142,6 +148,13 @@ public class MyProductFragment extends Fragment {
             );
 
         }
+    }
+
+    public void loadFragment(Fragment fragment) {
+        FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
     }
 
 }
