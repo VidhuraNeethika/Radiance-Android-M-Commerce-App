@@ -108,9 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }else{
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
-        } else if (item.getItemId() == R.id.helpCenter) {
-            loadFragment(new SingleProductViewFragment());
-        } else if (item.getItemId() == R.id.sideNavProductRegis) {
+        }else if (item.getItemId() == R.id.sideNavProductRegis) {
             if (currentUser != null) {
                 loadFragment(new AddProductFragment());
             }else{

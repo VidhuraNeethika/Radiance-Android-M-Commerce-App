@@ -55,6 +55,7 @@ public class SingleProductViewFragment extends Fragment {
         TextView nameField = fragment.findViewById(R.id.productNameFieldS);
         TextView priceField = fragment.findViewById(R.id.priceFieldS);
         TextView descriptionField = fragment.findViewById(R.id.descrptionFieldS);
+        TextView qtyField = fragment.findViewById(R.id.qtyTextS);
 
         for (int i = 0; i < product.getImageList().size(); i++) {
             imageList.add(product.getImageList().get(i));
@@ -72,6 +73,7 @@ public class SingleProductViewFragment extends Fragment {
         nameField.setText(product.getName());
         priceField.setText("Rs."+product.getPrice().toString()+"0");
         descriptionField.setText(product.getDescription());
+        qtyField.setText("Quantity : "+product.getQuantity());
 
     }
 }

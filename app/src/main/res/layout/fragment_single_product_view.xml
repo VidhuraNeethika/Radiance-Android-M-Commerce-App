@@ -10,9 +10,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout7"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="@drawable/bottom_nav_bg"
-        android:backgroundTint="@color/dark_white"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/custom_input_rounded_dark"
+        android:backgroundTint="@color/primary_color"
+        android:paddingStart="26dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -21,9 +28,8 @@
             android:id="@+id/textView61"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
             android:text="Total Price"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Rs.12,000.00"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/textView61"
             app:layout_constraintTop_toBottomOf="@+id/textView61" />
@@ -41,9 +48,9 @@
             android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:backgroundTint="@color/primary_color"
+            android:backgroundTint="@color/white"
             android:text="Buy Now"
+            android:textColor="@color/primary_color"
             app:layout_constraintBottom_toBottomOf="@+id/priceFieldS"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView61" />
@@ -76,6 +83,7 @@
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginEnd="24dp"
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/product_details_text"
@@ -85,10 +93,23 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/addToCartBtn"
-            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintEnd_toStartOf="@+id/addToWishListBtnS"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.272" />
+
+        <ImageButton
+            android:id="@+id/addToWishListBtnS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_input"
+            android:backgroundTint="@color/primary_color"
+            android:padding="8dp"
+            android:src="@drawable/heart_icon_white"
+            app:layout_constraintBottom_toBottomOf="@+id/addToCartBtn"
+            app:layout_constraintEnd_toStartOf="@+id/addToCartBtn"
+            app:layout_constraintTop_toTopOf="@+id/addToCartBtn" />
 
         <ImageButton
             android:id="@+id/addToCartBtn"
@@ -138,6 +159,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
         android:scrollbars="none"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
@@ -165,7 +187,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
-                android:lines="2"
                 android:text="Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button"
                 android:textSize="19sp"
                 android:textStyle="bold"
@@ -193,6 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="LIGHTSPEED wireless gaming mouse designed for serious performance with latest technology innovations. Impressive 250-hour battery life. Now in a variety of vibrant colors."
+                android:textColor="@color/matte_light_dark"
                 app:layout_constraintEnd_toEndOf="@+id/productNameFieldS"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/productNameFieldS"
@@ -252,11 +274,11 @@
                 android:id="@+id/divider4"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/descrptionFieldS" />
+                app:layout_constraintTop_toBottomOf="@+id/qtyTextS" />
 
             <TextView
                 android:id="@+id/textView68"
@@ -384,6 +406,65 @@
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/qtyTextS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/custom_input"
+                android:backgroundTint="@color/orange"
+                android:padding="5dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="TextView"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descrptionFieldS" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/qtyTextS"
+                app:layout_constraintStart_toEndOf="@+id/qtyTextS"
+                app:layout_constraintTop_toTopOf="@+id/qtyTextS">
+
+                <ImageButton
+                    android:id="@+id/imageButton6"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_input"
+                    app:srcCompat="@drawable/minus_icon" />
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="01"
+                    android:textAlignment="center" />
+
+                <ImageButton
+                    android:id="@+id/imageButton5"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_input"
+                    android:backgroundTint="@color/primary_color"
+                    app:srcCompat="@drawable/add_icon" />
+
+                <Space
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
