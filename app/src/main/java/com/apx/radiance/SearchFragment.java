@@ -79,7 +79,7 @@ public class SearchFragment extends Fragment {
         recyclerRecyclerView = fragment.findViewById(R.id.searchResultRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
         gridLayoutManager = new GridLayoutManager(getContext(), 2);
-        recyclerAdapter = new GridProductAdapter(productsList);
+        recyclerAdapter = new GridProductAdapter(productsList,SearchFragment.this);
         recyclerRecyclerView.setLayoutManager(gridLayoutManager);
         recyclerRecyclerView.setAdapter(recyclerAdapter);
 

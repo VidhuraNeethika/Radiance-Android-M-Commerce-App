@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView62"
+            android:id="@+id/priceFieldS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -44,7 +44,7 @@
             android:layout_marginEnd="24dp"
             android:backgroundTint="@color/primary_color"
             android:text="Buy Now"
-            app:layout_constraintBottom_toBottomOf="@+id/textView62"
+            app:layout_constraintBottom_toBottomOf="@+id/priceFieldS"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView61" />
 
@@ -151,7 +151,7 @@
             android:paddingBottom="10dp">
 
             <TextView
-                android:id="@+id/textView57"
+                android:id="@+id/catTextField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gaming Mouse"
@@ -160,7 +160,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView58"
+                android:id="@+id/productNameFieldS"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -170,8 +170,8 @@
                 android:textSize="19sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView57"
-                app:layout_constraintTop_toBottomOf="@+id/textView57" />
+                app:layout_constraintStart_toStartOf="@+id/catTextField"
+                app:layout_constraintTop_toBottomOf="@+id/catTextField" />
 
             <TextView
                 android:id="@+id/textView59"
@@ -183,19 +183,19 @@
                 android:gravity="center_vertical"
                 android:text="4.5"
                 android:textColor="@color/matte_light_dark"
-                app:layout_constraintBottom_toBottomOf="@+id/textView57"
-                app:layout_constraintEnd_toEndOf="@+id/textView58"
-                app:layout_constraintTop_toTopOf="@+id/textView57" />
+                app:layout_constraintBottom_toBottomOf="@+id/catTextField"
+                app:layout_constraintEnd_toEndOf="@+id/productNameFieldS"
+                app:layout_constraintTop_toTopOf="@+id/catTextField" />
 
             <TextView
-                android:id="@+id/textView60"
+                android:id="@+id/descrptionFieldS"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="LIGHTSPEED wireless gaming mouse designed for serious performance with latest technology innovations. Impressive 250-hour battery life. Now in a variety of vibrant colors."
-                app:layout_constraintEnd_toEndOf="@+id/textView58"
+                app:layout_constraintEnd_toEndOf="@+id/productNameFieldS"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView58"
+                app:layout_constraintStart_toStartOf="@+id/productNameFieldS"
                 app:layout_constraintTop_toBottomOf="@+id/textView67" />
 
             <TextView
@@ -206,10 +206,10 @@
                 android:text="Model : "
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView58" />
+                app:layout_constraintTop_toBottomOf="@+id/productNameFieldS" />
 
             <TextView
-                android:id="@+id/textView64"
+                android:id="@+id/modelField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -229,7 +229,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView63" />
 
             <TextView
-                android:id="@+id/textView66"
+                android:id="@+id/brandField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -256,7 +256,7 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView60" />
+                app:layout_constraintTop_toBottomOf="@+id/descrptionFieldS" />
 
             <TextView
                 android:id="@+id/textView68"

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.apx.radiance.adapter.CartProductAdapter;
 import com.apx.radiance.adapter.SingleProductViewImageAdapter;
@@ -23,8 +24,13 @@ public class SingleProductViewFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private Product product;
 
     public SingleProductViewFragment() {
+    }
+
+    public SingleProductViewFragment(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -44,12 +50,15 @@ public class SingleProductViewFragment extends Fragment {
 
         ArrayList<String> imageList = new ArrayList<>();
 
+        TextView categoryField = fragment.findViewById(R.id.catTextField);
+        TextView brandField = fragment.findViewById(R.id.brandField);
+        TextView nameField = fragment.findViewById(R.id.productNameFieldS);
+        TextView priceField = fragment.findViewById(R.id.priceFieldS);
+        TextView descriptionField = fragment.findViewById(R.id.descrptionFieldS);
 
-//        for (int i = 0; i < 10; i++) {
-            imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
-            imageList.add("https://i.ebayimg.com/images/g/1TcAAOSwBB5hFT~A/s-l1600.jpg");
-            imageList.add("https://i.ebayimg.com/images/g/9j8AAOSwtkRlWTSH/s-l960.png");
-//        }
+        for (int i = 0; i < product.getImageList().size(); i++) {
+            imageList.add(product.getImageList().get(i));
+        }
 
         recyclerView = fragment.findViewById(R.id.singleProductViewImageRecycler);
         recyclerView.setHasFixedSize(true);
@@ -57,6 +66,12 @@ public class SingleProductViewFragment extends Fragment {
         adapter = new SingleProductViewImageAdapter(imageList);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        categoryField.setText(product.getCategory());
+        brandField.setText(product.getBrand());
+        nameField.setText(product.getName());
+        priceField.setText("Rs."+product.getPrice().toString()+"0");
+        descriptionField.setText(product.getDescription());
 
     }
 }

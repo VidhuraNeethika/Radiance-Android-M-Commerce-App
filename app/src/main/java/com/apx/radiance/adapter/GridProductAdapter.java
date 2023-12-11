@@ -7,9 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apx.radiance.R;
+import com.apx.radiance.SingleProductViewFragment;
 import com.apx.radiance.model.Product;
 import com.squareup.picasso.Picasso;
 
@@ -20,8 +24,11 @@ public class GridProductAdapter extends RecyclerView.Adapter<GridProductAdapter.
 
     private ArrayList<Product> productItemsList;
 
-    public GridProductAdapter(ArrayList<Product> productsList) {
+    private Fragment transactionFragment;
+
+    public GridProductAdapter(ArrayList<Product> productsList, Fragment fragment) {
         this.productItemsList = productsList;
+        this.transactionFragment = fragment;
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
@@ -58,10 +65,25 @@ public class GridProductAdapter extends RecyclerView.Adapter<GridProductAdapter.
         holder.brand.setText(currentItem.getBrand());
         holder.category.setText(currentItem.getCategory());
         holder.price.setText("Rs."+currentItem.getPrice().toString()+"0");
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new SingleProductViewFragment(currentItem));
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return productItemsList.size();
+    }
+
+    public void loadFragment(Fragment fragment) {
+        FragmentManager supportFragmentManager = transactionFragment.getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
     }
 }

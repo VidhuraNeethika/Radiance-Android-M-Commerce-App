@@ -119,7 +119,7 @@ public class HomeFragment extends Fragment {
         recyclerRecyclerView = fragment.findViewById(R.id.serachResultRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        comAccAdapter = new GridProductAdapter(comAccProducts);
+        comAccAdapter = new GridProductAdapter(comAccProducts,HomeFragment.this);
         recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerRecyclerView.setAdapter(comAccAdapter);
 
@@ -154,7 +154,7 @@ public class HomeFragment extends Fragment {
         recyclerRecyclerView = fragment.findViewById(R.id.trendingProductRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        eleAdapter = new GridProductAdapter(eleProductList);
+        eleAdapter = new GridProductAdapter(eleProductList,HomeFragment.this);
         recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerRecyclerView.setAdapter(eleAdapter);
 
@@ -197,7 +197,7 @@ public class HomeFragment extends Fragment {
         recyclerRecyclerView = fragment.findViewById(R.id.moreToLoveRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
         horizontalLayoutManager = new LinearLayoutManager(getContext());
-        moreToLoveAdapter = new MtLProductAdapter(moretoLoveProducts);
+        moreToLoveAdapter = new MtLProductAdapter(moretoLoveProducts,HomeFragment.this);
         recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerRecyclerView.setAdapter(moreToLoveAdapter);
 
