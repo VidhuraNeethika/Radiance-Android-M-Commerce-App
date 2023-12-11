@@ -129,7 +129,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }else{
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
-
+        } else if (item.getItemId()==R.id.sideNavAbout) {
+            loadFragment(new AboutUsFragment());
         }
 
         dl.setBackgroundResource(R.color.white);
