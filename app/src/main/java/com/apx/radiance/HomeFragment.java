@@ -37,7 +37,7 @@ import java.util.EventListener;
 public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerRecyclerView;
-    private RecyclerView.Adapter newArrivalAdapter, trendingAdapter, moreToLoveAdapter;
+    private RecyclerView.Adapter comAccAdapter, eleAdapter, moreToLoveAdapter;
     private GridLayoutManager gridLayoutManager;
     private ArrayList<Tags> tagsArrayList;
     private RecyclerView.LayoutManager horizontalLayoutManager;
@@ -88,9 +88,9 @@ public class HomeFragment extends Fragment {
 
         //Slider End //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        //New Arrival Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Computer Accessories Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ArrayList<Product> newArrivalsProducts = new ArrayList<>();
+        ArrayList<Product> comAccProducts = new ArrayList<>();
 
         firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
             @Override
@@ -98,9 +98,16 @@ public class HomeFragment extends Fragment {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Product product = dataSnapshot.getValue(Product.class);
-                    newArrivalsProducts.add(product);
+
+                    if(product.getCategory().equals("Computer Accessories")){
+
+                        comAccProducts.add(product);
+
+                    }
+
+
                 }
-                newArrivalAdapter.notifyDataSetChanged();
+                comAccAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -112,15 +119,15 @@ public class HomeFragment extends Fragment {
         recyclerRecyclerView = fragment.findViewById(R.id.serachResultRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        newArrivalAdapter = new GridProductAdapter(newArrivalsProducts);
+        comAccAdapter = new GridProductAdapter(comAccProducts);
         recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
-        recyclerRecyclerView.setAdapter(newArrivalAdapter);
+        recyclerRecyclerView.setAdapter(comAccAdapter);
 
-        //New Arrival End /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Computer Accessories End /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        //Trending Start /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Electronic items Start /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ArrayList<Product> trendingProductList = new ArrayList<>();
+        ArrayList<Product> eleProductList = new ArrayList<>();
 
         firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
             @Override
@@ -128,9 +135,14 @@ public class HomeFragment extends Fragment {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Product product = dataSnapshot.getValue(Product.class);
-                    trendingProductList.add(product);
+
+                    if(product.getCategory().equals("Electronic Accessories")){
+
+                        eleProductList.add(product);
+
+                    }
                 }
-                trendingAdapter.notifyDataSetChanged();
+                eleAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -142,11 +154,11 @@ public class HomeFragment extends Fragment {
         recyclerRecyclerView = fragment.findViewById(R.id.trendingProductRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        trendingAdapter = new GridProductAdapter(trendingProductList);
+        eleAdapter = new GridProductAdapter(eleProductList);
         recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
-        recyclerRecyclerView.setAdapter(trendingAdapter);
+        recyclerRecyclerView.setAdapter(eleAdapter);
 
-        //Trending End /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Electronic items End /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
         //Tags Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////////

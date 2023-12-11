@@ -77,4 +77,6 @@
     <string name="to_access_this_feature_you_need_to_switch_your_account_to_a_seller_account_once_you_ve_made_the_switch_you_ll_be_able_to_navigate_to_the_product_registration_section_where_you_can_view_and_manage_your_items_text">To access this feature, you need to switch your account to a seller account. Once you\'ve made the switch, you\'ll be able to navigate to the product registration section, where you can view and manage your items.</string>
     <string name="switch_to_seller_account_text">Switch to Seller Account</string>
     <string name="switch_to_a_seller_account_and_manage_your_items_text">Switch to a Seller Account and Manage Your Items</string>
+    <string name="computer_accessories_text">Computers and Accessories</string>
+    <string name="electronic_items_and_accessories_text">Electronic Items and Accessories</string>
 </resources>
