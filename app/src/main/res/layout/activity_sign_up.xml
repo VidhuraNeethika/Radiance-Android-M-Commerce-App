@@ -34,11 +34,11 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="170dp"
-            android:layout_marginTop="36dp"
             android:layout_marginEnd="171dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/icon" />
 
         <TextView
@@ -46,35 +46,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="177dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="176dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/welcome_to_radiance"
             android:textColor="@color/primary_color"
             android:textSize="26sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginBottom="24dp"
             android:text="@string/welcome"
             android:textColor="@color/primary_color"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintStart_toStartOf="@+id/textView" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/signInBtnTop"
@@ -106,9 +106,9 @@
         </LinearLayout>
 
         <ScrollView
+            android:id="@+id/scrollView4"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/bottom_nav_bg"
             android:overScrollMode="never"
             android:paddingTop="20dp"
@@ -116,8 +116,7 @@
             android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -275,7 +274,6 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/email_warning_text"
                     android:textColor="@color/matte_light_dark"
-                    android:textStyle="italic"
                     app:layout_constraintStart_toStartOf="@+id/emailFieldSignIn"
                     app:layout_constraintTop_toBottomOf="@+id/emailFieldSignIn" />
 
@@ -291,7 +289,6 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/password_warning_text"
                     android:textColor="@color/matte_light_dark"
-                    android:textStyle="italic"
                     app:layout_constraintStart_toStartOf="@+id/passwordFieldSignIn"
                     app:layout_constraintTop_toBottomOf="@+id/passwordFieldSignIn" />
 
