@@ -160,10 +160,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/totalPriceField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LKR 45,000"
+                android:text="Rs.00.00"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -177,13 +177,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/shippingField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="LKR 5,000"
+                android:text="Rs.00.00"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintTop_toBottomOf="@+id/totalPriceField" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -196,14 +196,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/netTotalField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="LKR 50,000"
+                android:text="Rs.00.00"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintTop_toBottomOf="@+id/shippingField" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button

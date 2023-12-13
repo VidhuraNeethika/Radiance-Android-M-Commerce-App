@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.apx.radiance.adapter.CartProductAdapter;
 import com.apx.radiance.model.Product;
@@ -34,6 +35,10 @@ public class CartFragment extends Fragment {
     private FirebaseUser currentUser;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
+
+    private Double total = 0.0;
+    private Double shipping = 0.0;
+    private Double totalnetTotal = 0.0;
 
     public CartFragment() {
     }
@@ -59,20 +64,6 @@ public class CartFragment extends Fragment {
 
         ArrayList<Product> productsList = new ArrayList<>();
 
-//        ArrayList<String> imageList = new ArrayList<>();
-//        imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
-//
-//        Product product = new Product();
-//        product.setImageList(imageList);
-//        product.setName("Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button");
-//        product.setBrand("Logitech");
-//        product.setCategory("Gaming Mouse");
-//        product.setPrice(100.00);
-//
-//        for (int i = 0; i < 10; i++) {
-//            productsList.add(product);
-//        }
-
         ArrayList<String> list = new ArrayList<>();
 
         firebaseDatabase.getReference("Cart/" + currentUser.getUid()).orderByValue()
@@ -95,6 +86,7 @@ public class CartFragment extends Fragment {
 
                                         if (product.getpId().equals(id)) {
                                             productsList.add(product);
+                                            total = total + product.getPrice();
                                         }
 
                                     }
@@ -116,6 +108,18 @@ public class CartFragment extends Fragment {
 
                     }
                 });
+
+//        for (int i = 0; i < productsList.size(); i++) {
+//            total = total + productsList.get(i).getPrice();
+//        }
+
+        TextView totalTextView = fragment.findViewById(R.id.totalPriceField);
+        TextView shippingTextView = fragment.findViewById(R.id.shippingField);
+        TextView netTotalTextView = fragment.findViewById(R.id.netTotalField);
+
+        totalTextView.setText(String.valueOf(total));
+        shippingTextView.setText(String.valueOf(shipping));
+        netTotalTextView.setText(String.valueOf(total + shipping));
 
         recyclerView = fragment.findViewById(R.id.productListRecyclerView);
         recyclerView.setHasFixedSize(true);

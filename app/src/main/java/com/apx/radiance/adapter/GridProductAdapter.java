@@ -1,10 +1,16 @@
 package com.apx.radiance.adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,8 +19,15 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apx.radiance.R;
+import com.apx.radiance.SignInActivity;
 import com.apx.radiance.SingleProductViewFragment;
 import com.apx.radiance.model.Product;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,6 +38,9 @@ public class GridProductAdapter extends RecyclerView.Adapter<GridProductAdapter.
     private ArrayList<Product> productItemsList;
 
     private Fragment transactionFragment;
+    private FirebaseUser currentUser;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
 
     public GridProductAdapter(ArrayList<Product> productsList, Fragment fragment) {
         this.productItemsList = productsList;
@@ -35,6 +51,7 @@ public class GridProductAdapter extends RecyclerView.Adapter<GridProductAdapter.
 
         public ImageView imageView;
         public TextView name, brand, category, price;
+        public ImageButton addToCartBtn;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -43,6 +60,7 @@ public class GridProductAdapter extends RecyclerView.Adapter<GridProductAdapter.
             brand = itemView.findViewById(R.id.brandText);
             category = itemView.findViewById(R.id.categoryText);
             price = itemView.findViewById(R.id.priceText);
+            addToCartBtn = itemView.findViewById(R.id.addToCartGridBtn);
         }
     }
 
@@ -66,10 +84,47 @@ public class GridProductAdapter extends RecyclerView.Adapter<GridProductAdapter.
         holder.category.setText(currentItem.getCategory());
         holder.price.setText("Rs." + currentItem.getPrice().toString() + "0");
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadFragment(new SingleProductViewFragment(currentItem));
+            }
+        });
+
+        holder.addToCartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (currentUser == null) {
+                    Intent intent = new Intent(transactionFragment.getActivity(), SignInActivity.class);
+                    startActivity(transactionFragment.getContext(), intent, null);
+                } else {
+                    long currentTimeMillis = System.currentTimeMillis();
+
+                    // ADD TO CART
+                    firebaseDatabase.getReference("Cart").child(currentUser.getUid())
+                            .child(currentItem.getpId()).setValue(currentTimeMillis)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    Toast.makeText(transactionFragment.getContext(), "Added to cart", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                    Toast.makeText(transactionFragment.getContext(), "Failed to add to cart", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                }
+
             }
         });
 
@@ -86,4 +141,10 @@ public class GridProductAdapter extends RecyclerView.Adapter<GridProductAdapter.
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
     }
+
+    public void searchDetails(ArrayList<Product> searchList){
+        productItemsList = searchList;
+        notifyDataSetChanged();
+    }
+
 }

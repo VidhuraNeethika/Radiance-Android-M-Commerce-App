@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,6 +67,13 @@ public class HomeFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         //Slider Start //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        fragment.findViewById(R.id.searchFieldHome).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new SearchFragment());
+            }
+        });
 
         RecyclerView recyclerView = fragment.findViewById(R.id.sliderRecycler);
         ArrayList<String> arrayList = new ArrayList<>();
@@ -227,6 +236,13 @@ public class HomeFragment extends Fragment {
         }
 
 
+    }
+
+    public void loadFragment(Fragment fragment) {
+        FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
     }
 
 }

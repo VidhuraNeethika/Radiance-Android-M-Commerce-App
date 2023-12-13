@@ -122,7 +122,7 @@
             app:layout_constraintEnd_toEndOf="@+id/productNameText">
 
             <ImageButton
-                android:id="@+id/imageButton14"
+                android:id="@+id/addToCartBtnWishlist"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -136,7 +136,7 @@
                 android:layout_weight="1" />
 
             <ImageButton
-                android:id="@+id/imageButton7"
+                android:id="@+id/deleteBtnWishlist"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_input"
