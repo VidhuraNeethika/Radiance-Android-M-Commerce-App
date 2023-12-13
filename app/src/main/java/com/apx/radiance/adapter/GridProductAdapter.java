@@ -64,7 +64,7 @@ public class GridProductAdapter extends RecyclerView.Adapter<GridProductAdapter.
         holder.name.setText(currentItem.getName());
         holder.brand.setText(currentItem.getBrand());
         holder.category.setText(currentItem.getCategory());
-        holder.price.setText("Rs."+currentItem.getPrice().toString()+"0");
+        holder.price.setText("Rs." + currentItem.getPrice().toString() + "0");
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override

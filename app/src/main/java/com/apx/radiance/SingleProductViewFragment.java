@@ -12,10 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apx.radiance.adapter.CartProductAdapter;
 import com.apx.radiance.adapter.SingleProductViewImageAdapter;
 import com.apx.radiance.model.Product;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -25,6 +32,9 @@ public class SingleProductViewFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private Product product;
+
+    private FirebaseUser currentUser;
+    private FirebaseAuth firebaseAuth;
 
     public SingleProductViewFragment() {
     }
@@ -48,6 +58,8 @@ public class SingleProductViewFragment extends Fragment {
     public void onViewCreated(@NonNull View fragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(fragment, savedInstanceState);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
         ArrayList<String> imageList = new ArrayList<>();
 
         TextView categoryField = fragment.findViewById(R.id.catTextField);
@@ -71,9 +83,38 @@ public class SingleProductViewFragment extends Fragment {
         categoryField.setText(product.getCategory());
         brandField.setText(product.getBrand());
         nameField.setText(product.getName());
-        priceField.setText("Rs."+product.getPrice().toString()+"0");
+        priceField.setText("Rs." + product.getPrice().toString() + "0");
         descriptionField.setText(product.getDescription());
-        qtyField.setText("Quantity : "+product.getQuantity());
+        qtyField.setText("Quantity : " + product.getQuantity());
+
+        fragment.findViewById(R.id.addToCartBtnS).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                long currentTimeMillis = System.currentTimeMillis();
+
+                // ADD TO CART
+                FirebaseDatabase.getInstance().getReference("Cart").child(currentUser.getUid())
+                        .child(product.getpId()).setValue(currentTimeMillis)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                Toast.makeText(getContext(), "Added to cart", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                                Toast.makeText(getContext(), "Failed to add to cart", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+
+            }
+        });
 
     }
 }

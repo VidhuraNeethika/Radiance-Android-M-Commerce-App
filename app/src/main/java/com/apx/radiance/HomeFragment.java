@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
 
         ArrayList<Product> comAccProducts = new ArrayList<>();
 
-        firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
+        firebaseDatabase.getReference("Products").orderByChild("regDate").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -105,6 +105,7 @@ public class HomeFragment extends Fragment {
 
                     }
 
+                    Collections.reverse(comAccProducts);
 
                 }
                 comAccAdapter.notifyDataSetChanged();
@@ -129,7 +130,7 @@ public class HomeFragment extends Fragment {
 
         ArrayList<Product> eleProductList = new ArrayList<>();
 
-        firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
+        firebaseDatabase.getReference("Products").orderByChild("regDate").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -142,6 +143,7 @@ public class HomeFragment extends Fragment {
 
                     }
                 }
+                Collections.reverse(eleProductList);
                 eleAdapter.notifyDataSetChanged();
             }
 
@@ -177,7 +179,7 @@ public class HomeFragment extends Fragment {
 
         ArrayList<Product> moretoLoveProducts = new ArrayList<>();
 
-        firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
+        firebaseDatabase.getReference("Products").orderByChild("regDate").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -185,6 +187,7 @@ public class HomeFragment extends Fragment {
                     Product product = dataSnapshot.getValue(Product.class);
                     moretoLoveProducts.add(product);
                 }
+                Collections.reverse(moretoLoveProducts);
                 moreToLoveAdapter.notifyDataSetChanged();
             }
 

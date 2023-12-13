@@ -119,7 +119,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/priceText"
-            app:layout_constraintEnd_toEndOf="@+id/productNameText">
+            app:layout_constraintEnd_toEndOf="@+id/productNameText"
+            app:layout_constraintTop_toTopOf="@+id/priceText">
 
             <ImageButton
                 android:id="@+id/imageButton6"

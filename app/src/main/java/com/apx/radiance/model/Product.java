@@ -7,6 +7,7 @@ import java.util.Locale;
 
 public class Product {
 
+    private String pId;
     private ArrayList<String> imageList;
     private String name, description, category, brand, model,regDate,sellerEmail;
     private Double price;
@@ -15,7 +16,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(ArrayList<String> imageList, String name, String description, String category, String brand, String model, String regDate, String sellerEmail, Double price, int quantity) {
+    public Product(String pId, ArrayList<String> imageList, String name, String description, String category, String brand, String model, String regDate, String sellerEmail, Double price, int quantity) {
+        this.pId = pId;
         this.imageList = imageList;
         this.name = name;
         this.description = description;
@@ -26,6 +28,14 @@ public class Product {
         this.sellerEmail = sellerEmail;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public String getpId() {
+        return pId;
+    }
+
+    public void setpId(String pId) {
+        this.pId = pId;
     }
 
     public ArrayList<String> getImageList() {

@@ -56,7 +56,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
         holder.name.setText(currentItem.getName());
         holder.brand.setText(currentItem.getBrand());
         holder.category.setText(currentItem.getCategory());
-        holder.price.setText(currentItem.getPrice().toString());
+        holder.price.setText("Rs." + currentItem.getPrice().toString() + "0");
     }
 
     @Override

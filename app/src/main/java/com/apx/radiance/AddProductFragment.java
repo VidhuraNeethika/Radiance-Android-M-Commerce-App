@@ -393,57 +393,49 @@ public class AddProductFragment extends Fragment {
             Toast.makeText(getContext(), "Please select at least one image", Toast.LENGTH_SHORT).show();
         } else {
 
-        images.add(String.valueOf(imgUri1));
+            images.add(String.valueOf(imgUri1));
 
-        if (imgUri2 != null) {
-            images.add(String.valueOf(imgUri2));
-        }
-        if (imgUri3 != null) {
-            images.add(String.valueOf(imgUri3));
-        }
-        if (imgUri4 != null) {
-            images.add(String.valueOf(imgUri4));
-        }
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                for (int i = 0; i < images.size(); i++) {
-                    Uri uri = Uri.parse(images.get(i));
-                    int finalI = i;
-                    storageReference.child("productImages/" + UUID.randomUUID().toString()).putFile(uri).addOnSuccessListener(
-                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                                    while (!uriTask.isComplete()) ;
-                                    String imageDwnUrl = uriTask.getResult().toString();
-
-                                    downloadImagesList.add(imageDwnUrl);
-                                    imgIndex[0] = finalI;
-                                    addDetailsToDatabase(imgIndex[0], title, price, qty, description);
-
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(), "Something went wrong.Please try again.", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                            double prograss = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                            progressBar.setVisibility(View.VISIBLE);
-                            progressBar.setProgress((int) prograss);
-                        }
-                    });
-                }
-
+            if (imgUri2 != null) {
+                images.add(String.valueOf(imgUri2));
             }
-        }).start();
+            if (imgUri3 != null) {
+                images.add(String.valueOf(imgUri3));
+            }
+            if (imgUri4 != null) {
+                images.add(String.valueOf(imgUri4));
+            }
 
+            for (int i = 0; i < images.size(); i++) {
+                Uri uri = Uri.parse(images.get(i));
+                int finalI = i;
+                storageReference.child("productImages/" + UUID.randomUUID().toString()).putFile(uri).addOnSuccessListener(
+                        new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                                while (!uriTask.isComplete()) ;
+                                String imageDwnUrl = uriTask.getResult().toString();
+
+                                downloadImagesList.add(imageDwnUrl);
+                                imgIndex[0] = finalI;
+                                addDetailsToDatabase(imgIndex[0], title, price, qty, description);
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Something went wrong.Please try again.", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        double prograss = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                        progressBar.setVisibility(View.VISIBLE);
+                        progressBar.setProgress((int) prograss);
+                    }
+                });
+            }
 
         }
     }
@@ -452,8 +444,9 @@ public class AddProductFragment extends Fragment {
         System.out.println("addDetailsToDatabase : start");
         System.out.println("index : " + index + " images size : " + images.size());
 
-        if (index + 1 >= images.size()) {
+        if (index + 1 == images.size()) {
             Product product = new Product();
+            product.setpId(String.valueOf(UUID.randomUUID()));
             product.setName(title);
             product.setImageList(downloadImagesList);
             product.setPrice(Double.parseDouble(price));
@@ -469,7 +462,7 @@ public class AddProductFragment extends Fragment {
             product.setModel(modelText);
             product.setSellerEmail(currentUser.getEmail());
 
-            FirebaseDatabase.getInstance().getReference("Products").child(title)
+            FirebaseDatabase.getInstance().getReference("Products").child(String.valueOf(UUID.randomUUID()))
                     .setValue(product)
                     .addOnCompleteListener(
                             new OnCompleteListener<Void>() {
@@ -518,7 +511,7 @@ public class AddProductFragment extends Fragment {
 
                                 User user = documentSnapshot.toObject(User.class);
 
-                                if(user.getUserType().equals("user")) {
+                                if (user.getUserType().equals("user")) {
                                     getView().findViewById(R.id.addProductScrollView).setVisibility(View.GONE);
                                     getView().findViewById(R.id.addProductCustomerView).setVisibility(View.VISIBLE);
                                 } else {
@@ -526,7 +519,7 @@ public class AddProductFragment extends Fragment {
                                     getView().findViewById(R.id.addProductCustomerView).setVisibility(View.GONE);
                                 }
 
-                            }else{
+                            } else {
                                 Toast.makeText(getContext(), "Please update your account details", Toast.LENGTH_SHORT).show();
                                 loadFragment(new ProfileFragment());
                             }

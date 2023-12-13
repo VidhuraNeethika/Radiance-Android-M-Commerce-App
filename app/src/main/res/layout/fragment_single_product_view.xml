@@ -107,12 +107,12 @@
             android:backgroundTint="@color/primary_color"
             android:padding="8dp"
             android:src="@drawable/heart_icon_white"
-            app:layout_constraintBottom_toBottomOf="@+id/addToCartBtn"
-            app:layout_constraintEnd_toStartOf="@+id/addToCartBtn"
-            app:layout_constraintTop_toTopOf="@+id/addToCartBtn" />
+            app:layout_constraintBottom_toBottomOf="@+id/addToCartBtnS"
+            app:layout_constraintEnd_toStartOf="@+id/addToCartBtnS"
+            app:layout_constraintTop_toTopOf="@+id/addToCartBtnS" />
 
         <ImageButton
-            android:id="@+id/addToCartBtn"
+            android:id="@+id/addToCartBtnS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-5dp"

@@ -24,6 +24,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,6 +44,7 @@ public class MyProductFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
     private FirebaseFirestore database;
+    private FirebaseDatabase firebaseDatabase;
     private StorageReference storageReference;
 
     public MyProductFragment() {
@@ -63,32 +68,62 @@ public class MyProductFragment extends Fragment {
         database = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
         checkUser();
 
-        ArrayList<Product> productsList = new ArrayList<>();
+//        ArrayList<Product> productsList = new ArrayList<>();
+//
+//        ArrayList<String> imageList = new ArrayList<>();
+//        imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
+//
+//        Product product = new Product();
+//        product.setImageList(imageList);
+//        product.setName("Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button");
+//        product.setBrand("Logitech");
+//        product.setCategory("Gaming Mouse");
+//        product.setPrice(100.00);
+//
+//        for (int i = 0; i < 10; i++) {
+//            productsList.add(product);
+//        }
 
-        ArrayList<String> imageList = new ArrayList<>();
-        imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
+        ArrayList<Product> myProducts = new ArrayList<>();
 
-        Product product = new Product();
-        product.setImageList(imageList);
-        product.setName("Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button");
-        product.setBrand("Logitech");
-        product.setCategory("Gaming Mouse");
-        product.setPrice(100.00);
+        firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-        for (int i = 0; i < 10; i++) {
-            productsList.add(product);
-        }
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Product product = dataSnapshot.getValue(Product.class);
+
+                    if(product.getSellerEmail().equals(currentUser.getEmail())){
+
+                        if (product==null){
+                            fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.VISIBLE);
+                        }else{
+                            myProducts.add(product);
+                        }
+
+                    }
+
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Db data load fail", Toast.LENGTH_LONG).show();
+            }
+        });
 
         recyclerView = fragment.findViewById(R.id.productListRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
 
-        adapter = new MyProductAdapter(productsList);
+        adapter = new MyProductAdapter(myProducts);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
