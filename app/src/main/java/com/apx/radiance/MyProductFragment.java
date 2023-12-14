@@ -88,9 +88,7 @@ public class MyProductFragment extends Fragment {
                         myProducts.add(product);
 
                     } else {
-                        fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.VISIBLE);
-                        fragment.findViewById(R.id.myProductsBodyLayout).setVisibility(View.GONE);
-                        fragment.findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
+//                        fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -127,8 +125,8 @@ public class MyProductFragment extends Fragment {
                 docRef.update("userType", "seller").addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        fragment.findViewById(R.id.addProductScrollView).setVisibility(View.VISIBLE);
-                        fragment.findViewById(R.id.addProductCustomerView).setVisibility(View.GONE);
+                        fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.VISIBLE);
+                        fragment.findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
                         Toast.makeText(getContext(), "Successfully Switch", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -159,6 +157,7 @@ public class MyProductFragment extends Fragment {
                                 if (user.getUserType().equals("user")) {
                                     getView().findViewById(R.id.myProductsBodyLayout).setVisibility(View.GONE);
                                     getView().findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.GONE);
+
                                     getView().findViewById(R.id.myProductCustomerView).setVisibility(View.VISIBLE);
                                 } else {
                                     getView().findViewById(R.id.myProductsBodyLayout).setVisibility(View.VISIBLE);
