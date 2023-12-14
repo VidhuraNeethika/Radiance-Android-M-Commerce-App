@@ -72,43 +72,82 @@ public class MyProductFragment extends Fragment {
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        checkUser();
 
-        ArrayList<Product> myProducts = new ArrayList<>();
+        if (currentUser != null) {
 
-        firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            database.collection("Users").document(firebaseAuth.getUid()).get().addOnSuccessListener(
+                    new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(com.google.firebase.firestore.DocumentSnapshot documentSnapshot) {
 
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Product product = dataSnapshot.getValue(Product.class);
+                            if (documentSnapshot.exists()) {
 
-                    if (product.getSellerEmail().equals(currentUser.getEmail())) {
+                                User user = documentSnapshot.toObject(User.class);
 
-                        myProducts.add(product);
+                                if (user.getUserType().equals("user")) {
+                                    getView().findViewById(R.id.myProductsBodyLayout).setVisibility(View.GONE);
+                                    getView().findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.GONE);
 
-                    } else {
-//                        fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.VISIBLE);
+                                    getView().findViewById(R.id.myProductCustomerView).setVisibility(View.VISIBLE);
+                                } else {
+                                    getView().findViewById(R.id.myProductsBodyLayout).setVisibility(View.VISIBLE);
+                                    getView().findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
+
+                                    ///////////////////////////
+
+                                    ArrayList<Product> myProducts = new ArrayList<>();
+
+                                    firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                                Product product = dataSnapshot.getValue(Product.class);
+
+                                                if (product.getSellerEmail().equals(currentUser.getEmail())) {
+
+                                                    myProducts.add(product);
+                                                    fragment.findViewById(R.id.myProductsBodyLayout).setVisibility(View.VISIBLE);
+                                                    fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.GONE);
+                                                    fragment.findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
+
+                                                } else {
+                                                    fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.VISIBLE);
+                                                    fragment.findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
+                                                    fragment.findViewById(R.id.myProductsBodyLayout).setVisibility(View.GONE);
+                                                }
+
+                                            }
+                                            adapter.notifyDataSetChanged();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Toast.makeText(getContext(), "Db data load fail", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+                                    recyclerView = fragment.findViewById(R.id.productListRecyclerView);
+                                    recyclerView.setHasFixedSize(true);
+                                    layoutManager = new LinearLayoutManager(getContext());
+
+                                    adapter = new MyProductAdapter(myProducts);
+
+                                    recyclerView.setLayoutManager(layoutManager);
+                                    recyclerView.setAdapter(adapter);
+
+                                }
+
+                            } else {
+                                Toast.makeText(getContext(), "Please update your account details", Toast.LENGTH_SHORT).show();
+                                loadFragment(new ProfileFragment());
+                            }
+
+                        }
                     }
+            );
 
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "Db data load fail", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        recyclerView = fragment.findViewById(R.id.productListRecyclerView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getContext());
-
-        adapter = new MyProductAdapter(myProducts);
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        }
 
         fragment.findViewById(R.id.addProductBtnEmptyLayoutMP).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,41 +178,6 @@ public class MyProductFragment extends Fragment {
             }
         });
 
-    }
-
-    private void checkUser() {
-
-        if (currentUser != null) {
-
-            database.collection("Users").document(firebaseAuth.getUid()).get().addOnSuccessListener(
-                    new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(com.google.firebase.firestore.DocumentSnapshot documentSnapshot) {
-
-                            if (documentSnapshot.exists()) {
-
-                                User user = documentSnapshot.toObject(User.class);
-
-                                if (user.getUserType().equals("user")) {
-                                    getView().findViewById(R.id.myProductsBodyLayout).setVisibility(View.GONE);
-                                    getView().findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.GONE);
-
-                                    getView().findViewById(R.id.myProductCustomerView).setVisibility(View.VISIBLE);
-                                } else {
-                                    getView().findViewById(R.id.myProductsBodyLayout).setVisibility(View.VISIBLE);
-                                    getView().findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
-                                }
-
-                            } else {
-                                Toast.makeText(getContext(), "Please update your account details", Toast.LENGTH_SHORT).show();
-                                loadFragment(new ProfileFragment());
-                            }
-
-                        }
-                    }
-            );
-
-        }
     }
 
     public void loadFragment(Fragment fragment) {
