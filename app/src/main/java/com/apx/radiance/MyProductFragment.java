@@ -74,22 +74,6 @@ public class MyProductFragment extends Fragment {
 
         checkUser();
 
-//        ArrayList<Product> productsList = new ArrayList<>();
-//
-//        ArrayList<String> imageList = new ArrayList<>();
-//        imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
-//
-//        Product product = new Product();
-//        product.setImageList(imageList);
-//        product.setName("Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button");
-//        product.setBrand("Logitech");
-//        product.setCategory("Gaming Mouse");
-//        product.setPrice(100.00);
-//
-//        for (int i = 0; i < 10; i++) {
-//            productsList.add(product);
-//        }
-
         ArrayList<Product> myProducts = new ArrayList<>();
 
         firebaseDatabase.getReference("Products").addValueEventListener(new ValueEventListener() {
@@ -99,14 +83,14 @@ public class MyProductFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Product product = dataSnapshot.getValue(Product.class);
 
-                    if(product.getSellerEmail().equals(currentUser.getEmail())){
+                    if (product.getSellerEmail().equals(currentUser.getEmail())) {
 
-                        if (product==null){
-                            fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.VISIBLE);
-                        }else{
-                            myProducts.add(product);
-                        }
+                        myProducts.add(product);
 
+                    } else {
+                        fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.VISIBLE);
+                        fragment.findViewById(R.id.myProductsBodyLayout).setVisibility(View.GONE);
+                        fragment.findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
                     }
 
                 }
@@ -127,6 +111,13 @@ public class MyProductFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        fragment.findViewById(R.id.addProductBtnEmptyLayoutMP).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragment(new AddProductFragment());
+            }
+        });
 
         fragment.findViewById(R.id.switchToSellerAccountBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,15 +156,16 @@ public class MyProductFragment extends Fragment {
 
                                 User user = documentSnapshot.toObject(User.class);
 
-                                if(user.getUserType().equals("user")) {
+                                if (user.getUserType().equals("user")) {
                                     getView().findViewById(R.id.myProductsBodyLayout).setVisibility(View.GONE);
+                                    getView().findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.GONE);
                                     getView().findViewById(R.id.myProductCustomerView).setVisibility(View.VISIBLE);
                                 } else {
                                     getView().findViewById(R.id.myProductsBodyLayout).setVisibility(View.VISIBLE);
                                     getView().findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
                                 }
 
-                            }else{
+                            } else {
                                 Toast.makeText(getContext(), "Please update your account details", Toast.LENGTH_SHORT).show();
                                 loadFragment(new ProfileFragment());
                             }

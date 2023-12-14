@@ -13,10 +13,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apx.radiance.R;
 import com.apx.radiance.SignInActivity;
+import com.apx.radiance.SingleProductViewFragment;
 import com.apx.radiance.model.Product;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -118,10 +121,31 @@ public class WishlistProductAdapter extends RecyclerView.Adapter<WishlistProduct
             }
         });
 
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragment(new SingleProductViewFragment(currentItem));
+            }
+        });
+
+        holder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragment(new SingleProductViewFragment(currentItem));
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return productItemsList.size();
+    }
+
+    public void loadFragment(Fragment fragment) {
+        FragmentManager supportFragmentManager = transactionFragment.getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
     }
 }

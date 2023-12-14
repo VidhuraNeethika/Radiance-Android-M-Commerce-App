@@ -1,5 +1,6 @@
 package com.apx.radiance;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -71,6 +72,11 @@ public class CartFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                        if (dataSnapshot.getChildrenCount() == 0) {
+                            fragment.findViewById(R.id.cartBodyEmptyLayout).setVisibility(View.VISIBLE);
+                            fragment.findViewById(R.id.cartBodyLayout).setVisibility(View.GONE);
+                        }
+
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             list.add(snapshot.getKey());
                         }
@@ -127,6 +133,13 @@ public class CartFragment extends Fragment {
         adapter = new CartProductAdapter(productsList,CartFragment.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        fragment.findViewById(R.id.cartStartShippingBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), MainActivity.class));
+            }
+        });
 
     }
 }
