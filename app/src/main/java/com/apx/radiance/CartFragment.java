@@ -124,7 +124,7 @@ public class CartFragment extends Fragment {
         recyclerView = fragment.findViewById(R.id.productListRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new CartProductAdapter(productsList);
+        adapter = new CartProductAdapter(productsList,CartFragment.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 

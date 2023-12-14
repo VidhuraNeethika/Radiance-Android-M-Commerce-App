@@ -312,7 +312,7 @@ public class ProfileFragment extends Fragment {
         user.setMobile(mobileString);
         user.setAddress(addressString);
         user.setCity(cityString);
-//        user.setImageUrl(currentUser.getPhotoUrl().toString());
+        user.setImageUrl(currentUser.getPhotoUrl().toString());
         user.setUserType("user");
 
         fireStoreDatabase.collection("Users").document(currentUser.getUid()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
