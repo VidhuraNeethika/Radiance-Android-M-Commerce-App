@@ -12,7 +12,9 @@ import androidx.core.content.ContextCompat;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -122,19 +124,11 @@ public class SignUpActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(View v) {
 
-                                            // SMS sensing
-//                                            if(ContextCompat.checkSelfPermission(SignUpActivity.this, Manifest.permission.SEND) == PackageManager.PERMISSION_GRANTED){
-//                                                SmsManager smsManager = SmsManager.getDefault();
-//                                                smsManager.sendTextMessage(mobileNumber,null,message,null,null);
-//                                                Toast.makeText(getContext(),"SMS Sent Successfully.",Toast.LENGTH_LONG).show();
-//                                            }else {
-//                                                ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.SEND_SMS},100);
-//                                            }
-
                                             Intent intent = new Intent(Intent.ACTION_MAIN);
                                             intent.addCategory(Intent.CATEGORY_APP_EMAIL);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(intent);
+
                                         }
                                     }
                             ).show();

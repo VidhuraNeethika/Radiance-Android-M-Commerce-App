@@ -29,7 +29,7 @@
 
         <item
             android:id="@+id/sideNavNotification"
-            android:icon="@drawable/notification_icon"
+            android:icon="@drawable/bell_notification_icon"
             android:title="@string/notification_text" />
 
         <item

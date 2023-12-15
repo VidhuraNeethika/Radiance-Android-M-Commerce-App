@@ -8,10 +8,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +30,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NavigationBarView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NavigationBarView.OnItemSelectedListener, SensorEventListener {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -31,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BottomNavigationView bottomNavigationView;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
+
+    private SensorManager sensorManager;
+    private Sensor sensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +73,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         bottomNavigationView.setOnItemSelectedListener(this);
 
+        requestPermissions(new String[]{ Manifest.permission.ACTIVITY_RECOGNITION}, 100);
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager != null) {
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        }
+        if (sensor != null) {
+            sensorManager.registerListener(MainActivity.this, sensor, SensorManager.SENSOR_DELAY_UI);
+        }
+
     }
+
+    // Sensors
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+        switch (event.sensor.getType()) {
+            case Sensor.TYPE_LIGHT:
+                WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+//                layoutParams.screenBrightness = event.values[0] / 255.0f;
+                getWindow().setAttributes(layoutParams);
+                break;
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    // Sensors
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -76,19 +117,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (currentUser != null) {
                 loadFragment(new CartFragment());
                 dl.setBackgroundResource(R.color.dark_white);
-            }else{
+            } else {
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
         } else if (item.getItemId() == R.id.sideNavWishlist) {
             if (currentUser != null) {
                 loadFragment(new WishlistFragment());
-            }else{
+            } else {
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
         } else if (item.getItemId() == R.id.sideNavProfile || item.getItemId() == R.id.bottomNavProfile) {
             if (currentUser != null) {
                 loadFragment(new ProfileFragment());
-            }else{
+            } else {
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
         } else if (item.getItemId() == R.id.sideNavSearch || item.getItemId() == R.id.bottomNavSerach) {
@@ -100,35 +141,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (item.getItemId() == R.id.sideNavOrders) {
             if (currentUser != null) {
                 loadFragment(new OrderFragment());
-            }else{
+            } else {
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
         } else if (item.getItemId() == R.id.sideNavLog) {
             if (currentUser != null) {
                 Toast.makeText(MainActivity.this, "You are already logged in", Toast.LENGTH_SHORT).show();
-            }else{
+            } else {
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
-        }else if (item.getItemId() == R.id.sideNavProductRegis) {
+        } else if (item.getItemId() == R.id.sideNavProductRegis) {
             if (currentUser != null) {
                 loadFragment(new AddProductFragment());
-            }else{
+            } else {
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
         } else if (item.getItemId() == R.id.sideNavMyProduct) {
             if (currentUser != null) {
                 loadFragment(new MyProductFragment());
-            }else{
+            } else {
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
-        }else if (item.getItemId() == R.id.sideNavLogOut) {
+        } else if (item.getItemId() == R.id.sideNavLogOut) {
             if (currentUser != null) {
                 firebaseAuth.signOut();
                 Toast.makeText(MainActivity.this, "Successfully Log Out", Toast.LENGTH_SHORT).show();
-            }else{
+            } else {
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
-        } else if (item.getItemId()==R.id.sideNavAbout) {
+        } else if (item.getItemId() == R.id.sideNavAbout) {
             loadFragment(new AboutUsFragment());
         }
 
