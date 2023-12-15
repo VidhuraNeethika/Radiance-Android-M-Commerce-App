@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="7dp"
-        android:text="Sri Lanka, Kurunegala"
+        android:text="@string/my_location_text"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />

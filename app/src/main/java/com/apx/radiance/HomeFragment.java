@@ -84,6 +84,7 @@ public class HomeFragment extends Fragment {
         // Location Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         locationText = fragment.findViewById(R.id.locationTextHome);
+        locationText.setAllCaps(true);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
 
         getLocation();
@@ -275,7 +276,7 @@ public class HomeFragment extends Fragment {
                     try {
 
                         List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                        locationText.setText(addresses.get(0).getLocality()+",,,,,,,,,"+addresses.get(0).getCountryName());
+                        locationText.setText(addresses.get(0).getLocality()+","+addresses.get(0).getCountryName());
 
                     } catch (IOException e) {
                         throw new RuntimeException(e);
@@ -294,6 +295,7 @@ public class HomeFragment extends Fragment {
     private void askPermission() {
         ActivityCompat.requestPermissions(getActivity(), new String[]
                 {android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        getLocation();
     }
 
     @Override

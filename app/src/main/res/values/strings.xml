@@ -79,4 +79,5 @@
     <string name="switch_to_a_seller_account_and_manage_your_items_text">Switch to a Seller Account and Manage Your Items</string>
     <string name="computer_accessories_text">Computers and Accessories</string>
     <string name="electronic_items_and_accessories_text">Electronic Items and Accessories</string>
+    <string name="my_location_text">My Location</string>
 </resources>
