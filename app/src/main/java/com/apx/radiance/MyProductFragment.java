@@ -131,7 +131,7 @@ public class MyProductFragment extends Fragment {
                                     recyclerView.setHasFixedSize(true);
                                     layoutManager = new LinearLayoutManager(getContext());
 
-                                    adapter = new MyProductAdapter(myProducts);
+                                    adapter = new MyProductAdapter(myProducts,MyProductFragment.this);
 
                                     recyclerView.setLayoutManager(layoutManager);
                                     recyclerView.setAdapter(adapter);
