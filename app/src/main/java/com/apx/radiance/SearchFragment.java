@@ -1,9 +1,13 @@
 package com.apx.radiance;
 
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,18 +17,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apx.radiance.adapter.GridProductAdapter;
 import com.apx.radiance.adapter.TagAdapter;
 import com.apx.radiance.model.Product;
 import com.apx.radiance.model.Tags;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 public class SearchFragment extends Fragment {
 
@@ -37,6 +48,15 @@ public class SearchFragment extends Fragment {
     private SearchView searchView;
 
     private FirebaseDatabase firebaseDatabase;
+
+
+
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private TextView locationText;
+    private final static int REQUEST_CODE = 101;
+
+
+
 
     public SearchFragment() {
     }
@@ -55,6 +75,12 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View fragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(fragment, savedInstanceState);
+
+        locationText = fragment.findViewById(R.id.locationTextViewSearch);
+        locationText.setAllCaps(true);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+
+        getLocation();
 
         searchView = fragment.findViewById(R.id.searchFieldSearch);
         searchView.clearFocus();
@@ -83,20 +109,6 @@ public class SearchFragment extends Fragment {
         // Tags End //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // Search Start //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//        ArrayList<String> imageList = new ArrayList<>();
-//        imageList.add("https://i.ebayimg.com/images/g/6l4AAOSwiadlBoUS/s-l1600.jpg");
-//
-//        Product product = new Product();
-//        product.setImageList(imageList);
-//        product.setName("Logitech - G305 LIGHTSPEED Wireless Optical Gaming Mouse - 6 Programmable Button");
-//        product.setBrand("Logitech");
-//        product.setCategory("Gaming Mouse");
-//        product.setPrice(100.00);
-//
-//        for (int i = 0; i < 10; i++) {
-//            productsList.add(product);
-//        }
 
         firebaseDatabase.getReference("Products").orderByChild("regDate").addValueEventListener(new ValueEventListener() {
             @Override
@@ -166,6 +178,56 @@ public class SearchFragment extends Fragment {
         }
 
 
+    }
+
+    public void getLocation() {
+
+        if (getActivity().checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) == getActivity().getPackageManager().PERMISSION_GRANTED) {
+
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(getActivity(), location -> {
+
+                if (location != null) {
+
+                    Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+
+                    try {
+
+                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                        locationText.setText(addresses.get(0).getLocality()+", "+addresses.get(0).getCountryName());
+
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
+
+            });
+
+        }else{
+            askPermission();
+        }
+
+    }
+
+    private void askPermission() {
+        ActivityCompat.requestPermissions(getActivity(), new String[]
+                {android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        getLocation();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if(requestCode==REQUEST_CODE){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                if (grantResults.length > 0) {
+                    getLocation();
+                }
+        }else{
+            Toast.makeText(getContext(),"Permission Denied",Toast.LENGTH_LONG).show();
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
 }

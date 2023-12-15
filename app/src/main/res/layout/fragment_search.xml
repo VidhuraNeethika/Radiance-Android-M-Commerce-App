@@ -13,17 +13,17 @@
         android:layout_height="20dp"
         android:layout_marginEnd="9dp"
         android:src="@drawable/location_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/textView19"
-        app:layout_constraintEnd_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toTopOf="@+id/textView19" />
+        app:layout_constraintBottom_toBottomOf="@+id/locationTextViewSearch"
+        app:layout_constraintEnd_toStartOf="@+id/locationTextViewSearch"
+        app:layout_constraintTop_toTopOf="@+id/locationTextViewSearch" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/locationTextViewSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:text="Sri Lanka, Kurunegala"
+        android:text="@string/my_location_text"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

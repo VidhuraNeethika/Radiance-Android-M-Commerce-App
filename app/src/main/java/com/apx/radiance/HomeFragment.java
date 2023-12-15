@@ -276,7 +276,7 @@ public class HomeFragment extends Fragment {
                     try {
 
                         List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                        locationText.setText(addresses.get(0).getLocality()+","+addresses.get(0).getCountryName());
+                        locationText.setText(addresses.get(0).getLocality()+", "+addresses.get(0).getCountryName());
 
                     } catch (IOException e) {
                         throw new RuntimeException(e);
