@@ -2,10 +2,14 @@ package com.apx.radiance;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apx.radiance.adapter.GridProductAdapter;
@@ -25,15 +30,20 @@ import com.apx.radiance.adapter.SliderImageAdapter;
 import com.apx.radiance.adapter.TagAdapter;
 import com.apx.radiance.model.Product;
 import com.apx.radiance.model.Tags;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EventListener;
+import java.util.List;
+import java.util.Locale;
 
 
 public class HomeFragment extends Fragment {
@@ -45,6 +55,11 @@ public class HomeFragment extends Fragment {
     private RecyclerView.LayoutManager horizontalLayoutManager;
     private String[] tagsName;
     private FirebaseDatabase firebaseDatabase;
+
+    // Location
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private TextView locationText;
+    private final static int REQUEST_CODE = 101;
 
     public HomeFragment() {
     }
@@ -65,6 +80,15 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(fragment, savedInstanceState);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+        // Location Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        locationText = fragment.findViewById(R.id.locationTextHome);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+
+        getLocation();
+
+        //Location End //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //Slider Start //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -236,6 +260,54 @@ public class HomeFragment extends Fragment {
         }
 
 
+    }
+
+    public void getLocation() {
+
+        if (getActivity().checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) == getActivity().getPackageManager().PERMISSION_GRANTED) {
+
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(getActivity(), location -> {
+
+                if (location != null) {
+
+                    Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+
+                    try {
+
+                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                        locationText.setText(addresses.get(0).getLocality()+",,,,,,,,,"+addresses.get(0).getCountryName());
+
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
+
+            });
+
+        }else{
+            askPermission();
+        }
+
+    }
+
+    private void askPermission() {
+        ActivityCompat.requestPermissions(getActivity(), new String[]
+                {android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if(requestCode==REQUEST_CODE){
+            if(grantResults.length>0&&grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                getLocation();
+            }
+        }else{
+            Toast.makeText(getContext(),"Permission Denied",Toast.LENGTH_LONG).show();
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public void loadFragment(Fragment fragment) {
