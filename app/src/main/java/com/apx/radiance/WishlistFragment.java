@@ -103,6 +103,8 @@ public class WishlistFragment extends Fragment {
                                 }
                             });
                         }
+                        list.clear();
+                        productsList.clear();
                     }
 
                     @Override

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -26,6 +27,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
@@ -37,6 +40,7 @@ public class WishlistProductAdapter extends RecyclerView.Adapter<WishlistProduct
     private FirebaseUser currentUser;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     private Fragment transactionFragment;
 
@@ -49,7 +53,7 @@ public class WishlistProductAdapter extends RecyclerView.Adapter<WishlistProduct
 
         public ImageView imageView;
         public TextView name, brand, category, price;
-        public ImageButton addToCartBtn;
+        public ImageButton addToCartBtn,deleteBtn;
         public ImageButton removeFromWishlistBtn;
 
         public ProductViewHolder(@NonNull View itemView) {
@@ -61,6 +65,7 @@ public class WishlistProductAdapter extends RecyclerView.Adapter<WishlistProduct
             price = itemView.findViewById(R.id.priceText);
             addToCartBtn = itemView.findViewById(R.id.addToCartBtnWishlist);
             removeFromWishlistBtn = itemView.findViewById(R.id.deleteBtnWishlist);
+            deleteBtn = itemView.findViewById(R.id.deleteBtnWishlist);
         }
     }
 
@@ -132,6 +137,28 @@ public class WishlistProductAdapter extends RecyclerView.Adapter<WishlistProduct
             @Override
             public void onClick(View view) {
                 loadFragment(new SingleProductViewFragment(currentItem));
+            }
+        });
+
+        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseAuth = FirebaseAuth.getInstance();
+                currentUser = firebaseAuth.getCurrentUser();
+                String pId = currentItem.getpId();
+                String uid = currentUser.getUid();
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("Wishlist").child(uid);
+
+                databaseReference.child(pId).removeValue(new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+
+                        Toast.makeText(v.getContext(), "Successfully deleted product from your wishlist", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
             }
         });
 
