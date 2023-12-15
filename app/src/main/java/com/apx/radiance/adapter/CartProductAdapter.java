@@ -3,10 +3,13 @@ package com.apx.radiance.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,6 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.apx.radiance.R;
 import com.apx.radiance.SingleProductViewFragment;
 import com.apx.radiance.model.Product;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,6 +32,9 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
     private ArrayList<Product> productItemsList;
 
     private Fragment transactionFragment;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser currentUser;
+    private DatabaseReference databaseReference;
 
     public CartProductAdapter(ArrayList<Product> productsList,Fragment fragment) {
         this.productItemsList = productsList;
@@ -34,6 +45,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
 
         public ImageView imageView;
         public TextView name, brand, category, price;
+        public ImageButton deleteBtn;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -42,6 +54,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
             brand = itemView.findViewById(R.id.brandText);
             category = itemView.findViewById(R.id.categoryText);
             price = itemView.findViewById(R.id.priceText);
+            deleteBtn = itemView.findViewById(R.id.deleteButtonWishlist);
         }
     }
 
@@ -58,6 +71,10 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull CartProductAdapter.ProductViewHolder holder, int position) {
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+
         Product currentItem = productItemsList.get(position);
         Picasso.get().load(currentItem.getImageList().get(0)).into(holder.imageView);
         holder.name.setText(currentItem.getName());
@@ -76,6 +93,28 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
             @Override
             public void onClick(View view) {
                 loadFragment(new SingleProductViewFragment(currentItem));
+            }
+        });
+
+        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseAuth = FirebaseAuth.getInstance();
+                currentUser = firebaseAuth.getCurrentUser();
+                String pId = currentItem.getpId();
+                String uid = currentUser.getUid();
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("Cart").child(uid);
+
+                databaseReference.child(pId).removeValue(new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+
+                        Toast.makeText(v.getContext(), "Successfully deleted product from your cart", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
             }
         });
 

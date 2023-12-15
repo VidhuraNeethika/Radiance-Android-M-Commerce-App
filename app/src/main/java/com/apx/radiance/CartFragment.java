@@ -107,6 +107,8 @@ public class CartFragment extends Fragment {
                                 }
                             });
                         }
+                        list.clear();
+                        productsList.clear();
                     }
 
                     @Override
@@ -130,7 +132,7 @@ public class CartFragment extends Fragment {
         recyclerView = fragment.findViewById(R.id.productListRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new CartProductAdapter(productsList,CartFragment.this);
+        adapter = new CartProductAdapter(productsList, CartFragment.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 

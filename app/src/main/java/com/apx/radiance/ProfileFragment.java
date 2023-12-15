@@ -171,7 +171,6 @@ public class ProfileFragment extends Fragment {
 
     private void loadUserDetails() {
 
-
         fireStoreDatabase.collection("Users").document(firebaseAuth.getUid()).get().addOnSuccessListener(
                 new OnSuccessListener<com.google.firebase.firestore.DocumentSnapshot>() {
                     @Override
@@ -249,7 +248,7 @@ public class ProfileFragment extends Fragment {
             mobileField.requestFocus();
         } else {
 
-            if (currentUser.getPhotoUrl() != null && photoUrl == null) {
+            if (photoUrl == null) {
                 uploadWithoutImage();
             } else {
                 storageReference.child("userImages/" + UUID.randomUUID().toString()).putFile(photoUrl).addOnSuccessListener(
@@ -312,7 +311,7 @@ public class ProfileFragment extends Fragment {
         user.setMobile(mobileString);
         user.setAddress(addressString);
         user.setCity(cityString);
-        user.setImageUrl(currentUser.getPhotoUrl().toString());
+//        user.setImageUrl(currentUser.getPhotoUrl().toString());
         user.setUserType("user");
 
         fireStoreDatabase.collection("Users").document(currentUser.getUid()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {

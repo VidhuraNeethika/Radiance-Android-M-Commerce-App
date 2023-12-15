@@ -43,7 +43,6 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private SignInClient signInClient;
     String email, password;
-
     public static final String TAG = SignInActivity.class.getName();
 
     @Override
