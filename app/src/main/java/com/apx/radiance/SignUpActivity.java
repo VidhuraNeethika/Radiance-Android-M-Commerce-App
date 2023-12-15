@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -112,7 +113,6 @@ public class SignUpActivity extends AppCompatActivity {
                     FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
                     currentUser.sendEmailVerification();
-//                                        Toast.makeText(SignUpActivity.this, "Please verify your email", Toast.LENGTH_LONG).show();
 
                     CoordinatorLayout coordinatorLayout = findViewById(R.id.signInCoordinatiorLayout);
 
@@ -121,6 +121,16 @@ public class SignUpActivity extends AppCompatActivity {
                                     new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
+
+                                            // SMS sensing
+//                                            if(ContextCompat.checkSelfPermission(SignUpActivity.this, Manifest.permission.SEND) == PackageManager.PERMISSION_GRANTED){
+//                                                SmsManager smsManager = SmsManager.getDefault();
+//                                                smsManager.sendTextMessage(mobileNumber,null,message,null,null);
+//                                                Toast.makeText(getContext(),"SMS Sent Successfully.",Toast.LENGTH_LONG).show();
+//                                            }else {
+//                                                ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.SEND_SMS},100);
+//                                            }
+
                                             Intent intent = new Intent(Intent.ACTION_MAIN);
                                             intent.addCategory(Intent.CATEGORY_APP_EMAIL);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
