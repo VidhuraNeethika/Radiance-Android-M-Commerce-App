@@ -20,6 +20,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -250,6 +252,8 @@ public class SingleProductViewFragment extends Fragment {
                                             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS}, 100);
                                         }
 
+                                    }else{
+                                        loadFragment(new ProfileFragment());
                                     }
 
                                 }
@@ -265,10 +269,18 @@ public class SingleProductViewFragment extends Fragment {
 
                 } else {
                     Toast.makeText(getContext(), "Please login first!", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getContext(), SignInActivity.class));
                 }
 
             }
         });
 
+    }
+
+    public void loadFragment(Fragment fragment) {
+        FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
     }
 }

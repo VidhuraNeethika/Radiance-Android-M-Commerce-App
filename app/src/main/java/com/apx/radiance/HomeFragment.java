@@ -100,6 +100,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        fragment.findViewById(R.id.notificationIconHome).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new NotificationFragment());
+            }
+        });
+
         RecyclerView recyclerView = fragment.findViewById(R.id.sliderRecycler);
         ArrayList<String> arrayList = new ArrayList<>();
 
