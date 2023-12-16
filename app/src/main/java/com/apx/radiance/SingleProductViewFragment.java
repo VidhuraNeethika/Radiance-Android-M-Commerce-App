@@ -189,50 +189,6 @@ public class SingleProductViewFragment extends Fragment {
 
                 if (currentUser != null) {
 
-                    // NOTIFICATION
-
-                    notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
-                    requestPermissions(new String[]{
-                            Manifest.permission.POST_NOTIFICATIONS
-                    }, 1000);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        NotificationChannel channel = new NotificationChannel(channelId, "INFO", NotificationManager.IMPORTANCE_DEFAULT);
-                        channel.setShowBadge(true);
-                        channel.setDescription("This is Information Channel");
-                        channel.enableLights(true);
-                        channel.setLightColor(Color.BLUE);
-                        channel.setVibrationPattern(new long[]{0, 1000, 1000, 1000});
-                        channel.enableVibration(true);
-                        notificationManager.createNotificationChannel(channel);
-                    }
-
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-
-                    intent.putExtra("name", "ABCD");
-
-                    PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE
-                    );
-
-                    String message = "Your order has been placed successfully! Thank you for shopping with us.";
-
-                    Notification notification = new NotificationCompat.Builder(getActivity().getApplicationContext(), channelId)
-                            .setAutoCancel(true)
-                            .setSmallIcon(R.drawable.notification_icon)
-//                            .setContentTitle("Radiance")
-                            .setContentText(message)
-                            .setContentIntent(pendingIntent)
-//                            .setStyle(
-//                                    new NotificationCompat.InboxStyle()
-//                                            .addLine("Your order has been placed successfully! Thank you for shopping with us.")
-//                            )
-                            .build();
-
-                    notificationManager.notify(1, notification);
-
-                    // NOTIFICATION
-
                     // SEND SMS
 
                     fireStoreDatabase.collection("Users").document(firebaseAuth.getUid()).get().addOnSuccessListener(
@@ -244,14 +200,54 @@ public class SingleProductViewFragment extends Fragment {
 
                                         User user = documentSnapshot.toObject(User.class);
 
-                                        if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
+                                        // NOTIFICATION
+
+                                        notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+                                        requestPermissions(new String[]{
+                                                Manifest.permission.POST_NOTIFICATIONS
+                                        }, 1000);
+
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                            NotificationChannel channel = new NotificationChannel(channelId, "INFO", NotificationManager.IMPORTANCE_DEFAULT);
+                                            channel.setShowBadge(true);
+                                            channel.setDescription("This is Information Channel");
+                                            channel.enableLights(true);
+                                            channel.setLightColor(Color.BLUE);
+                                            channel.setVibrationPattern(new long[]{0, 1000, 1000, 1000});
+                                            channel.enableVibration(true);
+                                            notificationManager.createNotificationChannel(channel);
+                                        }
+
+                                        Intent intent = new Intent(getContext(), MainActivity.class);
+                                        intent.putExtra("name", "testing");
+
+                                        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE
+                                        );
+
+                                        String message = "Hello " + user.getFirstName() + ", Your order has been placed successfully! Thank you for shopping with us.";
+
+                                        Notification notification = new NotificationCompat.Builder(getActivity().getApplicationContext(), channelId)
+                                                .setAutoCancel(true)
+                                                .setSmallIcon(R.drawable.notification_icon)
+                                                .setContentTitle("Order Placed Successfully!")
+                                                .setContentText(message)
+                                                .setContentIntent(pendingIntent)
+                                                .build();
+
+                                        notificationManager.notify(1, notification);
+
+                                        // NOTIFICATION
+
+                                        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+
                                             SmsManager smsManager = SmsManager.getDefault();
-                                            smsManager.sendTextMessage(user.getMobile(), null,message,null,null);
-                                            Toast.makeText(getContext(),"SMS Sent Successfully.",Toast.LENGTH_LONG).show();
-                                        }else {
-                                            ActivityCompat.requestPermissions(getActivity(),new String[]{
-                                                    Manifest.permission.SEND_SMS
-                                            },100);
+                                            smsManager.sendTextMessage(user.getMobile(), null, message, null, null);
+
+                                            Toast.makeText(getContext(), "Message Sent Successfully.", Toast.LENGTH_LONG).show();
+
+                                        } else {
+                                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS}, 100);
                                         }
 
                                     }

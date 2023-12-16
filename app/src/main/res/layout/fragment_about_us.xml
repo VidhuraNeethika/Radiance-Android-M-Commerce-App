@@ -65,11 +65,13 @@
                 android:id="@+id/constraintLayout"
                 android:layout_width="0dp"
                 android:layout_height="300dp"
+                android:layout_marginTop="12dp"
                 android:background="#E1E1E1"
                 android:backgroundTint="#DCDCDC"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/textView57">
 
                 <fragment
                     android:id="@+id/mapLayout"
@@ -89,14 +91,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
                 android:text="Welcome to Radiance, your ultimate destination for seamless mobile commerce experiences. At Radiance, we have developed an innovative Android m-commerce application that revolutionizes the way users buy and sell products."
                 android:textAlignment="center"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView8"
@@ -112,8 +115,8 @@
                 android:id="@+id/textView58"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/custom_input"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/custom_input_rounded"
                 android:backgroundTint="@color/orange"
                 android:padding="10dp"
                 android:text="Our Mission"
@@ -123,7 +126,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView57"
                 app:layout_constraintStart_toStartOf="@+id/textView57"
-                app:layout_constraintTop_toBottomOf="@+id/textView57" />
+                app:layout_constraintTop_toBottomOf="@+id/contactUsBtn" />
 
             <TextView
                 android:id="@+id/textView60"
@@ -142,7 +145,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/custom_input"
+                android:background="@drawable/custom_input_rounded"
                 android:backgroundTint="@color/orange"
                 android:padding="10dp"
                 android:text="Our Vision"
@@ -265,6 +268,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout9" />
+
+            <Button
+                android:id="@+id/contactUsBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/primary_color"
+                android:text="Contact Us"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
