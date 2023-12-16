@@ -1,15 +1,18 @@
 package com.apx.radiance;
 
+import android.Manifest;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -32,6 +35,7 @@ import com.apx.radiance.model.Product;
 import com.apx.radiance.model.Tags;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -59,7 +63,7 @@ public class HomeFragment extends Fragment {
     // Location
     private FusedLocationProviderClient fusedLocationProviderClient;
     private TextView locationText;
-    private final static int REQUEST_CODE = 101;
+    private final static int CURRENT_LOCATION_REQUEST_CODE = 101;
 
     public HomeFragment() {
     }
@@ -81,17 +85,21 @@ public class HomeFragment extends Fragment {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        // Location Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Location Start
 
         locationText = fragment.findViewById(R.id.locationTextHome);
         locationText.setAllCaps(true);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
 
-        getLocation();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getUserCurrentLocation();
+            }
+        }).start();
 
-        //Location End //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Location End
 
-        //Slider Start //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Slider Start
 
         fragment.findViewById(R.id.searchFieldHome).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,9 +135,9 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-        //Slider End //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Slider End
 
-        //Computer Accessories Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Computer Accessories Start
 
         ArrayList<Product> comAccProducts = new ArrayList<>();
 
@@ -140,7 +148,7 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Product product = dataSnapshot.getValue(Product.class);
 
-                    if(product.getCategory().equals("Computer Accessories")){
+                    if (product.getCategory().equals("Computer Accessories")) {
 
                         comAccProducts.add(product);
 
@@ -161,13 +169,13 @@ public class HomeFragment extends Fragment {
         recyclerRecyclerView = fragment.findViewById(R.id.serachResultRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        comAccAdapter = new GridProductAdapter(comAccProducts,HomeFragment.this);
+        comAccAdapter = new GridProductAdapter(comAccProducts, HomeFragment.this);
         recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerRecyclerView.setAdapter(comAccAdapter);
 
-        //Computer Accessories End /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Computer Accessories End
 
-        //Electronic items Start /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Electronic items Start
 
         ArrayList<Product> eleProductList = new ArrayList<>();
 
@@ -178,7 +186,7 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Product product = dataSnapshot.getValue(Product.class);
 
-                    if(product.getCategory().equals("Electronic Accessories")){
+                    if (product.getCategory().equals("Electronic Accessories")) {
 
                         eleProductList.add(product);
 
@@ -197,14 +205,14 @@ public class HomeFragment extends Fragment {
         recyclerRecyclerView = fragment.findViewById(R.id.trendingProductRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
         horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        eleAdapter = new GridProductAdapter(eleProductList,HomeFragment.this);
+        eleAdapter = new GridProductAdapter(eleProductList, HomeFragment.this);
         recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerRecyclerView.setAdapter(eleAdapter);
 
-        //Electronic items End /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Electronic items End
 
 
-        //Tags Start ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Tags Start
 
         categoryInitialized();
         recyclerRecyclerView = fragment.findViewById(R.id.tagsRecyclerView);
@@ -214,9 +222,9 @@ public class HomeFragment extends Fragment {
         TagAdapter tagAdapter = new TagAdapter(getContext(), tagsArrayList);
         recyclerRecyclerView.setAdapter(tagAdapter);
 
-        //Tags End /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Tags End
 
-        //More to Love Start ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        //More to Love Start
 
         ArrayList<Product> moretoLoveProducts = new ArrayList<>();
 
@@ -241,11 +249,11 @@ public class HomeFragment extends Fragment {
         recyclerRecyclerView = fragment.findViewById(R.id.moreToLoveRecycler);
         recyclerRecyclerView.setHasFixedSize(true);
         horizontalLayoutManager = new LinearLayoutManager(getContext());
-        moreToLoveAdapter = new MtLProductAdapter(moretoLoveProducts,HomeFragment.this);
+        moreToLoveAdapter = new MtLProductAdapter(moretoLoveProducts, HomeFragment.this);
         recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerRecyclerView.setAdapter(moreToLoveAdapter);
 
-        //More to Love End /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //More to Love End
 
     }
 
@@ -270,60 +278,45 @@ public class HomeFragment extends Fragment {
 
     }
 
-    public void getLocation() {
-
-        if (getActivity().checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) == getActivity().getPackageManager().PERMISSION_GRANTED) {
-
-            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(getActivity(), location -> {
-
-                if (location != null) {
-
-                    Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
-
-                    try {
-
-                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                        locationText.setText(addresses.get(0).getLocality()+", "+addresses.get(0).getCountryName());
-
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                }
-
-            });
-
-        }else{
-            askPermission();
-        }
-
-    }
-
-    private void askPermission() {
-        ActivityCompat.requestPermissions(getActivity(), new String[]
-                {android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-        getLocation();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        if(requestCode==REQUEST_CODE){
-            if(grantResults.length>0&&grantResults[0]== PackageManager.PERMISSION_GRANTED){
-                getLocation();
-            }
-        }else{
-            Toast.makeText(getContext(),"Permission Denied",Toast.LENGTH_LONG).show();
-        }
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
     public void loadFragment(Fragment fragment) {
         FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void getUserCurrentLocation(){
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+
+                    if (location != null){
+
+                        try {
+                            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                            locationText.setText(addresses.get(0).getLocality()+", "+addresses.get(0).getCountryName());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                }
+            });
+
+        } else {
+
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, CURRENT_LOCATION_REQUEST_CODE);
+            loadFragment(new HomeFragment());
+
+        }
+
     }
 
 }

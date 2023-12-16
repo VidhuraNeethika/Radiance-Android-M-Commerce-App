@@ -69,11 +69,15 @@
             android:title="@string/provacy_policy_text" />
     </group>
 
-    <group android:id="@+id/sideNavGroupAuth">
+    <group android:id="@+id/sideNavSignIn">
         <item
             android:id="@+id/sideNavLog"
             android:icon="@drawable/user_icon"
             android:title="@string/sign_in_text" />
+
+    </group>
+
+    <group android:id="@+id/sideNavSignOut">
 
         <item
             android:id="@+id/sideNavLogOut"

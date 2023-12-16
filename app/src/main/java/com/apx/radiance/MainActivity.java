@@ -3,6 +3,8 @@ package com.apx.radiance;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -12,11 +14,13 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
 
+    private final static int SENSOR_REQUEST_CODE = 100;
     private SensorManager sensorManager;
     private Sensor sensor;
 
@@ -79,9 +84,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        Menu menu = navigationView.getMenu();
+
+        if (currentUser != null) {
+            menu.setGroupVisible(R.id.sideNavSignOut, true);
+            menu.setGroupVisible(R.id.sideNavSignIn, false);
+        } else {
+            menu.setGroupVisible(R.id.sideNavSignIn, true);
+            menu.setGroupVisible(R.id.sideNavSignOut, false);
+
+        }
+
         bottomNavigationView.setOnItemSelectedListener(this);
 
-        requestPermissions(new String[]{ Manifest.permission.ACTIVITY_RECOGNITION}, 100);
+        requestPermissions(new String[]{ Manifest.permission.ACTIVITY_RECOGNITION }, SENSOR_REQUEST_CODE);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager != null) {
@@ -98,13 +115,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        switch (event.sensor.getType()) {
-            case Sensor.TYPE_LIGHT:
-                WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-//                layoutParams.screenBrightness = event.values[0] / 255.0f;
-                getWindow().setAttributes(layoutParams);
-                break;
-        }
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+//        layoutParams.screenBrightness = event.values[0] / 255.0f;
+        getWindow().setAttributes(layoutParams);
+
     }
 
     @Override
@@ -113,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     // Sensors
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -174,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (currentUser != null) {
                 firebaseAuth.signOut();
                 Toast.makeText(MainActivity.this, "Successfully Log Out", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
             } else {
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
