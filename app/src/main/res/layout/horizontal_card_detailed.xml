@@ -123,7 +123,7 @@
             app:layout_constraintTop_toTopOf="@+id/priceText">
 
             <ImageButton
-                android:id="@+id/imageButton6"
+                android:id="@+id/qtyMinusCart"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
@@ -131,16 +131,16 @@
                 app:srcCompat="@drawable/minus_icon" />
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/qtyTextCart"
                 android:layout_width="35dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="10"
+                android:text="1"
                 android:textAlignment="center" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/qtyAddCart"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"

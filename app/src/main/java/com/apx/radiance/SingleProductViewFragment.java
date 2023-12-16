@@ -30,6 +30,7 @@ import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,6 +108,11 @@ public class SingleProductViewFragment extends Fragment {
         TextView priceField = fragment.findViewById(R.id.priceFieldS);
         TextView descriptionField = fragment.findViewById(R.id.descrptionFieldS);
         TextView qtyField = fragment.findViewById(R.id.qtyTextS);
+        TextView sellerField = fragment.findViewById(R.id.sellerField);
+
+        TextView qtyTextField = fragment.findViewById(R.id.qtyText);
+        ImageButton qtyAdd = fragment.findViewById(R.id.qtyAddBtn);
+        ImageButton qtyMinus = fragment.findViewById(R.id.qtyMinusBtn);
 
         for (int i = 0; i < product.getImageList().size(); i++) {
             imageList.add(product.getImageList().get(i));
@@ -125,6 +131,7 @@ public class SingleProductViewFragment extends Fragment {
         priceField.setText("Rs." + product.getPrice().toString() + "0");
         descriptionField.setText(product.getDescription());
         qtyField.setText("Quantity : " + product.getQuantity());
+        sellerField.setText(product.getSellerEmail());
 
         // ADD TO CART
         fragment.findViewById(R.id.addToCartBtnS).setOnClickListener(new View.OnClickListener() {
@@ -234,7 +241,7 @@ public class SingleProductViewFragment extends Fragment {
                                         PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE
                                         );
 
-                                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm", Locale.getDefault());
+                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
                                         String formattedTime = sdf.format(new Date());
 
                                         NotificationItems notificationItems = new NotificationItems();
@@ -299,6 +306,32 @@ public class SingleProductViewFragment extends Fragment {
                     startActivity(new Intent(getContext(), SignInActivity.class));
                 }
 
+            }
+        });
+
+        int currentQty = product.getQuantity();
+        qtyMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int qtyText = Integer.parseInt((String) qtyTextField.getText());
+
+                if (qtyText > 1) {
+                    qtyTextField.setText(String.valueOf(qtyText - 1));
+                } else {
+                    Toast.makeText(getContext(), "Minimum quantity is 1", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        qtyAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int qtyText = Integer.parseInt((String) qtyTextField.getText());
+
+                if (qtyText < currentQty) {
+                    qtyTextField.setText(String.valueOf(qtyText + 1));
+                } else {
+                    Toast.makeText(getContext(), "Maximum quantity deserve", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

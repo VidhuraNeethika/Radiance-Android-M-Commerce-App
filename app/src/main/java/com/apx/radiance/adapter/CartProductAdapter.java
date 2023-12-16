@@ -44,8 +44,8 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageView;
-        public TextView name, brand, category, price;
-        public ImageButton deleteBtn;
+        public TextView name, brand, category, price,qtyTextField;
+        public ImageButton deleteBtn,qtyAddBtn,qtyMinusBtn;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +55,10 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
             category = itemView.findViewById(R.id.categoryText);
             price = itemView.findViewById(R.id.priceText);
             deleteBtn = itemView.findViewById(R.id.deleteButtonWishlist);
+
+            qtyAddBtn = itemView.findViewById(R.id.qtyAddCart);
+            qtyMinusBtn = itemView.findViewById(R.id.qtyMinusCart);
+            qtyTextField = itemView.findViewById(R.id.qtyTextCart);
         }
     }
 
@@ -115,6 +119,32 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                     }
                 });
 
+            }
+        });
+
+        int currentQty = currentItem.getQuantity();
+        holder.qtyMinusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int qtyText = Integer.parseInt((String) holder.qtyTextField.getText());
+
+                if (qtyText > 1) {
+                    holder.qtyTextField.setText(String.valueOf(qtyText - 1));
+                } else {
+                    Toast.makeText(v.getContext(), "Minimum quantity is 1", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        holder.qtyAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int qtyText = Integer.parseInt((String) holder.qtyTextField.getText());
+
+                if (qtyText < currentQty) {
+                    holder.qtyTextField.setText(String.valueOf(qtyText + 1));
+                } else {
+                    Toast.makeText(v.getContext(), "Maximum quantity deserve", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

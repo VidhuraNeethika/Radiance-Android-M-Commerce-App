@@ -274,11 +274,11 @@
                 android:id="@+id/divider4"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/qtyTextS" />
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <TextView
                 android:id="@+id/textView68"
@@ -433,7 +433,7 @@
                 app:layout_constraintTop_toTopOf="@+id/qtyTextS">
 
                 <ImageButton
-                    android:id="@+id/imageButton6"
+                    android:id="@+id/qtyMinusBtn"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_weight="1"
@@ -441,16 +441,16 @@
                     app:srcCompat="@drawable/minus_icon" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/qtyText"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="01"
+                    android:text="1"
                     android:textAlignment="center" />
 
                 <ImageButton
-                    android:id="@+id/imageButton5"
+                    android:id="@+id/qtyAddBtn"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_weight="1"
@@ -464,6 +464,27 @@
                     android:layout_weight="1" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Seller :"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/qtyTextS"
+                app:layout_constraintTop_toBottomOf="@+id/qtyTextS" />
+
+            <TextView
+                android:id="@+id/sellerField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="seller"
+                android:textColor="@color/matte_light_dark"
+                app:layout_constraintBottom_toBottomOf="@+id/textView13"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
+                app:layout_constraintTop_toTopOf="@+id/textView13" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
