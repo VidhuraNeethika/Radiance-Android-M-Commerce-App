@@ -263,11 +263,11 @@
                 android:layout_width="0dp"
                 android:layout_height="250dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout9" />
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
 
             <Button
                 android:id="@+id/contactUsBtn"
@@ -279,6 +279,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+            <FrameLayout
+                android:id="@+id/frameLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/videoView"
+                app:layout_constraintStart_toStartOf="@+id/videoView"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+                <VideoView
+                    android:id="@+id/aboutUsVideoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
+            </FrameLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

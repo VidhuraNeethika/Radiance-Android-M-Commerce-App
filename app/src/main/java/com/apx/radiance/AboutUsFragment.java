@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -93,24 +95,14 @@ public class AboutUsFragment extends Fragment {
             }
         });
 
-//        String url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"; // your URL here
-//        MediaPlayer mediaPlayer = new MediaPlayer();
-//        mediaPlayer.setAudioAttributes(
-//                new AudioAttributes.Builder()
-//                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-//                        .setUsage(AudioAttributes.USAGE_MEDIA)
-//                        .build()
-//        );
-//
-//        try {
-//
-//            mediaPlayer.setDataSource(url);
-//            mediaPlayer.prepare();
-//            mediaPlayer.start();
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        VideoView videoview = fragment.findViewById(R.id.aboutUsVideoView);
+        String videoPath = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+        Uri uri = Uri.parse(videoPath);
+        videoview.setVideoURI(uri);
+
+        MediaController mediaController = new MediaController(getContext());
+        videoview.setMediaController(mediaController);
+        mediaController.setAnchorView(videoview);
 
     }
 }
