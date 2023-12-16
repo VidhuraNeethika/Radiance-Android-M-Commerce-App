@@ -1,14 +1,19 @@
 package com.apx.radiance;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +21,12 @@ import android.view.ViewGroup;
 import com.apx.radiance.adapter.NotificationAdapter;
 import com.apx.radiance.model.NotificationItems;
 import com.apx.radiance.model.Tags;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class NotificationFragment extends Fragment {
 
@@ -25,8 +34,8 @@ public class NotificationFragment extends Fragment {
     private RecyclerView.Adapter recyclerAdapter;
     private ArrayList<Tags> tagsArrayList;
     private RecyclerView.LayoutManager horizontalLayoutManager;
-    GridLayoutManager gridLayoutManager;
-    private String[] tagsName;
+
+    SharedPreferences sharedPreferences;
 
     public NotificationFragment() {
     }
@@ -46,37 +55,80 @@ public class NotificationFragment extends Fragment {
     public void onViewCreated(@NonNull View fragment, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(fragment, savedInstanceState);
 
-        // Notification Start //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        loadNotification(fragment);
+
+        fragment.findViewById(R.id.clearAllText).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+
+                loadNotification(fragment);
+
+            }
+        });
+
+        fragment.findViewById(R.id.searchAgainButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new HomeFragment());
+            }
+        });
+
+    }
+
+    private void loadNotification(View fragment) {
 
         ArrayList<NotificationItems> notificationItemsList = new ArrayList<>();
 
-        notificationItemsList.add(new NotificationItems(
-                "Become a personal customer",
-                "Great news! Discover amazing deals and discounts on your favorite products with our m-commerce Android app. Shop conveniently from anywhere, browse a wide range of products, and place orders with ease. Don't miss out on exclusive offers and updates. Download our app now and start shopping today!",
-                "5 Min Ago",
-                R.drawable.bell_notification_icon));
+        Gson gson = new Gson();
 
-        notificationItemsList.add(new NotificationItems(
-                "Stay Updated with Exciting Offers!",
-                "Hey there! Get ready for some incredible deals on our m-commerce Android app. Explore a wide range of products, from fashion to electronics, and enjoy exclusive discounts. Don't miss out on the latest trends and must-have items. Download our app now and start saving today!",
-                "30 Min Ago",
-                R.drawable.bell_notification_icon));
+        sharedPreferences = getContext().getSharedPreferences("notification", Context.MODE_PRIVATE);
 
-        notificationItemsList.add(new NotificationItems(
-                "Seasonal Offers Just for You!",
-                "Hello there! Get ready for the season with our amazing deals and discounts on our m-commerce Android app. From winter clothing to holiday gifts, we have everything you need to celebrate in style. Don't miss out on the chance to save big this season. Download our app now and start shopping today!",
-                "45 Min Ago",
-                R.drawable.bell_notification_icon));
+        if (sharedPreferences.getAll().isEmpty()) {
+            fragment.findViewById(R.id.notificationBodyEmptyLayout).setVisibility(View.VISIBLE);
+            fragment.findViewById(R.id.notificationBodyLayout).setVisibility(View.GONE);
+        } else {
+            fragment.findViewById(R.id.notificationBodyEmptyLayout).setVisibility(View.GONE);
+            fragment.findViewById(R.id.notificationBodyLayout).setVisibility(View.VISIBLE);
 
+            Map<String, ?> allEntries = sharedPreferences.getAll();
 
-        recyclerRecyclerView = fragment.findViewById(R.id.notificiation_recylcer);
-        recyclerRecyclerView.setHasFixedSize(true);
-        horizontalLayoutManager = new LinearLayoutManager(getContext());
-        recyclerAdapter = new NotificationAdapter(notificationItemsList);
-        recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
-        recyclerRecyclerView.setAdapter(recyclerAdapter);
+            for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+                String key = entry.getKey();
+                String jsonList = entry.getValue().toString();
 
-        // Notification End ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                List<NotificationItems> notificationItems = gson.fromJson(jsonList, new TypeToken<List<NotificationItems>>() {
+                }.getType());
+                for (NotificationItems item : notificationItems) {
+
+                    notificationItemsList.add(new NotificationItems(
+                            item.getTitle(),
+                            item.getDescription(),
+                            item.getTime(),
+                            R.drawable.bell_notification_icon));
+                }
+            }
+
+            recyclerRecyclerView = fragment.findViewById(R.id.notificiation_recylcer);
+            recyclerRecyclerView.setHasFixedSize(true);
+            horizontalLayoutManager = new LinearLayoutManager(getContext());
+            recyclerAdapter = new NotificationAdapter(notificationItemsList);
+            recyclerRecyclerView.setLayoutManager(horizontalLayoutManager);
+            recyclerRecyclerView.setAdapter(recyclerAdapter);
+
+            // Notification End ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
 
     }
+
+    public void loadFragment(Fragment fragment) {
+        FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
+    }
+
 }
