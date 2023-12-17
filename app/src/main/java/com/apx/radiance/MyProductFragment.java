@@ -92,8 +92,7 @@ public class MyProductFragment extends Fragment {
                                 } else {
                                     getView().findViewById(R.id.myProductsBodyLayout).setVisibility(View.VISIBLE);
                                     getView().findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
-
-                                    ///////////////////////////
+                                    getView().findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.GONE);
 
                                     ArrayList<Product> myProducts = new ArrayList<>();
 
@@ -111,11 +110,13 @@ public class MyProductFragment extends Fragment {
                                                     fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.GONE);
                                                     fragment.findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
 
-                                                } else {
-                                                    fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.VISIBLE);
-                                                    fragment.findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
-                                                    fragment.findViewById(R.id.myProductsBodyLayout).setVisibility(View.GONE);
                                                 }
+//                                                else {
+//                                                    Toast.makeText(getContext(), "awa", Toast.LENGTH_SHORT).show();
+//                                                    fragment.findViewById(R.id.myProductsBodyEmptyLayout).setVisibility(View.VISIBLE);
+//                                                    fragment.findViewById(R.id.myProductCustomerView).setVisibility(View.GONE);
+//                                                    fragment.findViewById(R.id.myProductsBodyLayout).setVisibility(View.GONE);
+//                                                }
 
                                             }
                                             adapter.notifyDataSetChanged();
@@ -131,7 +132,7 @@ public class MyProductFragment extends Fragment {
                                     recyclerView.setHasFixedSize(true);
                                     layoutManager = new LinearLayoutManager(getContext());
 
-                                    adapter = new MyProductAdapter(myProducts,MyProductFragment.this);
+                                    adapter = new MyProductAdapter(myProducts, MyProductFragment.this);
 
                                     recyclerView.setLayoutManager(layoutManager);
                                     recyclerView.setAdapter(adapter);

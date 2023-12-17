@@ -104,6 +104,7 @@ public class SingleProductViewFragment extends Fragment {
 
         TextView categoryField = fragment.findViewById(R.id.catTextField);
         TextView brandField = fragment.findViewById(R.id.brandField);
+        TextView modelField = fragment.findViewById(R.id.modelField);
         TextView nameField = fragment.findViewById(R.id.productNameFieldS);
         TextView priceField = fragment.findViewById(R.id.priceFieldS);
         TextView descriptionField = fragment.findViewById(R.id.descrptionFieldS);
@@ -127,6 +128,7 @@ public class SingleProductViewFragment extends Fragment {
 
         categoryField.setText(product.getCategory());
         brandField.setText(product.getBrand());
+        modelField.setText(product.getModel());
         nameField.setText(product.getName());
         priceField.setText("Rs." + product.getPrice().toString() + "0");
         descriptionField.setText(product.getDescription());
