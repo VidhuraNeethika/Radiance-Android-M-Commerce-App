@@ -137,15 +137,14 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
 
                 int qtyText = Integer.parseInt((String) holder.qtyTextField.getText());
 
-
                 if (qtyText < currentQty) {
                     holder.qtyTextField.setText(String.valueOf(qtyText + 1));
                     totalPrice.setText(String.format("Rs.%s0", oldTotalPrice + (currentItem.getPrice() * qtyText)));
                     netTotalPrice.setText(String.format("Rs.%s0", oldNetTotal + (currentItem.getPrice() * qtyText)));
-
                 } else {
                     Toast.makeText(v.getContext(), "Maximum quantity deserve", Toast.LENGTH_LONG).show();
                 }
+
             }
         });
 

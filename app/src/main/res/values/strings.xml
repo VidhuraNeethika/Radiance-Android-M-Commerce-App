@@ -32,7 +32,7 @@
     <string name="already_have_an_acount_text">Already have an Acount?</string>
     <string name="email_warning_text">Please enter valid email or mobile number</string>
     <string name="password_warning_text">Password must be at least 8 characters.</string>
-    <string name="cart_title">7 Items in cart</string>
+    <string name="cart_title">0 Items in cart</string>
     <string name="sub_total_text">Sub Total</string>
     <string name="shipping_text">Shipping</string>
     <string name="total_text">Total</string>
