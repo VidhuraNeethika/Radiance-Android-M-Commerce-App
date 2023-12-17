@@ -4,7 +4,7 @@
     <group android:id="@+id/sideNavGroupMain">
         <item
             android:id="@+id/sideNavHome"
-            android:icon="@drawable/dashboard_icon"
+            android:icon="@drawable/home_icon"
             android:title="@string/home_title" />
 
         <item

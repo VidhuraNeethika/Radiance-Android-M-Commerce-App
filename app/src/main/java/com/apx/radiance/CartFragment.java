@@ -38,8 +38,11 @@ public class CartFragment extends Fragment {
     private FirebaseDatabase firebaseDatabase;
 
     private Double total = 0.0;
-    private Double shipping = 0.0;
+    private Double shipping = 550.0;
     private Double totalnetTotal = 0.0;
+    private int qty = 0;
+
+    private TextView totalTextView, shippingTextView, netTotalTextView, cartItemsCount;
 
     public CartFragment() {
     }
@@ -63,6 +66,11 @@ public class CartFragment extends Fragment {
         currentUser = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
+        totalTextView = fragment.findViewById(R.id.totalPriceField);
+        shippingTextView = fragment.findViewById(R.id.shippingField);
+        netTotalTextView = fragment.findViewById(R.id.netTotalField);
+        cartItemsCount = fragment.findViewById(R.id.cartItemsCount);
+
         ArrayList<Product> productsList = new ArrayList<>();
 
         ArrayList<String> list = new ArrayList<>();
@@ -80,6 +88,7 @@ public class CartFragment extends Fragment {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             list.add(snapshot.getKey());
                         }
+
                         Collections.reverse(list);
 
                         for (String id : list) {
@@ -92,13 +101,20 @@ public class CartFragment extends Fragment {
 
                                         if (product.getpId().equals(id)) {
                                             productsList.add(product);
+
+                                            cartItemsCount.setText(productsList.size() + " Items in your cart");
+
                                             total = total + product.getPrice();
+                                            shipping = shipping * productsList.size();
+                                            totalnetTotal = total + shipping;
+
+                                            totalTextView.setText("Rs." + total + "0");
+                                            shippingTextView.setText("Rs." + shipping + "0");
+                                            netTotalTextView.setText("Rs." + totalnetTotal + "0");
                                         }
 
                                     }
                                     adapter.notifyDataSetChanged();
-
-
                                 }
 
                                 @Override
@@ -117,22 +133,10 @@ public class CartFragment extends Fragment {
                     }
                 });
 
-//        for (int i = 0; i < productsList.size(); i++) {
-//            total = total + productsList.get(i).getPrice();
-//        }
-
-        TextView totalTextView = fragment.findViewById(R.id.totalPriceField);
-        TextView shippingTextView = fragment.findViewById(R.id.shippingField);
-        TextView netTotalTextView = fragment.findViewById(R.id.netTotalField);
-
-        totalTextView.setText(String.valueOf(total));
-        shippingTextView.setText(String.valueOf(shipping));
-        netTotalTextView.setText(String.valueOf(total + shipping));
-
         recyclerView = fragment.findViewById(R.id.productListRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new CartProductAdapter(productsList, CartFragment.this);
+        adapter = new CartProductAdapter(productsList, CartFragment.this, fragment);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 

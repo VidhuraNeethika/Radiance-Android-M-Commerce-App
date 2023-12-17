@@ -35,17 +35,19 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
     private FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
     private DatabaseReference databaseReference;
+    private View viewFragment;
 
-    public CartProductAdapter(ArrayList<Product> productsList,Fragment fragment) {
+    public CartProductAdapter(ArrayList<Product> productsList, Fragment fragment, View viewFragment) {
         this.productItemsList = productsList;
         this.transactionFragment = fragment;
+        this.viewFragment = viewFragment;
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageView;
-        public TextView name, brand, category, price,qtyTextField;
-        public ImageButton deleteBtn,qtyAddBtn,qtyMinusBtn;
+        public TextView name, brand, category, price, qtyTextField;
+        public ImageButton deleteBtn, qtyAddBtn, qtyMinusBtn;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -123,27 +125,44 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
         });
 
         int currentQty = currentItem.getQuantity();
-        holder.qtyMinusBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int qtyText = Integer.parseInt((String) holder.qtyTextField.getText());
+        TextView totalPrice = viewFragment.findViewById(R.id.totalPriceField);
+        TextView netTotalPrice = viewFragment.findViewById(R.id.netTotalField);
 
-                if (qtyText > 1) {
-                    holder.qtyTextField.setText(String.valueOf(qtyText - 1));
-                } else {
-                    Toast.makeText(v.getContext(), "Minimum quantity is 1", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        int oldTotalPrice = (int) Double.parseDouble(totalPrice.getText().toString().substring(3));
+        int oldNetTotal = (int) Double.parseDouble(netTotalPrice.getText().toString().substring(3));
+
         holder.qtyAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 int qtyText = Integer.parseInt((String) holder.qtyTextField.getText());
+
 
                 if (qtyText < currentQty) {
                     holder.qtyTextField.setText(String.valueOf(qtyText + 1));
+                    totalPrice.setText(String.format("Rs.%s0", oldTotalPrice + (currentItem.getPrice() * qtyText)));
+                    netTotalPrice.setText(String.format("Rs.%s0", oldNetTotal + (currentItem.getPrice() * qtyText)));
+
                 } else {
                     Toast.makeText(v.getContext(), "Maximum quantity deserve", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        holder.qtyMinusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int qtyText = Integer.parseInt((String) holder.qtyTextField.getText());
+                int oldTotalPrice2 = (int) Double.parseDouble(totalPrice.getText().toString().substring(3));
+                int oldNetTotal2 = (int) Double.parseDouble(netTotalPrice.getText().toString().substring(3));
+
+                if (qtyText > 1) {
+                    holder.qtyTextField.setText(String.valueOf(qtyText - 1));
+                    totalPrice.setText(String.format("Rs.%s0", oldTotalPrice2 - currentItem.getPrice()));
+                    netTotalPrice.setText(String.format("Rs.%s0", oldNetTotal2 - currentItem.getPrice()));
+                } else {
+                    Toast.makeText(v.getContext(), "Minimum quantity is 1", Toast.LENGTH_LONG).show();
                 }
             }
         });
