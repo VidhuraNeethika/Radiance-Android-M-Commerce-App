@@ -2,7 +2,10 @@ package com.apx.radiance;
 
 import android.Manifest;
 import android.app.ActivityOptions;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -23,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +69,9 @@ public class HomeFragment extends Fragment {
     private TextView locationText;
     private final static int CURRENT_LOCATION_REQUEST_CODE = 101;
 
+    Dialog dialog;
+    Button okButton;
+
     public HomeFragment() {
     }
 
@@ -84,6 +91,31 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(fragment, savedInstanceState);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+        // Shared Preferences
+        SharedPreferences preferences = getContext().getSharedPreferences("user_log", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.welcome_dialog);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.dialog_background));
+        dialog.setCancelable(false);
+
+        okButton = dialog.findViewById(R.id.okButtonHome);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putString("login_status", "success");
+                editor.apply();
+                dialog.dismiss();
+            }
+        });
+
+        String successText = preferences.getString("login_status", "fail");
+        if(successText.equals("fail")){
+            dialog.show();
+        }
 
         // Location Start
 
