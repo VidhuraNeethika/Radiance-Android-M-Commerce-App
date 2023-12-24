@@ -119,7 +119,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/sliderRecycler"
                     android:layout_width="match_parent"
-                    android:layout_height="250sp"
+                    android:layout_height="218dp"
                     android:orientation="horizontal"
                     app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager" />
 
