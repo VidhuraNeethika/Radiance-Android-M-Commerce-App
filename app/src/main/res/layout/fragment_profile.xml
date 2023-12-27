@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileFragment">
+
+<!--    <Button-->
+<!--        android:id="@+id/button"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginTop="28dp"-->
+<!--        android:layout_marginEnd="24dp"-->
+<!--        android:backgroundTint="@color/primary_color"-->
+<!--        android:text="@string/sign_in_text"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cartHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/back_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/profile_text"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/primary_color"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.384"
+            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.272" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cartHeader">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="163dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="163dp"
+                android:background="@drawable/custom_input_rounded"
+                android:backgroundTint="@color/dark_white"
+                android:padding="6dp"
+                android:src="@drawable/profile_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="60dp"
+                android:text="Don't worry, only you can see your personal data. No one else will be able to see it"
+                android:textAlignment="center"
+                android:textColor="@color/matte_light_dark"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+
+            <Button
+                android:id="@+id/signOutButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/primary_color"
+                android:text="@string/sign_out_text"
+                app:layout_constraintEnd_toEndOf="@+id/textView29"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+            <Button
+                android:id="@+id/signInButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/primary_color"
+                android:text="@string/sign_in_text"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/textView29"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+            <ImageButton
+                android:id="@+id/addProfileImageBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-25dp"
+                android:background="@drawable/custom_input_rounded"
+                android:backgroundTint="@color/primary_color"
+                android:padding="5dp"
+                android:src="@drawable/add_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/profileImageView"
+                app:layout_constraintStart_toEndOf="@+id/profileImageView" />
+
+            <EditText
+                android:id="@+id/emailaddressFieldProfileProfile"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/email_icon"
+                android:drawablePadding="10dp"
+                android:hint="Email Address"
+                android:paddingStart="10dp"
+                android:paddingRight="20dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/signOutButton" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailaddressFieldProfileProfile">
+
+                <EditText
+                    android:id="@+id/firstNameField"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/custom_input"
+                    android:drawableStart="@drawable/sign_in_icon"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/first_name_text"
+                    android:paddingStart="10dp"
+                    android:paddingRight="20dp"
+                    android:textSize="14sp" />
+
+                <Space
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/lastNameField"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/custom_input"
+                    android:drawableStart="@drawable/sign_in_icon"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/last_name_text"
+                    android:paddingStart="10dp"
+                    android:paddingRight="20dp"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/addressFieldProfile"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/route_icon"
+                android:drawablePadding="10dp"
+                android:hint="Address"
+                android:paddingStart="10dp"
+                android:paddingRight="20dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/mobileFieldProfile"
+                app:layout_constraintStart_toStartOf="@+id/mobileFieldProfile"
+                app:layout_constraintTop_toBottomOf="@+id/mobileFieldProfile" />
+
+            <EditText
+                android:id="@+id/cityFieldProfile"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/location_icon"
+                android:drawablePadding="10dp"
+                android:hint="@string/city_field"
+                android:paddingStart="10dp"
+                android:paddingRight="20dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/addressFieldProfile"
+                app:layout_constraintStart_toStartOf="@+id/addressFieldProfile"
+                app:layout_constraintTop_toBottomOf="@+id/addressFieldProfile" />
+
+            <EditText
+                android:id="@+id/mobileFieldProfile"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/phone_icon"
+                android:drawablePadding="10dp"
+                android:hint="@string/mobile_number_text"
+                android:inputType="number"
+                android:paddingStart="10dp"
+                android:paddingRight="20dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/emailaddressFieldProfileProfile"
+                app:layout_constraintStart_toStartOf="@+id/emailaddressFieldProfileProfile"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+
+            <Button
+                android:id="@+id/updateButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/primary_color"
+                android:text="@string/update_text"
+                app:layout_constraintEnd_toEndOf="@+id/cityFieldProfile"
+                app:layout_constraintStart_toStartOf="@+id/cityFieldProfile"
+                app:layout_constraintTop_toBottomOf="@+id/cityFieldProfile" />
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/textView29"
+                app:layout_constraintStart_toStartOf="@+id/textView29"
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

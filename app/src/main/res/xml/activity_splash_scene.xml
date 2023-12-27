@@ -9,145 +9,85 @@
         motion:duration="1500"
         motion:autoTransition="animateToEnd">
        <KeyFrameSet>
-           <KeyPosition />
-           <KeyAttribute
-               motion:motionTarget="@+id/rLetterWhite"
-               motion:framePosition="30"
-               android:alpha="0" />
        </KeyFrameSet>
-        <OnSwipe motion:maxAcceleration="1.0"
-            motion:maxVelocity="1.0" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:id="@+id/splashBackgroundLayout"
+            android:id="@+id/imageView7"
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:scaleX="10"
-            android:scaleY="10" />
-        <Constraint
-            android:id="@+id/rLetterOrange"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintVertical_bias="0.475"
+            motion:layout_constraintHorizontal_bias="0.498"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             android:scaleX="0"
             android:scaleY="0"
             android:alpha="0" />
         <Constraint
-            android:id="@+id/rLetterOrange"
-            android:scaleX="0"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:scaleY="0" />
-        <Constraint
-            android:id="@+id/rLetterWhite"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:scaleX="1"
-            android:scaleY="1" />
-        <Constraint
-            android:layout_height="35dp"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="35dp"
             android:id="@+id/progressBar"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="12dp"
-            android:visibility="gone" />
-        <Constraint
-            android:layout_width="411dp"
-            android:layout_height="100dp"
-            android:id="@+id/view"
-            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent" />
-        <Constraint
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/welcomeTextView"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="172dp"
+            android:layout_marginStart="172dp"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="12dp"
-            android:alpha="0" />
-
+            android:scaleX="0"
+            android:scaleY="0" />
+        <Constraint
+            android:id="@+id/imageView6"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:scaleX="5"
+            android:scaleY="5"
+            android:layout_marginTop="-45dp" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/splashBackgroundLayout"
+            android:id="@+id/imageView6"
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:scaleX="0"
-            android:scaleY="0" />
-        <Constraint
-            android:id="@+id/rLetterOrange"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:scaleX="1"
-            android:scaleY="1"
-            android:alpha="1"
-            motion:transitionEasing="cubic(1,0,1,0)" />
-        <Constraint
-            android:id="@+id/rLetterWhite"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             android:scaleX="0"
             android:scaleY="0"
-            android:visibility="gone" ></Constraint>
+            motion:transitionEasing="linear"
+            android:layout_marginTop="-36dp" />
         <Constraint
-            android:layout_height="35dp"
+            android:id="@+id/imageView7"
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="40dp"
-            android:id="@+id/progressBar"
-            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             motion:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="12dp"
-            android:visibility="visible" />
-        <Constraint
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:id="@+id/view"
+            motion:layout_constraintVertical_bias="0.475"
+            motion:layout_constraintHorizontal_bias="0.498"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent" />
+            android:scaleX="1"
+            android:scaleY="1"
+            android:alpha="1" />
         <Constraint
-            android:layout_height="wrap_content"
-            motion:layout_constraintTop_toTopOf="parent"
-            android:layout_width="wrap_content"
-            android:id="@+id/welcomeTextView"
+            android:id="@+id/progressBar"
             motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="172dp"
+            android:layout_marginStart="172dp"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="12dp" />
-
-
+            android:scaleX="1"
+            android:scaleY="1" />
     </ConstraintSet>
 </MotionScene>

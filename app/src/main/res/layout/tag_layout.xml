@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/tagButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/primary_color"
+        android:text="All"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:cornerRadius="100dp" />
+
+
+</LinearLayout>
